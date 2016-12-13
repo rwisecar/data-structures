@@ -20,7 +20,8 @@ The *display()* method accepts a linked list, and returns a string representing 
 
 
 
-# We relied on the following resources in building our linked list and associated functions.
+## We relied on the following resources in building our linked list and associated functions.
+
 1. http://stackoverflow.com/questions/280243/python-linked-list
 2. http://greenteapress.com/thinkpython/html/chap17.html
 3. http://interactivepython.org/runestone/static/pythonds/BasicDS/ImplementinganUnorderedListLinkedLists.html
