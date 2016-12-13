@@ -55,26 +55,24 @@ def test_pop_length():
     assert new_list.length == 2
 
 
-def test_remove_length():
-    """Test whether the length of the list changes when you remove a value."""
-    node1 = Node(15)
-    node2 = Node(10)
-    node3 = Node(5)
-    new_list = LinkedList(node1, length=1)
-    new_list.push(node2)
-    new_list.push(node3)
-    new_list.remove(node2)
-    assert new_list.length == 2
+# def test_remove_length():
+#     """Test whether the length of the list changes when you remove a value."""
+#     node1 = Node(15)
+#     node2 = Node(10)
+#     node3 = Node(5)
+#     new_list = LinkedList(node1, length=1)
+#     new_list.push(node2)
+#     new_list.push(node3)
+#     new_list.remove(node2)
+#     assert new_list.length == 2
 
 
-def test_search():
-    """Test the whether the search function returns the correct value."""
-    node1 = Node(15)
-    node2 = Node(10)
-    node3 = Node(5)
-    new_list = LinkedList(node1, length=1)
-    new_list.push(node2)
-    new_list.push(node3)
-    assert new_list.search(10) == node2
-
-
+# def test_search():
+#     """Test the whether the search function returns the correct value."""
+#     node1 = Node(15)
+#     node2 = Node(10)
+#     node3 = Node(5)
+#     new_list = LinkedList(node1, length=1)
+#     new_list.push(node2)
+#     new_list.push(node3)
+#     assert new_list.search(10) == node2

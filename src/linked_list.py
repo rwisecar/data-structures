@@ -1,6 +1,13 @@
 """Create a linked_list class with assoc. methods and instantiate."""
 
 
+class Node(object):
+    """Create node instances that can populate the linked list."""
+    def __init__(self, val=None, next=None):
+        self.val = val
+        self.next = next
+
+
 class LinkedList(object):
 
     def __init__(self, head=None, length=0):
@@ -27,42 +34,35 @@ class LinkedList(object):
         """Return the length of the linked list."""
         return self.length
 
-    def remove(self, node):
-        """Input a node and remove that node from the list."""
-        if self.length > 0:
-            head = self.head
-            if node == head:
-                return LinkedList(head.next, 1)
-            current = head
-            found = False
-            while found is False:
-                if current.next == node:
-                    current.next = current.next.next
-                    found is True
-                    return LinkedList(head)
-                current = current.next
-            raise ValueError
-        else:
-            raise ValueError
+    # def remove(self, node):
+    #     """Input a node and remove that node from the list."""
+    #     if self.length > 0:
+    #         head = self.head
+    #         if node == head:
+    #             return LinkedList(head.next, 1)
+    #         current = head
+    #         found = False
+    #         while found is False:
+    #             if current.next == node:
+    #                 current.next = current.next.next
+    #                 found is True
+    #                 return LinkedList(head)
+    #             current = current.next
+    #         raise ValueError
+    #     else:
+    #         raise ValueError
 
-    def search(self, value):
-        """Search through list for a node and return that node."""
-        current = self.head
-        found = False
-        if self.length > 0:
-            while found is False:
-                if current.val == value:
-                    found = True
-                    return current
-                current = current.next
-            return None
-        return None
+    # def search(self, value):
+    #     """Search through list for a node and return that node."""
+    #     current = self.head
+    #     found = False
+    #     if self.length > 0:
+    #         while found is False:
+    #             if current.val == value:
+    #                 found = True
+    #                 return current
+    #             current = current.next
+    #         return None
+    #     return None
 
-    def display()
-
-
-class Node(object):
-    """Create node instances that can populate the linked list."""
-    def __init__(self, val=None, next=None):
-        self.val = val
-        self.next = next
+    # def display()
