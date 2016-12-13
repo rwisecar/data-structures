@@ -31,12 +31,11 @@ class LinkedList(object):
         """Return the length of the linked list."""
         return self.length
 
-    def push(self, data):
-        """Add a node as the new head of a linked list."""
-        node = Node(data)
-        node.next_node = self.head
-        self.head = node
-        self.length = self.length + 1
+    def push(self, value):
+        """Add a node as the head of a linked list."""
+        new_node = Node(value, self.head)
+        self.head = new_node
+        self.length += 1
 
     def pop(self):
         """Remove and return head of a linked list."""

@@ -31,12 +31,10 @@ def test_size():
 
 
 def test_push():
-    """Test whether the push method adds a node to the end."""
-    node1 = Node(15)
-    node2 = Node(10)
-    new_list = LinkedList(head=node1, data=None, length=1)
-    new_list.push(node2)
-    assert new_list.length == 2
+    """Test whether the push method adds a node to the head."""
+    new_list = LinkedList()
+    new_list.push(15)
+    assert new_list.head.value == 15
 
 
 def test_pop():
