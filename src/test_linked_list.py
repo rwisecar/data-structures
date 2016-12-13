@@ -7,12 +7,12 @@ from linked_list import Node, LinkedList
 def test_create_node():
     """Test whether we create a node with a value 'val'."""
     test_node = Node(15)
-    assert test_node.data == 15
+    assert test_node.value == 15
 
 
 def test_create_list():
     """Test whether we create a new Linked List instance."""
-    new_node = Node(data=15, next_node=None)
+    new_node = Node(value=15, next_node=None)
     new_list = LinkedList(head=new_node, data=None, length=1)
     assert new_list.head == new_node and new_list.length == 1
 
@@ -20,8 +20,8 @@ def test_create_list():
 def test_create_from_existing_list():
     """Test whether we can create a linked list from an existing list."""
     new_list = LinkedList(head=None, data=[1, 2, 3], length=3)
-    new_node = Node(data=3)
-    assert new_list.head.data == new_node.data
+    new_node = Node(value=3)
+    assert new_list.head.value == new_node.value
 
 
 def test_size():
@@ -47,7 +47,7 @@ def test_pop():
     new_list = LinkedList(node1, length=1)
     new_list.push(node2)
     new_list.push(node3)
-    assert new_list.pop().data == node3.data
+    assert new_list.pop().value == node3.value
 
 
 def test_pop_length():
@@ -60,7 +60,7 @@ def test_pop_length():
 def test_search():
     """Test whether the search method returns the correct value."""
     new_list = LinkedList(data=[5, 10, 15], length=3)
-    assert new_list.search(10).data == 10
+    assert new_list.search(10).value == 10
 
 
 def test_display():
@@ -69,13 +69,8 @@ def test_display():
     new_list.display() == "(20, 15, 10, 5)"
 
 
-# def test_remove_length():
-#     """Test whether the length of the list changes when you remove a value."""
-#     node1 = Node(15)
-#     node2 = Node(10)
-#     node3 = Node(5)
-#     new_list = LinkedList(node1, length=1)
-#     new_list.push(node2)
-#     new_list.push(node3)
-#     new_list.remove(node2)
-#     assert new_list.length == 2
+def test_remove_length():
+    """Test whether the length of the list changes when you remove a value."""
+    new_list = LinkedList(data=[5, 10, 15], length=3)
+    new_list.remove(new_list.head.next_node)
+    assert new_list.head.next_node.value == 5

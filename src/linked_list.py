@@ -3,8 +3,8 @@
 
 class Node(object):
     """Create node instances that can populate the linked list."""
-    def __init__(self, data=None, next_node=None):
-        self.data = data
+    def __init__(self, value=None, next_node=None):
+        self.value = value
         self.next_node = next_node
 
 
@@ -44,15 +44,15 @@ class LinkedList(object):
         old_head = self.head
         self.head = next_node
         self.length = self.length - 1
-        return old_head.data
+        return old_head.value
 
-    def search(self, data):
+    def search(self, val):
         """Search through list for a node and return that node."""
         current = self.head
         found = False
         if self.length > 0:
             while current and found is False:
-                if current.data == data:
+                if current.value == val:
                     found = True
                     return current
                 else:
@@ -71,61 +71,21 @@ class LinkedList(object):
         linked_list_string += ")"
         return linked_list_string
 
-    # def remove(self, node):
-    #     """Input a node and remove that node from the list."""
-    #     if self.length > 0:
-    #         current = self.head
-    #         previous = none
-    #         found = False
-    #         if current == node:
-    #             found = True
-    #             return LinkedList(current.next_node, 1)
-    #         while current and found is False:
-    #             if current.data == node.data:
-    #                 current.next_node = current.next_node.next_node
-    #                 found = True
-    #             if current is None:
-    #                 raise ValueError("Node not found in list.")
-    #             if previous is None         
-    # current = current.next_node
-    #         raise ValueError
-    #     else:
-    #         raise ValueError
-
-    # def remove(self, node):
-    #     current = self.head
-    #     previous = None
-    #     found = False
-    #     while current and found is False:
-    #         if current.data == node.data:
-    #             previous.next_node = current.next_node
-    #             found = True
-    #         previous = current
-    #         current = current.next_node
-    #     if current is None:
-    #         raise ValueError("Node not found in list.")
-    #     if previous is None:
-    #         self.head = current.next_node()
-    #     else:
-    #         previous.next_node = current.next_node
-
-"""Remove function found at codefellows.org"""
-    # def delete(self, data):
-    # current = self.head
-    # previous = None
-    # found = False
-    # while current and found is False:
-    #     if current.get_data() == data:
-    #         found = True
-    #     else:
-    #         previous = current
-    #         current = current.get_next()
-    # if current is None:
-    #     raise ValueError("Data not in list")
-    # if previous is None:
-    #     self.head = current.get_next()
-    # else:
-    #     previous.set_next(current.get_next())
-
-
-
+    def remove(self, node):
+        """Input a node and remove that node from the list."""
+        current = self.head
+        previous = None
+        found = False
+        while current and found is False:
+            # import pdb;pdb.set_trace()
+            if current == node:
+                if previous is None:
+                    self.head = current.next_node()
+                else:
+                    previous.next_node = current.next_node
+                self.length -= 1
+                found = True
+            previous = current
+            current = previous.next_node
+        # if current is None:
+        #     raise ValueError("Node not found in list.")
