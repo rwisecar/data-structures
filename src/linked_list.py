@@ -30,9 +30,20 @@ class LinkedList(object):
         """Returns the length of the linked list."""
         return self.length
 
-    # def search(val)
+    def search(self, val):
+        current = self.head
+        found = False
+        if self.length > 0:
+            while current != None and not found:
+                if current.getData() == val:
+                    found = True 
+                    return val
+            current = current.getNext()
+        return "Value not in linked list."
 
-    # def remove(node)
+    def remove(node)
+
+
 
     # def display()
 
