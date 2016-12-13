@@ -61,24 +61,53 @@ class LinkedList(object):
                 raise ValueError("Value not found in list.")
         return None
 
+    def display(self):
+        """Input a linked list and return a string showing list in tuples."""
+        linked_list_string = "("
+        current = self.head
+        while current:
+            linked_list_string += "{}, ".format(str(current))
+            current = current.next_node
+        linked_list_string += ")"
+        return linked_list_string
+
     # def remove(self, node):
     #     """Input a node and remove that node from the list."""
     #     if self.length > 0:
-    #         head = self.head
-    #         if node == head:
-    #             return LinkedList(head.next, 1)
-    #         current = head
+    #         current = self.head
+    #         previous = none
     #         found = False
-    #         while found is False:
-    #             if current.next == node:
-    #                 current.next = current.next.next
-    #                 found is True
-    #                 return LinkedList(head)
-    #             current = current.next
+    #         if current == node:
+    #             found = True
+    #             return LinkedList(current.next_node, 1)
+    #         while current and found is False:
+    #             if current.data == node.data:
+    #                 current.next_node = current.next_node.next_node
+    #                 found = True
+    #             if current is None:
+    #                 raise ValueError("Node not found in list.")
+    #             if previous is None         
+    # current = current.next_node
     #         raise ValueError
     #     else:
     #         raise ValueError
 
+    # def remove(self, node):
+    #     current = self.head
+    #     previous = None
+    #     found = False
+    #     while current and found is False:
+    #         if current.data == node.data:
+    #             previous.next_node = current.next_node
+    #             found = True
+    #         previous = current
+    #         current = current.next_node
+    #     if current is None:
+    #         raise ValueError("Node not found in list.")
+    #     if previous is None:
+    #         self.head = current.next_node()
+    #     else:
+    #         previous.next_node = current.next_node
 
 """Remove function found at codefellows.org"""
     # def delete(self, data):
@@ -98,4 +127,5 @@ class LinkedList(object):
     # else:
     #     previous.set_next(current.get_next())
 
-    # def display()
+
+

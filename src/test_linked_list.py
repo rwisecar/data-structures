@@ -58,9 +58,15 @@ def test_pop_length():
 
 
 def test_search():
-    """Test the whether the search function returns the correct value."""
+    """Test whether the search method returns the correct value."""
     new_list = LinkedList(data=[5, 10, 15], length=3)
     assert new_list.search(10).data == 10
+
+
+def test_display():
+    """Test that the display method returns a stringified tuple of the list."""
+    new_list = LinkedList(data=[5, 10, 15, 20], length=4)
+    new_list.display() == "(20, 15, 10, 5)"
 
 
 # def test_remove_length():
@@ -73,5 +79,3 @@ def test_search():
 #     new_list.push(node3)
 #     new_list.remove(node2)
 #     assert new_list.length == 2
-
-
