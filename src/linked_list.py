@@ -8,9 +8,6 @@ class LinkedList(object):
         self.head = head
         self.length = length
 
-    def __str__(self):
-        return str(self.head)
-
     def push(self, val):
         """Add a node as the new head of a linked list."""
         node = Node(val)
@@ -24,28 +21,44 @@ class LinkedList(object):
         old_head = self.head
         self.head = next_node
         self.length = self.length - 1
-        return old_head
+        return old_head.val
 
     def size(self):
-        """Returns the length of the linked list."""
+        """Return the length of the linked list."""
         return self.length
 
-    def search(self, val):
+    def remove(self, node):
+        """Input a node and remove that node from the list."""
+        if self.length > 0:
+            head = self.head
+            if node == head:
+                return LinkedList(head.next, 1)
+            current = head
+            found = False
+            while found is False:
+                if current.next == node:
+                    current.next = current.next.next
+                    found is True
+                    return LinkedList(head)
+                current = current.next
+            raise ValueError
+        else:
+            raise ValueError
+
+    def search(self, value):
+        """Search through list for a node and return that node."""
         current = self.head
         found = False
         if self.length > 0:
-            while current != None and not found:
-                if current.getData() == val:
-                    found = True 
-                    return val
-            current = current.getNext()
-        return "Value not in linked list."
+            while found is False:
+                if current.val == value:
+                    found = True
+                    return current
+                current = current.next
+            return None
+        return None
 
-    def remove(node)
-
-
-
-    # def display()
+    def display()
 
 
 class Node(object):
@@ -53,9 +66,3 @@ class Node(object):
     def __init__(self, val=None, next=None):
         self.val = val
         self.next = next
-
-    def __str__(self):
-        return str(self.val, self.next)
-
-# # To make a new list from an old list
-# new_list = [LinkedList(new_list[n]) for n in new_list]
