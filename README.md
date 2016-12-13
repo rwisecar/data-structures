@@ -35,21 +35,26 @@ src/test_linked_list.py      44      0   100%
 TOTAL                       108      6    94%
 
 
-===================== 10 passed in 0.04 seconds =============================
+===================== 10 passed in 0.04 seconds ===============================
+
 linked_list-0.1.zip
-py35 installed: coverage==4.2,linked-list==0.1,py==1.4.31,pytest==3.0.5,pytest-cov==2.4.0
-py35 runtests: PYTHONHASHSEED='534259829'
+
+py35 installed
+
 py35 runtests: commands[0] | py.test src --cov=src --cov-report term-missing
 
 ==========================test session starts ===============================
 
 platform darwin -- Python 3.5.2, pytest-3.0.5, py-1.4.31, pluggy-0.4.0
+
 plugins: cov-2.4.0
+
 collected 10 items 
 
 src/test_linked_list.py ..........
 
----------- coverage: platform darwin, python 3.5.2-final-0 -----------
+
+------------ coverage: platform darwin, python 3.5.2-final-0 -------------
 Name                      Stmts   Miss  Cover   Missing
 -------------------------------------------------------
 src/linked_list.py           64      6    91%   24-25, 60-62, 83
