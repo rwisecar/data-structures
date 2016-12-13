@@ -19,46 +19,48 @@ def test_create_list():
 
 def test_create_from_existing_list():
     """Test whether we can create a linked list from an existing list."""
-    new_list = LinkedList(head=None, data=[1], length=3)
-    new_node = Node(data=1)
+    new_list = LinkedList(head=None, data=[1, 2, 3], length=3)
+    new_node = Node(data=3)
     assert new_list.head.data == new_node.data
 
-# def test_size():
-#     """Test whether length of the link link"""
-#     linked_list1 = LinkedList(head=2, length=10)
-#     assert linked_list1.size() == linked_list1.length
+
+def test_size():
+    """Test whether length of the link link"""
+    linked_list1 = LinkedList(head=2, length=10)
+    assert linked_list1.size() == linked_list1.length
 
 
-# def test_push():
-#     """Test whether the push method adds a node to the end."""
-#     node1 = Node(15)
-#     node2 = Node(10)
-#     new_list = LinkedList(node1, length=1)
-#     new_list.push(node2)
-#     assert new_list.length == 2
+def test_push():
+    """Test whether the push method adds a node to the end."""
+    node1 = Node(15)
+    node2 = Node(10)
+    new_list = LinkedList(head=node1, data=None, length=1)
+    new_list.push(node2)
+    assert new_list.length == 2
 
 
-# def test_pop():
-#     """Test whether the pop method removes and returns the first node."""
-#     node1 = Node(15)
-#     node2 = Node(10)
-#     node3 = Node(5)
-#     new_list = LinkedList(node1, length=1)
-#     new_list.push(node2)
-#     new_list.push(node3)
-#     assert new_list.pop().val == node3.val
+def test_pop():
+    """Test whether the pop method removes and returns the first node."""
+    node1 = Node(15)
+    node2 = Node(10)
+    node3 = Node(5)
+    new_list = LinkedList(node1, length=1)
+    new_list.push(node2)
+    new_list.push(node3)
+    assert new_list.pop().data == node3.data
 
 
-# def test_pop_length():
-#     """Test whether the length of the list changes when a value is popped."""
-#     node1 = Node(15)
-#     node2 = Node(10)
-#     node3 = Node(5)
-#     new_list = LinkedList(node1, length=1)
-#     new_list.push(node2)
-#     new_list.push(node3)
-#     new_list.pop()
-#     assert new_list.length == 2
+def test_pop_length():
+    """Test whether the length of the list changes when a value is popped."""
+    new_list = LinkedList(data=[5, 10, 15], length=3)
+    new_list.pop()
+    assert new_list.length == 2
+
+
+def test_search():
+    """Test the whether the search function returns the correct value."""
+    new_list = LinkedList(data=[5, 10, 15], length=3)
+    assert new_list.search(10).data == 10
 
 
 # def test_remove_length():
@@ -73,12 +75,3 @@ def test_create_from_existing_list():
 #     assert new_list.length == 2
 
 
-# def test_search():
-#     """Test the whether the search function returns the correct value."""
-#     node1 = Node(15)
-#     node2 = Node(10)
-#     node3 = Node(5)
-#     new_list = LinkedList(node1, length=1)
-#     new_list.push(node2)
-#     new_list.push(node3)
-#     assert new_list.search(10) == node2
