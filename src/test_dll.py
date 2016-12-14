@@ -100,3 +100,70 @@ def test_pop_without_values():
     full_list = DoubleLink()
     with pytest.raises(IndexError):
         full_list.pop()
+
+
+def test_append_adds_value(full_list):
+    """Check that append adds a value to the end of the list."""
+    full_list.append(15)
+    assert full_list.tail.value == 15
+
+
+def test_append_empty_list():
+    """Check that append adds a value to an empty list."""
+    new_list = DoubleLink()
+    new_list.append(15)
+    assert new_list.tail.value == 15
+
+
+def test_append_length_list(full_list):
+    """Check that list length extends when you append value."""
+    full_list.append(15)
+    assert full_list._length == 4
+
+
+def test_shift_last_value(full_list):
+    """Check that second to last list value is new tail."""
+    full_list.shift()
+    assert full_list.tail.value == 2
+
+
+def test_shift_without_values():
+    """Check index error when called empty list."""
+    full_list = DoubleLink()
+    with pytest.raises(IndexError):
+        full_list.shift()
+
+
+def test_shift_length(full_list):
+    """Check that list length changes when you shift."""
+    full_list.shift()
+    assert full_list._length == 2
+
+
+def test_remove_length(full_list):
+    """Check that list length decreases when you remove value."""
+    full_list.remove(2)
+    assert full_list._length == 2
+
+
+def test_remove_head(full_list):
+    """Check that when you remove the head, it pops and resets the head."""
+    full_list.remove(3)
+    assert full_list.head.value == 2
+
+
+def test_remove_value(full_list):
+    """Check that when you remove a value, that value is actually removed."""
+    full_list.remove(2)
+    assert full_list.head.next_node.value == 1
+
+
+# def test_raise_value_error(full_list):
+#     """Check that when you search for value that DNE, return ValueError."""
+#     with pytest.raises(ValueError):
+#         full_list.remove(15)
+
+
+
+
+
