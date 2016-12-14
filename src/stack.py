@@ -14,7 +14,10 @@ class Stack(object):
                     self._linkedlist.head = Node(item)
                     self._linkedlist.length = 1
             except TypeError:
-                self.head = data
+                self._linkedlist.head = data
+        else:
+            self._linkedlist.head = head
+            self._linkedlist.length = length
 
     def push(self, value):
         self._linkedlist.push(value)
@@ -26,7 +29,7 @@ class Stack(object):
         self._linkedlist.size()
 
 
-new_stack = Stack(data=[1])
-print(new_stack._linkedlist.head.value)
+# new_stack = Stack(data=[1])
+# print(new_stack._linkedlist.head.value)
 # new_stack._linkedlist.pop()
 # print(new_stack._linkedlist.head.value)
