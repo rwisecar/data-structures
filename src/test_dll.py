@@ -1,7 +1,13 @@
 """Test for test_dll.py module."""
 
 import pytest
-from dll import Node
+from dll import Node, DoubleLink
+
+
+@pytest.fixture
+def full_list():
+    new_list = DoubleLink(iterable=[1, 2, 3])
+    return new_list
 
 
 def test_create_node():
@@ -28,3 +34,46 @@ def test_test_previous_node():
     test_node2 = Node(10)
     test_node1 = Node(20, previous_node=test_node2)
     assert test_node1.previous_node.value == 10
+
+
+def test_create_empty_dll():
+    """Test whether we create an empty list."""
+    new_list = DoubleLink()
+    assert new_list._length is 0
+
+
+def test_create_one_value_list():
+    """Test that you can create list with one value."""
+    new_list = DoubleLink(1)
+    assert new_list._length == 1
+
+
+def test_create_multi_value_list(full_list):
+    """Test that you can create list with iterable."""
+    assert full_list._length == 3
+
+
+def test_push_new_node_to_full_dll(full_list):
+    """Test that you can push a new value to a nonempty list."""
+    full_list.push(15)
+    assert full_list.head.value == 15
+
+
+def test_push_next_node(full_list):
+    """Test that when you push to a nonempty list, the next node is previous head."""
+    full_list.push(15)
+    assert full_list.head.next_node.value == 3
+
+
+def test_push_previous_node(full_list):
+    """Test that when you push to a nonempty list, the next node's previous node is the head."""
+    full_list.push(15)
+    assert full_list.head.next_node.previous_node.value == 15
+
+
+
+
+
+
+
+
