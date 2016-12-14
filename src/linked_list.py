@@ -39,6 +39,8 @@ class LinkedList(object):
 
     def pop(self):
         """Remove and return head of a linked list."""
+        if self.head is None:
+            raise IndexError("Cannot pop from an empty list.")
         next_node = self.head.next_node
         old_head = self.head
         self.head = next_node
