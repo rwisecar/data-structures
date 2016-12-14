@@ -43,8 +43,15 @@ class DoubleLink(object):
     def append(value):
         pass
 
-    def pop():
-        pass
+    def pop(self):
+        """Remove and return head of a dll."""
+        if self.head is None:
+            raise IndexError("Cannot pop from an empty list.")
+        next_node = self.head.next_node
+        old_head = self.head
+        self.head = next_node
+        self._length = self._length - 1
+        return old_head.value
 
     def shift():
         pass

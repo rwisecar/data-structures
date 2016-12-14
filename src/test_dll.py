@@ -83,8 +83,20 @@ def test_push_tail_node_full_list(full_list):
     assert full_list.tail.value == 1
 
 
+def test_size_of_stack_when_pushed(full_list):
+    """Check for decreasing size when popped."""
+    full_list.pop()
+    assert full_list._length == 2
 
 
+def test_pop_with_value(full_list):
+    """Checking for pop from the value."""
+    full_list.pop()
+    assert full_list.head.value == 2
 
 
-
+def test_pop_without_values():
+    """Check index error when called empty list."""
+    full_list = DoubleLink()
+    with pytest.raises(IndexError):
+        full_list.pop()
