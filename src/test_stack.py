@@ -39,3 +39,56 @@ def test_pushed_value_is_new_head():
     this_stack = Stack(data=[1, 2, 3])
     this_stack._linkedlist.push("new")
     assert this_stack._linkedlist.head.value == "new"
+
+
+def test_length_of_stack():
+    """Check that size of the stack reflects the number of nodes in the stack."""
+    from stack import Stack
+    this_stack = Stack(data=[1, 2, 3])
+    assert this_stack._linkedlist.length == 3
+
+
+def test_length_of_stack_when_pushed():
+    """Check that size changes to reflect pushed values."""
+    from stack import Stack
+    this_stack = Stack(data=[1, 2, 3])
+    this_stack._linkedlist.push("new")
+    assert this_stack._linkedlist.length == 4
+
+
+def test_size_of_stack_with_nodes():
+    """Check that the size of a nonempty stack is accurate."""
+    from stack import Stack
+    this_stack = Stack(data=[1, 2, 3])
+    assert this_stack._linkedlist.size() == 3
+
+
+def test_size_of_stack_when_pushed():
+    """Check that size changes to reflect pushed values."""
+    from stack import Stack
+    this_stack = Stack(data=[1, 2, 3])
+    this_stack._linkedlist.push("new")
+    assert this_stack._linkedlist.size() == 4
+
+
+def test_size_of_stack_when_popped():
+    """Check that size decreases when popped."""
+    from stack import Stack
+    this_stack = Stack(data=[1, 2, 3])
+    this_stack._linkedlist.pop()
+    assert this_stack._linkedlist.size() == 2
+
+
+def test_pop_with_values():
+    """Check that pop removes the top value from the stack."""
+    from stack import Stack
+    this_stack = Stack(data=[1, 2, 3])
+    assert this_stack._linkedlist.pop() == 3
+
+
+def test_pop_without_values():
+    """Check that pop raises IndexError when called on empty stack."""
+    from stack import Stack
+    this_stack = Stack()
+    with pytest.raises(IndexError):
+        this_stack._linkedlist.pop()
