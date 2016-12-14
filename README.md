@@ -18,43 +18,46 @@ The *remove()* method takes in a node, iterates through the list to find the nod
 
 The *display()* method accepts a linked list, and returns a string representing a tuple of the list values.
 
+#Stack
+##Module: stack.py
+##Test Module: test_stack.py
 
-===========================test session starts ===============================
+The Stack module creates a stack that inherits some functionality from linked_list.py's LinkedList class via a constructor. 
+
+It contains the size(), pop(), and push() functions, and is capable of taking both a dataset and a head value as input.
+
+#Testing Information:
 
 
 ---------- coverage: platform darwin, python 2.7.10-final-0 ----------
 Name                      Stmts   Miss  Cover   Missing
----------------------------------:------:------:----------
-src/linked_list.py     :     64  :   6  : 91%  : 24-25, 60-62, 83
-src/test_linked_list.py:     44  :   0  : 100% :
----------------------------------:------:------:--------
-TOTAL                  :    108  :   6  : 94%  :
+-------------------------------------------------------
+src/linked_list.py           65      6    91%   24-25, 61-63, 84
+src/stack.py                 19      5    74%   16-17, 23, 26, 29
+src/test_linked_list.py      42      0   100%
+src/test_stack.py            56      0   100%
+-------------------------------------------------------
+TOTAL                       182     11    94%
 
 
-===================== 10 passed in 0.04 seconds ===============================
-
-linked_list-0.1.zip
-
-py35 installed
-
-py35 runtests: commands[0] | py.test src --cov=src --cov-report term-missing
-
-==========================test session starts ===============================
+============================================== 22 passed in 0.08 seconds ===============================================
 
 
-
------------- coverage: platform darwin, python 3.5.2-final-0 -------------
+---------- coverage: platform darwin, python 3.5.2-final-0 -----------
 Name                      Stmts   Miss  Cover   Missing
----------------------------------:------:------:----------
-src/linked_list.py     :     64  :   6  : 91%  : 24-25, 60-62, 83
-src/test_linked_list.py:     44  :   0  : 100% :
----------------------------------:------:------:--------
-TOTAL                  :    108  :   6  : 94%  :
+-------------------------------------------------------
+src/linked_list.py           65      6    91%   24-25, 61-63, 84
+src/stack.py                 19      5    74%   16-17, 23, 26, 29
+src/test_linked_list.py      42      0   100%
+src/test_stack.py            56      0   100%
+-------------------------------------------------------
+TOTAL                       182     11    94%
 
 
-=========================10 passed in 0.07 seconds ==========================
-
-
+============================================== 22 passed in 0.10 seconds ===============================================
+____________________________ summary __________________________
+  py27: commands succeeded
+  py35: commands succeeded
 
 
 ## We relied on the following resources in building our linked list and associated functions.
