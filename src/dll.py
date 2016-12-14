@@ -18,6 +18,7 @@ class DoubleLink(object):
         """Create an instance of a doubly linked list."""
         self._length = 0
         self.head = None
+        self.tail = None
 
         if iterable and hasattr(iterable, "__iter__"):
             for value in iterable:
@@ -36,6 +37,7 @@ class DoubleLink(object):
             self.head = new_node
         else:
             self.head = new_node
+            self.tail = new_node
         self._length += 1
 
     def append(value):

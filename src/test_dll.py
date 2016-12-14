@@ -71,6 +71,17 @@ def test_push_previous_node(full_list):
     assert full_list.head.next_node.previous_node.value == 15
 
 
+def test_push_tail_node_empty_list():
+    """Test that when you push to an empty list, the head is also the tail."""
+    new_list = DoubleLink()
+    new_list.push(15)
+    assert new_list.tail.value == 15
+
+
+def test_push_tail_node_full_list(full_list):
+    """Test that the tail node is the last node when you make a list."""
+    assert full_list.tail.value == 1
+
 
 
 
