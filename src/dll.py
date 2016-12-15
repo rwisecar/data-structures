@@ -59,6 +59,7 @@ class DoubleLink(object):
         next_node = self.head.next_node
         old_head = self.head
         self.head = next_node
+        self.head.previous_node = None
         self._length = self._length - 1
         return old_head.value
 
