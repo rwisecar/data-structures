@@ -45,3 +45,51 @@ def test_equeue_queue_length(value_queue):
     """Checking for the length of queue."""
     value_queue.enqueue(15)
     assert value_queue._queue._length == 4
+
+
+def test_dequeue_with_value(value_queue):
+    """Test that you can remove head of queue."""
+    value_queue.dequeue()
+    assert value_queue._queue.head.value == 2
+
+
+def test_dequeue_with_empty_list(new_queue):
+    """Check index error when you call dequeue on empty queue."""
+    with pytest.raises(IndexError):
+        new_queue.dequeue()
+
+
+def test_length_of_queue_when_dequeued(value_queue):
+    """Check length of queue when you call dequeue."""
+    value_queue.dequeue()
+    assert value_queue._queue._length == 2
+
+
+def test_length_of_empty_queue(new_queue):
+    """Check that length of empty queue returns 0."""
+    assert new_queue.size() == 0
+
+
+def test_length_of_full_queue(value_queue):
+    """Check that length of full queue returns length of queue."""
+    assert value_queue.size() == 3
+
+
+def test_peek_returns_value(value_queue):
+    """Check that peek returns the value of the next node."""
+    assert value_queue.peek(2) == 1
+
+
+def test_peek_returns_none_if_empty_queue(new_queue):
+    """Check that peek returns None if queue is empty."""
+    assert new_queue.peek(15) is None
+
+
+def test_peek_head_of_queue(value_queue):
+    """Check that peek works with head of queue."""
+    assert value_queue.peek(3) == 2
+
+
+def test_peek_tail_of_queue(value_queue):
+    """Check that peek works with tail of queue."""
+    assert value_queue.peek(1) is None
