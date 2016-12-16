@@ -24,7 +24,3 @@ class Stack(object):
             return self._linkedlist.pop()
         except IndexError:
             raise IndexError("Cannot pop from an empty stack")
-
-    def size(self):
-        """Returns the length of the stack."""
-        self._linkedlist.size()

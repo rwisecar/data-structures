@@ -15,7 +15,7 @@ def test_new_stack_is_empty():
     """Check that a new stack is empty."""
     from stack import Stack
     this_stack = Stack()
-    assert this_stack._linkedlist.size() == 0
+    assert this_stack._linkedlist.length == 0
 
 
 def test_new_stack_with_data_has_data(new_stack):
@@ -34,7 +34,7 @@ def test_new_stack_with_head_has_head():
 
 def test_pushed_value_is_new_head(new_stack):
     """When pushing to stack, the pushed value should be the new head."""
-    new_stack._linkedlist.push("new")
+    new_stack.push("new")
     assert new_stack._linkedlist.head.value == "new"
 
 
@@ -45,32 +45,26 @@ def test_length_of_stack(new_stack):
 
 def test_length_of_stack_when_pushed(new_stack):
     """Check that size changes to reflect pushed values."""
-    new_stack._linkedlist.push("new")
+    new_stack.push("new")
     assert new_stack._linkedlist.length == 4
 
 
 def test_size_of_stack_with_nodes(new_stack):
     """Check that the size of a nonempty stack is accurate."""
-    assert new_stack._linkedlist.size() == 3
+    assert new_stack._linkedlist.length == 3
 
 
-def test_size_of_stack_when_pushed(new_stack):
-    """Check that size changes to reflect pushed values."""
-    new_stack._linkedlist.push("new")
-    assert new_stack._linkedlist.size() == 4
-
-
-def test_size_of_stack_when_popped(new_stack):
+def test_length_of_stack_when_popped(new_stack):
     """Check that size decreases when popped."""
-    new_stack._linkedlist.pop()
-    assert new_stack._linkedlist.size() == 2
+    new_stack.pop()
+    assert new_stack._linkedlist.length == 2
 
 
 def test_pop_with_values():
     """Check that pop removes the top value from the stack."""
     from stack import Stack
     this_stack = Stack(data=[1, 2, 3])
-    assert this_stack._linkedlist.pop() == 3
+    assert this_stack.pop() == 3
 
 
 def test_pop_without_values():
@@ -78,4 +72,4 @@ def test_pop_without_values():
     from stack import Stack
     this_stack = Stack()
     with pytest.raises(IndexError):
-        this_stack._linkedlist.pop()
+        this_stack.pop()
