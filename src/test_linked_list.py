@@ -4,29 +4,47 @@ import pytest
 from linked_list import Node, LinkedList
 
 
+@pytest.fixture
+def empty_list():
+    """Create an empty list fixture."""
+    from linked_list import Node, LinkedList
+    new_list = LinkedList()
+    return new_list
+
+
+@pytest.fixture
+def full_list():
+    """Create a full list via fixture."""
+    from linked_list import Node, LinkedList
+    full_list = LinkedList(data=[1, 2, 3])
+    return full_list
+
+
 def test_create_node():
     """Test whether we create a node with a value 'val'."""
     test_node = Node(15)
     assert test_node.value == 15
 
 
-def test_create_list():
-    """Test whether we create a new Linked List instance."""
-    new_node = Node(value=15, next_node=None)
-    new_list = LinkedList(head=new_node, data=None, length=1)
-    assert new_list.head == new_node and new_list.length == 1
+def test_create_empty_list(empty_list):
+    """Test whether we create an empty new Linked List instance."""
+    assert empty_list.length == 0
 
 
-def test_create_from_existing_list():
+def test_create_list_with_head():
+    """Test whether we can create a list with an input head."""
+    new_list = LinkedList(15)
+    assert new_list.length == 1
+
+
+def test_create_list_with_data(full_list):
     """Test whether we can create a linked list from an existing list."""
-    new_list = LinkedList(head=None, data=[1, 2, 3], length=3)
-    new_node = Node(value=3)
-    assert new_list.head.value == new_node.value
+    assert full_list.head.value == 3
 
 
 def test_size():
     """Test whether length of the link link"""
-    linked_list1 = LinkedList(head=2, length=10)
+    linked_list1 = LinkedList(2)
     assert linked_list1.size() == linked_list1.length
 
 
@@ -37,38 +55,34 @@ def test_push():
     assert new_list.head.value == 15
 
 
-def test_pop():
+def test_push_to_full_list(full_list):
+    """Test whether head us expected node when you push to full list."""
+    full_list.push(15)
+    assert full_list.head.value == 15
+
+
+def test_pop(full_list):
     """Test whether the pop method removes and returns the first node."""
-    node1 = Node(15)
-    node2 = Node(10)
-    node3 = Node(5)
-    new_list = LinkedList(node1, length=1)
-    new_list.push(node2)
-    new_list.push(node3)
-    assert new_list.pop().value == node3.value
+    assert full_list.pop() == 3
 
 
-def test_pop_length():
+def test_pop_length(full_list):
     """Test whether the length of the list changes when a value is popped."""
-    new_list = LinkedList(data=[5, 10, 15], length=3)
-    new_list.pop()
-    assert new_list.length == 2
+    full_list.pop()
+    assert full_list.length == 2
 
 
-def test_search():
+def test_search(full_list):
     """Test whether the search method returns the correct value."""
-    new_list = LinkedList(data=[5, 10, 15], length=3)
-    assert new_list.search(10).value == 10
+    assert full_list.search(2).value == 2
 
 
-def test_display():
+def test_display(full_list):
     """Test that the display method returns a stringified tuple of the list."""
-    new_list = LinkedList(data=[5, 10, 15, 20], length=4)
-    new_list.display() == "(20, 15, 10, 5)"
+    full_list.display() == "(3, 2, 1)"
 
 
-def test_remove_length():
+def test_remove_length(full_list):
     """Test whether the length of the list changes when you remove a value."""
-    new_list = LinkedList(data=[5, 10, 15], length=3)
-    new_list.remove(new_list.head.next_node)
-    assert new_list.head.next_node.value == 5
+    full_list.remove(full_list.head.next_node)
+    assert full_list.head.next_node.value == 1

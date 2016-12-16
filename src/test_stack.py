@@ -26,9 +26,7 @@ def test_new_stack_with_data_has_data(new_stack):
 def test_new_stack_with_head_has_head():
     """Check new stack with head kwarg has head."""
     from stack import Stack
-    from linked_list import Node
-    node1 = Node(5)
-    this_stack = Stack(head=node1)
+    this_stack = Stack(5)
     assert this_stack._linkedlist.head.value == 5
 
 
