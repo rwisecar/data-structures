@@ -7,7 +7,7 @@ from linked_list import Node, LinkedList
 @pytest.fixture
 def empty_list():
     """Create an empty list fixture."""
-    from linked_list import Node, LinkedList
+    from linked_list import LinkedList
     new_list = LinkedList()
     return new_list
 
@@ -15,7 +15,7 @@ def empty_list():
 @pytest.fixture
 def full_list():
     """Create a full list via fixture."""
-    from linked_list import Node, LinkedList
+    from linked_list import LinkedList
     full_list = LinkedList(data=[1, 2, 3])
     return full_list
 
@@ -40,6 +40,12 @@ def test_create_list_with_head():
 def test_create_list_with_data(full_list):
     """Test whether we can create a linked list from an existing list."""
     assert full_list.head.value == 3
+
+
+def test_create_list_raise_error():
+    """Test that TypeError is raised when you call list with noniterable."""
+    with pytest.raises(TypeError):
+        data_list = LinkedList(data=123456)
 
 
 def test_size():
@@ -74,7 +80,13 @@ def test_pop_length(full_list):
 
 def test_search(full_list):
     """Test whether the search method returns the correct value."""
-    assert full_list.search(2).value == 2
+    assert full_list.search(2) == 2
+
+
+def test_search_value_error(full_list):
+    """Test whether search of value not in list raises error."""
+    with pytest.raises(ValueError):
+        full_list.search("hello")
 
 
 def test_display(full_list):
@@ -84,5 +96,24 @@ def test_display(full_list):
 
 def test_remove_length(full_list):
     """Test whether the length of the list changes when you remove a value."""
-    full_list.remove(full_list.head.next_node)
+    full_list.remove(2)
+    assert full_list.length == 2
+
+
+def test_remove_next_node(full_list):
+    """Check that when you remove a node, its value is gone."""
+    full_list.remove(2)
     assert full_list.head.next_node.value == 1
+
+
+def test_remove_head(full_list):
+    """Test that remove works on the head of the list."""
+    full_list.remove(3)
+    assert full_list.head.value == 2
+
+
+def test_remove_value_error(full_list):
+    """Check that removing a value not in list returns error."""
+    with pytest.raises(ValueError):
+        full_list.remove("hello")
+

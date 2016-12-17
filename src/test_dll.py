@@ -22,6 +22,12 @@ def test_create_empty_node():
     assert test_node.value is None
 
 
+def test_create_list_raise_error():
+    """Test that TypeError is raised when you init with noniterable."""
+    with pytest.raises(TypeError):
+        new_dll = DoubleLink(iterable=123456)
+
+
 def test_test_next_node():
     """Test whether creating a next with another node."""
     test_node1 = Node(15)

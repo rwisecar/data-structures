@@ -51,15 +51,15 @@ class LinkedList(object):
     def search(self, val):
         """Search through list for a node and return that node."""
         current = self.head
-        found = False
         if self.length > 0:
-            while current and found is False:
+            while current:
                 if current.value == val:
-                    found = True
-                    return current
+                    break
                 else:
                     current = current.next_node
-            if current is None:
+            if current:
+                return current.value
+            else:
                 raise ValueError("Value not found in list.")
 
     def display(self):
@@ -72,21 +72,21 @@ class LinkedList(object):
         linked_list_string += ")"
         return linked_list_string
 
-    def remove(self, node):
+    def remove(self, value):
         """Input a node and remove that node from the list."""
         current = self.head
         previous = None
-        try:
-            while current:
-                if current == node:
-                    break
-                else:
-                    previous = current
-                    current = previous.next_node
-            if previous is None:
-                self.head = current.next_node()
+        while current:
+            if current.value == value:
+                break
             else:
-                previous.next_node = current.next_node
+                previous = current
+                current = previous.next_node
+        if previous is None:
+            self.head = current.next_node
             self.length -= 1
-        except ValueError:
+        elif current and previous:
+            previous.next_node = current.next_node
+            self.length -= 1
+        elif ValueError:
             raise ValueError("Node not found in list.")
