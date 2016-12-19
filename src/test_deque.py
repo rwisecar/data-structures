@@ -162,3 +162,25 @@ def test_popleft_empty_deque_raises_error(empty_deque):
     """Test pop mehtod on empty deque raises error."""
     with pytest.raises(IndexError):
         empty_deque.popleft()
+
+
+def test_cant_peek_empty(empty_deque):
+    """Test peek can't be called on empty deques."""
+    with pytest.raises(AttributeError):
+        empty_deque.peek()
+
+
+def test_peek_returns_value(full_deque):
+    """Test peeking at the proper (tail) value."""
+    assert full_deque.peek() == 1
+
+
+def test_cant_peekleft_empty(empty_deque):
+    """Test peekleft can't be called on empty deques."""
+    with pytest.raises(AttributeError):
+        empty_deque.peekleft()
+
+
+def test_peekleft_returns_value(full_deque):
+    """Test peeklefting at the proper (head) value."""
+    assert full_deque.peekleft() == 3

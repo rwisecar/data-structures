@@ -45,3 +45,15 @@ class Deque(object):
     def popleft(self):
         """Popleft removes the value from the head and returns value."""
         return self._deque.pop()
+
+    def peek(self):
+        """Return value at tail."""
+        if self._deque.tail is None:
+            raise AttributeError("Can't peek at empty!")
+        return self._deque.tail.value
+
+    def peekleft(self):
+        """Return value at head."""
+        if self._deque.head is None:
+            raise AttributeError("Can't peekleft at empty!")
+        return self._deque.head.value
