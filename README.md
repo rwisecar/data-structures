@@ -26,36 +26,59 @@ The Stack module creates a stack that inherits some functionality from linked_li
 
 It contains the size(), pop(), and push() functions, and is capable of taking both a dataset and a head value as input.
 
+
+#Queue
+##Module: queue.py
+##Test Module: test_queue.py
+
+The queue module creates a queue that inherits some functionality from dll.py-- the doubly linked list-- via a composition.
+
+It contains the enqueue(), dequeue(), peek(), and size() methods, and follows the first in, first out format.
+
+
+#Deque
+##Module: deque.py
+##Test Module: test_deque.py
+
+The deque module creates a deque that inherits some functionality from the doubly linked list module via composition. Nodes can be added to, and removed from, both ends of the deque.
+
+It contains the append(), appendleft(), pop(), popleft(), peek(), peekleft(), and size() methods. 
+
+
 #Testing Information:
 
-
----------- coverage: platform darwin, python 2.7.10-final-0 ----------
+---------- coverage: platform darwin, python 2.7.13-final-0 ----------
 Name                      Stmts   Miss  Cover   Missing
 -------------------------------------------------------
-src/linked_list.py           65      6    91%   24-25, 61-63, 84
-src/stack.py                 19      5    74%   16-17, 23, 26, 29
-src/test_linked_list.py      42      0   100%
-src/test_stack.py            56      0   100%
+src/deque.py                 24      0   100%
+src/dll.py                   68      0   100%
+src/linked_list.py           67      0   100%
+src/queue.py                 22      0   100%
+src/stack.py                 11      0   100%
+src/test_deque.py            89      0   100%
+src/test_dll.py              84      0   100%
+src/test_linked_list.py      57      0   100%
+src/test_queue.py            43      0   100%
+src/test_stack.py            37      0   100%
 -------------------------------------------------------
-TOTAL                       182     11    94%
-
-
-============================================== 22 passed in 0.08 seconds ===============================================
+TOTAL                       502      0   100%
 
 
 ---------- coverage: platform darwin, python 3.5.2-final-0 -----------
 Name                      Stmts   Miss  Cover   Missing
 -------------------------------------------------------
-src/linked_list.py           65      6    91%   24-25, 61-63, 84
-src/stack.py                 19      5    74%   16-17, 23, 26, 29
-src/test_linked_list.py      42      0   100%
-src/test_stack.py            56      0   100%
+src/deque.py                 24      0   100%
+src/dll.py                   68      0   100%
+src/linked_list.py           67      0   100%
+src/queue.py                 22      0   100%
+src/stack.py                 11      0   100%
+src/test_deque.py            89      0   100%
+src/test_dll.py              84      0   100%
+src/test_linked_list.py      57      0   100%
+src/test_queue.py            43      0   100%
+src/test_stack.py            37      0   100%
 -------------------------------------------------------
-TOTAL                       182     11    94%
-
-
-============================================== 22 passed in 0.10 seconds ===============================================
-____________________________ summary __________________________
+TOTAL                       502      0   100%
   py27: commands succeeded
   py35: commands succeeded
 
