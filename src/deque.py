@@ -28,3 +28,7 @@ class Deque(object):
         if self._deque.head:
             return self._deque._length
         return 0
+
+    def append(self, value):
+        """Append the value to the end of the deque."""
+        self._deque.append(value)
