@@ -17,7 +17,8 @@ class Deque(object):
 
     peekleft() returns the value that would be returned by popleft.()
 
-    size() returns the number of nodes in the deque."""
+    size() returns the number of nodes in the deque.
+    """
 
     def __init__(self, head=None, iterable=None):
         """Creating instances for the deque."""
@@ -32,3 +33,15 @@ class Deque(object):
     def append(self, value):
         """Append the value to the end of the deque."""
         self._deque.append(value)
+
+    def appendleft(self, value):
+        """Append the value to the head of the deque."""
+        self._deque.push(value)
+
+    def pop(self):
+        """Pop removes the value from the end and returns value."""
+        return self._deque.shift()
+
+    def popleft(self):
+        """Popleft removes the value from the head and returns value."""
+        return self._deque.pop()

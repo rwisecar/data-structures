@@ -2,6 +2,7 @@
 
 import pytest
 
+
 @pytest.fixture
 def empty_deque():
     """Create empty deque."""
@@ -46,30 +47,118 @@ def test_initializing_deque_with_non_iterable_raises_error():
 
 
 def test_append_to_empty_deque_check_head(empty_deque):
+    """Test append method on empty deque first value is Denny Way."""
     empty_deque.append("Denny Way")
     assert empty_deque._deque.head.value == "Denny Way"
 
 
 def test_append_to_empty_deque_check_tail(empty_deque):
+    """Test append method on empty deque tail is Denny Way."""
     empty_deque.append("Denny Way")
     assert empty_deque._deque.tail.value == "Denny Way"
 
 
 def test_append_to_empty_deque_size(empty_deque):
+    """Test append method on empty deque size is 1."""
     empty_deque.append("Denny Way")
     assert empty_deque.size() == 1
 
 
 def test_append_to_full_deque_check_head(full_deque):
+    """Test append method on full deque head is 3."""
     full_deque.append("Denny Way")
     assert full_deque._deque.head.value == 3
 
 
 def test_append_to_full_deque_check_tail(full_deque):
+    """Test append method on full deque tail is 3."""
     full_deque.append("Denny Way")
     assert full_deque._deque.tail.value == "Denny Way"
 
 
 def test_append_to_full_deque_size(full_deque):
+    """Test append method on full deque size is 4."""
     full_deque.append("Denny Way")
     assert full_deque.size() == 4
+
+
+def test_appendleft_to_empty_deque_check_head(empty_deque):
+    """Test appendleft method on empty deque head is Denny Way."""
+    empty_deque.appendleft("Denny Way")
+    assert empty_deque._deque.head.value == "Denny Way"
+
+
+def test_appendleft_to_empty_deque_check_tail(empty_deque):
+    """Test appendleft method on empty deque tail is Denny Way."""
+    empty_deque.appendleft("Denny Way")
+    assert empty_deque._deque.tail.value == "Denny Way"
+
+
+def test_appendleft_to_empty_deque_size(empty_deque):
+    """Test appendleft method on empty deque size is 1."""
+    empty_deque.appendleft("Denny Way")
+    assert empty_deque.size() == 1
+
+
+def test_appendleft_to_full_deque_check_head(full_deque):
+    """Test appendleft method on full deque head is Denny Way."""
+    full_deque.appendleft("Denny Way")
+    assert full_deque._deque.head.value == "Denny Way"
+
+
+def test_appendleft_to_full_deque_check_tail(full_deque):
+    """Test appendleft method on full deque tail is 1."""
+    full_deque.appendleft("Denny Way")
+    assert full_deque._deque.tail.value == 1
+
+
+def test_appendleft_to_full_deque_size(full_deque):
+    """Test appendleft method on full deque size is 4."""
+    full_deque.appendleft("Denny Way")
+    assert full_deque.size() == 4
+
+
+def test_pop_to_full_deque_tail(full_deque):
+    """Test pop method on full deque tail is 2."""
+    full_deque.pop()
+    assert full_deque._deque.tail.value == 2
+
+
+def test_pop_to_full_deque_returns_correct_value(full_deque):
+    """Test pop method on full deque returns 1."""
+    assert full_deque.pop() == 1
+
+
+def test_pop_to_full_deque_size_decrease(full_deque):
+    """Test pop method on full deque size is ."""
+    full_deque.pop()
+    assert full_deque._deque._length == 2
+
+
+def test_pop_empty_deque_raises_error(empty_deque):
+    """Test pop mehtod on empty deque raises error."""
+    with pytest.raises(IndexError):
+        empty_deque.pop()
+
+
+def test_popleft_to_full_deque_tail(full_deque):
+    """Test pop method on full deque tail is 2."""
+    full_deque.popleft()
+    assert full_deque._deque.tail.value == 1
+
+
+def test_popleft_to_full_deque_returns_correct_value(full_deque):
+    """Test pop method on full deque returns 1."""
+    assert full_deque.popleft() == 3
+
+
+def test_popleft_to_full_deque_size_decrease(full_deque):
+    """Test pop method on full deque size is ."""
+    full_deque.popleft()
+    assert full_deque._deque._length == 2
+
+
+def test_popleft_empty_deque_raises_error(empty_deque):
+    """Test pop mehtod on empty deque raises error."""
+    with pytest.raises(IndexError):
+        empty_deque.popleft()
