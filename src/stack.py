@@ -10,9 +10,9 @@ class Stack(object):
     size(): returns the length of the items in th Stack.
     """
 
-    def __init__(self, head=None, data=None, length=0):
+    def __init__(self, head=None, data=None):
         """Create a new stack based on LinkedList composition."""
-        self._linkedlist = LinkedList(head, data, length)
+        self._linkedlist = LinkedList(head, data)
 
     def push(self, value):
         """Push new values to head of stack."""
