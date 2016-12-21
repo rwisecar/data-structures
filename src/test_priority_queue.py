@@ -74,3 +74,20 @@ def test_pop_negative_priority(empty_pqueue):
     empty_pqueue.insert(10, -1)
     empty_pqueue.pop()
     assert empty_pqueue._priorityq[0][0] == 5
+
+
+def test_peek_from_empty(empty_pqueue):
+    """Test can't peek at empty."""
+    with pytest.raises(IndexError):
+        empty_pqueue.peek()
+
+
+def test_peek_from_populated_q(populated_pqueue):
+    """Test peek works as exoected on prepoulated queue."""
+    assert populated_pqueue.peek() == ('Seattle', 1)
+
+
+def test_peek_w_two_at_same_prio(populated_pqueue):
+    """Test peek returns first of multiple same prio."""
+    populated_pqueue.insert('New York', 1)
+    assert populated_pqueue.peek() == ('Seattle', 1)
