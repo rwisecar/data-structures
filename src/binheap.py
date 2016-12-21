@@ -21,9 +21,6 @@ class Binheap(object):
         elif iterable:
             raise TypeError("Can't init with a non iterable.")
 
-    # def sort_up():
-    #     """Sort up."""
-
     def push(self, value):
         """Add a value at the end of the heap into the leftmost empty spot."""
         self.heap.append(value)
@@ -33,10 +30,12 @@ class Binheap(object):
     def pop(self):
         """Pop the root and return value."""
         try:
+            popped_value = self.heap[0]
             self.heap[0], self.heap[-1] = self.heap[-1], self.heap[0]
             self.heap.pop()
             if len(self.heap) > 1:
                 self.bubble_up()
+            return popped_value
         except IndexError:
             raise IndexError("Can't pop from an empty list.")
 
@@ -44,7 +43,7 @@ class Binheap(object):
         """Sort the list."""
         child = -1
         parent = int((len(self.heap) - 2) / 2)
-        while self.heap[child] > self.heap[parent]:
+        while self.heap[child] < self.heap[parent]:
             self.heap[child], self.heap[parent] = self.heap[parent], self.heap[child]
             child, parent = parent, int((parent - 1) / 2)
             if self.heap[child] is self.heap[0]:
