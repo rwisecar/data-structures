@@ -44,41 +44,54 @@ The deque module creates a deque that inherits some functionality from the doubl
 
 It contains the append(), appendleft(), pop(), popleft(), peek(), peekleft(), and size() methods. 
 
+#Binary Heap
+##Module: binheap.py
+##Test Module: text_deque.py
+
+The binary heap module creates a minheap binary heap structure, in which each parent is smaller than its child elements. It has a pop() method, which removes the first element and maintains the heap structure, and a push() method, which adds an element to the end and resorts the structure as necessary.
+
+We refactored this module after reviewing Maelle and Ben S.'s code in class. We also looked at https://interactivepython.org/runestone/static/pythonds/Trees/BinaryHeapImplementation.html 
 
 #Testing Information:
 
----------- coverage: platform darwin, python 2.7.13-final-0 ----------
+---------- coverage: platform darwin, python 2.7.10-final-0 ----------
 Name                      Stmts   Miss  Cover   Missing
 -------------------------------------------------------
+src/binheap.py               30      0   100%
 src/deque.py                 24      0   100%
 src/dll.py                   68      0   100%
 src/linked_list.py           67      0   100%
 src/queue.py                 22      0   100%
 src/stack.py                 11      0   100%
+src/test_binheap.py          40      0   100%
 src/test_deque.py            89      0   100%
 src/test_dll.py              84      0   100%
 src/test_linked_list.py      57      0   100%
 src/test_queue.py            43      0   100%
 src/test_stack.py            37      0   100%
 -------------------------------------------------------
-TOTAL                       502      0   100%
+TOTAL                       572      0   100%
 
 
 ---------- coverage: platform darwin, python 3.5.2-final-0 -----------
 Name                      Stmts   Miss  Cover   Missing
 -------------------------------------------------------
+src/binheap.py               30      0   100%
 src/deque.py                 24      0   100%
 src/dll.py                   68      0   100%
 src/linked_list.py           67      0   100%
 src/queue.py                 22      0   100%
 src/stack.py                 11      0   100%
+src/test_binheap.py          40      0   100%
 src/test_deque.py            89      0   100%
 src/test_dll.py              84      0   100%
 src/test_linked_list.py      57      0   100%
 src/test_queue.py            43      0   100%
 src/test_stack.py            37      0   100%
 -------------------------------------------------------
-TOTAL                       502      0   100%
+TOTAL                       572      0   100%
+
+
   py27: commands succeeded
   py35: commands succeeded
 
