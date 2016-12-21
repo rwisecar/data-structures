@@ -30,13 +30,33 @@ def test_initted_q_shows_q(populated_pqueue):
     assert populated_pqueue._priorityq[2] == ('Tacoma', 5)
 
 
+def test_insert_negative_priority(populated_pqueue):
+    """Test that a negative priority can be added to a populated queue."""
+    populated_pqueue.insert(5, -1)
+    assert populated_pqueue._priorityq[3] == (5, -1)
+
+
 def test_insert_adds_to_q(empty_pqueue):
     """Test that inserted value is add."""
-    empty_pqueue.insert(('Bellingham', 2))
-    assert empty_pqueue[0] == ('Bellingham', 2)
+    empty_pqueue.insert('Bellingham', 2)
+    assert empty_pqueue._priorityq[0] == ('Bellingham', 2)
 
 
 def test_cant_pop_from_empty(empty_pqueue):
     """Test that pop raises error on empty queue."""
     with pytest.raises(IndexError):
         empty_pqueue.pop()
+
+
+def test_pop_from_full(populated_pqueue):
+    """Test that pop is functional from populated queue."""
+    populated_pqueue.pop()
+    assert len(populated_pqueue._priorityq) == 2
+
+
+def test_pop_negative_priority(empty_pqueue):
+    """Test that pop() sorts, removes negative number."""
+    empty_pqueue.insert(5, 0)
+    empty_pqueue.insert(10, -1)
+    empty_pqueue.pop()
+    assert empty_pqueue._priorityq[0][0] == 5

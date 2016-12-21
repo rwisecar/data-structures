@@ -17,7 +17,7 @@ class Priority_Q(object):
         self._priorityq = []
         if iterable and hasattr(iterable, "__iter__"):
             for i in iterable:
-                self.insert(iterable[0], iterable[1])
+                self.insert(i[0], i[1])
         elif iterable:
             raise TypeError("Can't init with a non iterable.")
 
@@ -31,7 +31,7 @@ class Priority_Q(object):
             raise IndexError("You may not pop from an empty queue.")
         top_priority = sorted(self._priorityq, key=lambda x: x[1])
         self._priorityq.remove(top_priority[0])
-        return top_priority[0]
+        # return top_priority[0]
 
     def peek(self):
         """Return the most important item from the queue w/o removing it."""
