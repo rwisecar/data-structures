@@ -2,19 +2,22 @@
 
 
 class Binheap(object):
-    """Create a binary heap in which parent node is smallest.
+    """
+    Create a binary heap in which parent node is smallest.
 
     push() adds a new value into the heap.
 
     pop() removes the parent value from the top of the heap.
 
-    Both push() and pop() maintain heap property."""
+    Both push() and pop() maintain heap property.
+    """
 
     def __init__(self, iterable=None):
         """The init function for Binheap."""
         self.heap = []
         if iterable and hasattr(iterable, "__iter__"):
             self.heap.extend(iterable)
+            self.bubble_up()
         elif iterable:
             raise TypeError("Can't init with a non iterable.")
 
@@ -23,21 +26,26 @@ class Binheap(object):
 
     def push(self, value):
         """Add a value at the end of the heap into the leftmost empty spot."""
-        parent = (len(self.heap) - 1 // 2) - 1
-        if len(self.heap) == 0:
-            self.heap.append(value)
-        else:
-            self.heap.append(value)
-            child = self.heap[-1]
-            while child < self.heap[parent]:
-                self.heap[value]
-                child, parent = parent, child
-                parent // 2
-                
+        self.heap.append(value)
+        if len(self.heap) > 1:
+            self.bubble_up()
 
-    # def pop(self):
-        """Removes the parent element from the top of the heap and reorders."""
-        # Find and remove min value
-        # Take most recent node and add to head
-        # Resort
-        pass
+    def pop(self):
+        """Pop the root and return value."""
+        try:
+            self.heap[0], self.heap[-1] = self.heap[-1], self.heap[0]
+            self.heap.pop()
+            if len(self.heap) > 1:
+                self.bubble_up()
+        except IndexError:
+            raise IndexError("Can't pop from an empty list.")
+
+    def bubble_up(self):
+        """Sort the list."""
+        child = -1
+        parent = int((len(self.heap) - 2) / 2)
+        while self.heap[child] > self.heap[parent]:
+            self.heap[child], self.heap[parent] = self.heap[parent], self.heap[child]
+            child, parent = parent, int((parent - 1) / 2)
+            if self.heap[child] is self.heap[0]:
+                break
