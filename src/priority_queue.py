@@ -36,6 +36,6 @@ class Priority_Q(object):
     def peek(self):
         """Return the most important item from the queue w/o removing it."""
         if not self._priorityq:
-            raise IndexError("You may not pop from an empty queue.")
+            raise IndexError("You may not peek from an empty queue.")
         top_priority = sorted(self._priorityq, key=lambda x: x[1])
         return top_priority[0]
