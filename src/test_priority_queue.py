@@ -54,6 +54,20 @@ def test_pop_from_full(populated_pqueue):
     assert len(populated_pqueue._priorityq) == 2
 
 
+def test_pop_from_full_removes_high_priority_tuple(populated_pqueue):
+    """Test that pop removes the tuple with the highest priority."""
+    populated_pqueue.pop()
+    assert ('Seattle', 1) not in populated_pqueue._priorityq
+
+
+def test_pop_two_items_same_priority(populated_pqueue):
+    """Test that pop removes only first instance of a duplicated high priority."""
+    populated_pqueue.insert('New York', 1)
+    populated_pqueue.pop()
+    assert ('Seattle', 1) not in populated_pqueue._priorityq
+    assert ('New York', 1) in populated_pqueue._priorityq
+
+
 def test_pop_negative_priority(empty_pqueue):
     """Test that pop() sorts, removes negative number."""
     empty_pqueue.insert(5, 0)
