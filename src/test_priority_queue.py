@@ -7,7 +7,7 @@ def empty_pqueue():
     """Fixture for empty priority queue."""
     from priority_queue import Priority_Q
     empty_prio_q = Priority_Q()
-    return prio_q
+    return empty_prio_q
 
 
 @pytest.fixture
@@ -27,7 +27,7 @@ def test_cant_init_w_noniterable():
 
 def test_initted_q_shows_q(populated_pqueue):
     """Test that populated, initialized queue shows data."""
-    assert populated_pqueue[3] == ('Tacoma', 5)
+    assert populated_pqueue._priorityq[2] == ('Tacoma', 5)
 
 
 def test_insert_adds_to_q(empty_pqueue):
