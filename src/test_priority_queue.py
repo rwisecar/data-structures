@@ -91,3 +91,11 @@ def test_peek_w_two_at_same_prio(populated_pqueue):
     """Test peek returns first of multiple same prio."""
     populated_pqueue.insert('New York', 1)
     assert populated_pqueue.peek() == ('Seattle', 1)
+
+
+def test_peek_returns_lowest_neg_prio(empty_pqueue):
+    """Test that peek sorts, returns lowest negative number."""
+    empty_pqueue.insert(5, 0)
+    empty_pqueue.insert(10, -1)
+    empty_pqueue.insert(8, -3)
+    assert empty_pqueue.peek() == (8, -3)
