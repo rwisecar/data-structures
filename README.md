@@ -52,6 +52,16 @@ The binary heap module creates a minheap binary heap structure, in which each pa
 
 We refactored this module after reviewing Maelle and Ben S.'s code in class. We also looked at https://interactivepython.org/runestone/static/pythonds/Trees/BinaryHeapImplementation.html 
 
+#Priority Queue
+##Module: priority_queue.py
+##Test Module: test_priority_queue.py
+
+The priority queue takes in a list of tuples of (value, priority). 
+
+The insert(value, priority=0) method adds an item to the queue with the value and priority assigned by the user. The pop() method returns the tuple with the lowest priority (most important item). The peek()function returns the value of the most important item, without removing it.
+
+We had help from the following stack overflow resource: http://stackoverflow.com/questions/10695139/sort-a-list-of-tuples-by-2nd-item-integer-value
+
 #Testing Information:
 
 ---------- coverage: platform darwin, python 2.7.10-final-0 ----------
