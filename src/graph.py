@@ -40,7 +40,8 @@ class Graph():
             self.add_node(n1)
         if n2 not in self.graph.keys():
             self.add_node(n2)
-        self.graph[n1]['edges'].append(n2)
+        if n2 not in self.graph[n1]['edges']:
+            self.graph[n1]['edges'].append(n2)
 
     def nodes(self):
         """Returns a list of all nodes in the graph."""
@@ -52,8 +53,24 @@ class Graph():
     def edges(self):
         """Returns a list of all edges in the graph."""
         edge_list = []
+        # for item in self.graph.items():
+        #     edge_list.append(item)
         for n in self.graph.keys():
             edge_list.append("{}: {}".format(n, self.graph[n]["edges"]))
         return edge_list
 
-    
+    def del_node(self, n):
+        """Deletes node n from the graph, raises error if does not exist."""
+        if n not in self.graph.keys():
+            raise KeyError("You can't delete a node that does not exist.")
+        del self.graph[n]
+        for key in self.graph.keys():
+            if n in self.graph[key]["edges"]:
+                self.graph[key]["edges"].remove(n)
+
+    def del_edge(self, n1, n2):
+        """Deletes the edge connecting n1 and n2."""
+        if self.graph[n1]['edges'] and self.graph[n2]:
+            self.graph[n1]['edges'].remove(n2)
+        else:
+            raise KeyError("That edge is not in the graph.")
