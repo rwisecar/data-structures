@@ -30,8 +30,14 @@ class Graph():
 
     def add_node(self, n):
         """Adds a node to the graph."""
-        self.graph[n] = {"edges": {}}
+        if n in self.graph.keys():
+            raise KeyError("Node already in graph.")
+        self.graph[n] = {"edges": []}
 
     def add_edge(self, n1, n2):
-        """Add an edge between two nodes in the graph."""
-        pass
+        """Add an edge from n1 to n2 in the graph."""
+        if n1 not in self.graph.keys():
+            self.add_node(n1)
+        if n2 not in self.graph.keys():
+            self.add_node(n2)
+        self.graph[n1]['edges'].append(n2)
