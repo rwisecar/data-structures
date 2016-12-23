@@ -34,10 +34,10 @@ class Binheap(object):
         return val
 
     def bubble_down(self, idx):
-        """Bubble down until meets min heap status."""
+        """Bubble down node until meets min heap status."""
         first_child = (2 * idx) + 1
         if first_child >= len(self.heap):
-            return
+            return 0
         second_child = first_child + 1
         try:
             child_idx = first_child if self.heap[first_child] < self.heap[second_child] else second_child
@@ -48,9 +48,9 @@ class Binheap(object):
             self.bubble_down(child_idx)
 
     def bubble_up(self, idx):
-        """Bubble up until meets min heap status."""
+        """Bubble up node until meets min heap status."""
         if idx == 0:
-            return
+            return 0
         parent_idx = (idx - 1) // 2
         if self.heap[idx] < self.heap[parent_idx]:
             self.heap[idx], self.heap[parent_idx] = self.heap[parent_idx], self.heap[idx]
