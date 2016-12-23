@@ -217,3 +217,10 @@ def test_adjacent_raises_error_on_nonexistent_key(graph_with_edges):
     """Test error is raised when one of key args isn't in graph."""
     with pytest.raises(KeyError):
         graph_with_edges.adjacent(5, "Charlie Brown")
+
+
+def test_adjacent_for_lack_of_connection(graph_with_edges):
+    """Test should return False for no connection."""
+    graph_with_edges.add_node("Charlie Brown")
+    assert graph_with_edges.adjacent(15, "Charlie Brown") is False
+
