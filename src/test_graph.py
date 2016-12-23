@@ -26,6 +26,7 @@ def three_node_graph():
     this_graph.add_node("Hunt-Walker, Nicholas")
     return this_graph
 
+
 @pytest.fixture
 def graph_with_edges():
     """Fixture for a graph with edges."""
@@ -174,13 +175,13 @@ def test_edge_deletes_edge(graph_with_edges):
     assert 10 not in graph_with_edges.graph[5]["edges"]
 
 
-def test_del_edge_raises_KeyError_if_n1_not_in_graph(graph_with_edges):
+def test_del_edge_raises_keyerror_if_n1_not_in_graph(graph_with_edges):
     """Test that a KeyError is raised if n1 is not in the graph."""
     with pytest.raises(KeyError):
         graph_with_edges.del_edge(100, 5)
 
 
-def test_del_edge_raises_KeyError_if_n2_not_in_graph(graph_with_edges):
+def test_del_edge_raises_keyerror_if_n2_not_in_graph(graph_with_edges):
     """Test that a KeyError is raised if n2 is not in the graph."""
     with pytest.raises(KeyError):
         graph_with_edges.del_edge(5, 100)
@@ -188,15 +189,21 @@ def test_del_edge_raises_KeyError_if_n2_not_in_graph(graph_with_edges):
 
 def test_has_node_haz_nodez(three_node_graph):
     """Test known node is indeed in graph."""
-    assert three_node_graph.has_node("Hunt-Walker, Nicholas") == True
+    assert three_node_graph.has_node("Hunt-Walker, Nicholas") is True
 
 
 def test_has_node_when_node_nonexistent(three_node_graph):
     """Test that False returned when nonexistent node called."""
-    assert three_node_graph.has_node("Elvis Presley") == False
+    assert three_node_graph.has_node("Elvis Presley") is False
 
 
 def test_neighbors_with_nonexistent_node(empty_graph):
     """Test error raised when asking for neighbors of nonexisting node."""
     with pytest.raises(KeyError):
         empty_graph.neighbors("Coffee Mug")
+
+
+def test_neighbors_lists_arguments_edges(graph_with_edges):
+    """Test method returns edges for given node."""
+    assert graph_with_edges.neighbors(5) == [10, 15]
+

@@ -86,10 +86,10 @@ class Graph():
         if n not in self.graph.keys():
             raise KeyError("Not in graph.")
         edges_list = []
-        self.graph[n]['edges'].extend(edges_list)
+        edges_list.extend(self.graph[n]['edges'])
         for key in self.graph.keys():
             if n in self.graph[key]["edges"]:
-                edges_list.append(self.graph[key]["edges"])
+                edges_list.append(key)
         return edges_list
 
     def adjacent(self, n1, n2):
