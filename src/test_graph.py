@@ -71,3 +71,8 @@ def test_add_edge_creates_edge(empty_graph):
     empty_graph.add_edge("Wisecarver, Rachael", "Valenzuela, Rick")
     assert empty_graph.graph["Wisecarver, Rachael"]["edges"] == ["Valenzuela, Rick"]
 
+def test_add_edge_only_in_expected_direction(empty_graph):
+    """Test add_edge() doesn't add edge in reverse director."""
+    empty_graph.add_edge("Wisecarver, Rachael", "Valenzuela, Rick")
+    assert ["Valenzuela, Rick"] not in empty_graph.graph["Wisecarver, Rachael"]["edges"]
+
