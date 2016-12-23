@@ -72,5 +72,7 @@ class Graph():
         """Deletes the edge connecting n1 and n2."""
         if self.graph[n1]['edges'] and self.graph[n2]:
             self.graph[n1]['edges'].remove(n2)
+        elif n1 not in self.graph.keys() or n2 not in self.graph.keys():
+            raise KeyError("That node is not in the graph.")
         else:
-            raise KeyError("That edge is not in the graph.")
+            raise ValueError("That edge is not in the graph.")
