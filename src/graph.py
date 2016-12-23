@@ -75,14 +75,11 @@ class Graph():
         elif n1 not in self.graph.keys() or n2 not in self.graph.keys():
             raise KeyError("That node is not in the graph.")
         else:
-<<<<<<< HEAD
             raise ValueError("That edge is not in the graph.")
-=======
-            raise KeyError("That edge is not in the graph.")
 
     def has_node(self, n):
         """Return True if node n is contained in the graph."""
-        if n in self.graph.keys:
+        if n in self.graph.keys():
             return True
 
     def neighbors(self, n):
@@ -94,7 +91,6 @@ class Graph():
                 edges_list.append(self.graph[key]["edges"])
         return edges_list
 
-
     def adjacent(self, n1, n2):
         """Return True if n1 and n2 are connected by an edge."""
         if n1 in self.graph[n2]['edges']:
@@ -102,5 +98,3 @@ class Graph():
         if n2 in self.graph[n1]['edges']:
             return True
         return False
-
->>>>>>> da3e3f6bf305233708364603259dc7b9c3301e2f

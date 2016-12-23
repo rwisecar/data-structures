@@ -184,3 +184,10 @@ def test_del_edge_raises_KeyError_if_n2_not_in_graph(graph_with_edges):
     """Test that a KeyError is raised if n2 is not in the graph."""
     with pytest.raises(KeyError):
         graph_with_edges.del_edge(5, 100)
+
+
+def test_has_node_haz_nodez(three_node_graph):
+    """Test known node is indeed in graph."""
+    assert three_node_graph.has_node("Hunt-Walker, Nicholas") == True
+
+
