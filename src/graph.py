@@ -89,3 +89,13 @@ class Graph():
                 edges_list.append(self.graph[key]["edges"])
         return edges_list
 
+
+    def adjacent(n1, n2):
+        """Return True if n1 and n2 are connceted by an edge."""
+        if n1 in self.graph[n2]['edges']:
+            return True
+        if n2 in self.graph[n1]['edges']:
+            return True
+        return False
+
+
