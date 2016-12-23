@@ -79,8 +79,8 @@ class Graph():
 
     def has_node(self, n):
         """Return True if node n is contained in the graph."""
-        if n in self.graph.keys():
-            return True
+        return n in self.graph.keys()
+
 
     def neighbors(self, n):
         """Return a list of all nodes connected to n by edges."""

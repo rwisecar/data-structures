@@ -191,3 +191,7 @@ def test_has_node_haz_nodez(three_node_graph):
     assert three_node_graph.has_node("Hunt-Walker, Nicholas") == True
 
 
+def test_has_node_when_node_nonexistent(three_node_graph):
+    """Test that False returned when nonexistent node called."""
+    assert three_node_graph.has_node("Elvis Presley") == False
+
