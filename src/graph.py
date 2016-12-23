@@ -81,9 +81,10 @@ class Graph():
         """Return True if node n is contained in the graph."""
         return n in self.graph.keys()
 
-
     def neighbors(self, n):
         """Return a list of all nodes connected to n by edges."""
+        if n not in self.graph.keys():
+            raise KeyError("Not in graph.")
         edges_list = []
         self.graph[n]['edges'].extend(edges_list)
         for key in self.graph.keys():

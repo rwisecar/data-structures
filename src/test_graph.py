@@ -195,3 +195,8 @@ def test_has_node_when_node_nonexistent(three_node_graph):
     """Test that False returned when nonexistent node called."""
     assert three_node_graph.has_node("Elvis Presley") == False
 
+
+def test_neighbors_with_nonexistent_node(empty_graph):
+    """Test error raised when asking for neighbors of nonexisting node."""
+    with pytest.raises(KeyError):
+        empty_graph.neighbors("Coffee Mug")
