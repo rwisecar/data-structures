@@ -208,15 +208,26 @@ def test_neighbors_lists_arguments_edges(graph_with_edges):
     assert graph_with_edges.neighbors(5) == [10, 15]
 
 
+def test_neighbors_when_no_neighbors(graph_with_edges):
+    """Test that neighbors returns empty list when node has no neighbors."""
+    assert graph_with_edges.neighbors(15) == []
+
+
 def test_adjacent_returns_true_on_edge(graph_with_edges):
     """Test adjacent() returns True when edge exists."""
     assert graph_with_edges.adjacent(5, 10) is True
 
 
-def test_adjacent_raises_error_on_nonexistent_key(graph_with_edges):
+def test_adjacent_raises_error_on_nonexistent_n2(graph_with_edges):
     """Test error is raised when one of key args isn't in graph."""
     with pytest.raises(KeyError):
         graph_with_edges.adjacent(5, "Charlie Brown")
+
+
+def test_adjacent_raises_error_on_nonexistent_n1(graph_with_edges):
+    """Test error is raised when one of key args isn't in graph."""
+    with pytest.raises(KeyError):
+        graph_with_edges.adjacent("Charlie Brown", 5)
 
 
 def test_adjacent_for_lack_of_connection(graph_with_edges):
