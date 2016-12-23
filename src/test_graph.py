@@ -21,9 +21,9 @@ def three_node_graph_with_edges():
     """Fixture for a graph with three nodes."""
     from graph import Graph
     this_graph = Graph()
-    empty_graph.add_node("Wisecarver, Rachael")
-    empty_graph.add_node("Valenzuela, Rick")
-    empty_graph.add_node("Hunt-Walker, Nicholas")
+    this_graph.add_node("Wisecarver, Rachael")
+    this_graph.add_node("Valenzuela, Rick")
+    this_graph.add_node("Hunt-Walker, Nicholas")
     return this_graph
 
 
@@ -71,8 +71,13 @@ def test_add_edge_creates_edge(empty_graph):
     empty_graph.add_edge("Wisecarver, Rachael", "Valenzuela, Rick")
     assert empty_graph.graph["Wisecarver, Rachael"]["edges"] == ["Valenzuela, Rick"]
 
+
 def test_add_edge_only_in_expected_direction(empty_graph):
     """Test add_edge() doesn't add edge in reverse director."""
     empty_graph.add_edge("Wisecarver, Rachael", "Valenzuela, Rick")
     assert ["Valenzuela, Rick"] not in empty_graph.graph["Wisecarver, Rachael"]["edges"]
 
+
+def test_nodes_lists_nodes(three_node_graph_with_edges):
+    """Test nodes() lists all nodes in graph."""
+    assert three_node_graph_with_edges.nodes() == ["Wisecarver, Rachel", "Valenzuela, Rick", "Hunt-Walker, Nicholas"]
