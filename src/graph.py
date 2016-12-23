@@ -41,3 +41,19 @@ class Graph():
         if n2 not in self.graph.keys():
             self.add_node(n2)
         self.graph[n1]['edges'].append(n2)
+
+    def nodes(self):
+        """Returns a list of all nodes in the graph."""
+        node_list = []
+        for n in self.graph.keys():
+            node_list.append(n)
+        return node_list
+
+    def edges(self):
+        """Returns a list of all edges in the graph."""
+        edge_list = []
+        for n in self.graph.keys():
+            edge_list.append("{}: {}".format(n, self.graph[n]["edges"]))
+        return edge_list
+
+    
