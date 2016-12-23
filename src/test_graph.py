@@ -207,3 +207,13 @@ def test_neighbors_lists_arguments_edges(graph_with_edges):
     """Test method returns edges for given node."""
     assert graph_with_edges.neighbors(5) == [10, 15]
 
+
+def test_adjacent_returns_true_on_edge(graph_with_edges):
+    """Test adjacent() returns True when edge exists."""
+    assert graph_with_edges.adjacent(5, 10) is True
+
+
+def test_adjacent_raises_error_on_nonexistent_key(graph_with_edges):
+    """Test error is raised when one of key args isn't in graph."""
+    with pytest.raises(KeyError):
+        graph_with_edges.adjacent(5, "Charlie Brown")

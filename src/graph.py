@@ -82,7 +82,7 @@ class Graph():
         return n in self.graph.keys()
 
     def neighbors(self, n):
-        """Return a list of all nodes connected to n by edges."""
+        """Return a list of all nodes connected to n by edges. GOTTA CLARIFY SPEC."""
         if n not in self.graph.keys():
             raise KeyError("Not in graph.")
         edges_list = []
@@ -94,4 +94,6 @@ class Graph():
 
     def adjacent(self, n1, n2):
         """Return True if n1 and n2 are connected by an edge."""
+        if n1 not in self.graph.keys() or n2 not in self.graph.keys():
+            raise KeyError("One of these nodes is not in the graph. Guess!")
         return n1 in self.graph[n2]['edges'] or n2 in self.graph[n1]['edges']
