@@ -74,3 +74,11 @@ class Graph():
             self.graph[n1]['edges'].remove(n2)
         else:
             raise KeyError("That edge is not in the graph.")
+
+
+    def has_node(n):
+        """Returns True if node n is contained in the graph."""
+        if n in self.graph.keys:
+            return True
+
+
