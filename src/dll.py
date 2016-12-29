@@ -95,7 +95,7 @@ class DoubleLink(object):
                         current_node.previous_node.next_node = current_node.next_node
                         current_node.next_node.previous_node = current_node.previous_node
                         self._length -= 1
-                        break
+                    break
                 else:
                     current_value = current_node.next_node.value
                     current_node = current_node.next_node
