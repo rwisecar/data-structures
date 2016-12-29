@@ -58,9 +58,12 @@ class DoubleLink(object):
             raise IndexError("Cannot pop from an empty list.")
         next_node = self.head.next_node
         old_head = self.head
+        if next_node:
+            next_node.previous_node = None
         self.head = next_node
-        self.head.previous_node = None
         self._length = self._length - 1
+        if self._length < 1:
+            self.tail = None
         return old_head.value
 
     def shift(self):
@@ -69,25 +72,32 @@ class DoubleLink(object):
             raise IndexError("Cannot shift from an empty list.")
         prev_node = self.tail.previous_node
         old_tail = self.tail
+        if prev_node:
+            self.tail.next_node = None
         self.tail = prev_node
         self._length = self._length - 1
+        if self._length < 1:
+            self.head = None
         return old_tail.value
 
     def remove(self, val):
         """Input a value and remove a node with that value from the list."""
-        current = self.head
-        previous = current.previous_node
-        following = current.next_node
-        found = False
-        while current and found is False:
-            if current.value == val:
-                if previous is None:
-                    self.pop()
+        try:
+            current_value = self.head.value
+            current_node = self.head
+            while current_node:
+                if current_node.value == val:
+                    if current_value is self.head.value:
+                        self.pop()
+                    elif current_value is self.tail.value:
+                        self.shift()
+                    else:
+                        current_node.previous_node.next_node = current_node.next_node
+                        current_node.next_node.previous_node = current_node.previous_node
+                        self._length -= 1
+                        break
                 else:
-                    previous.next_node = following
-                    following.previous_node = previous
-                self._length -= 1
-                found = True
-            previous = current
-            current = previous.next_node
-            following = current.next_node
+                    current_value = current_node.next_node.value
+                    current_node = current_node.next_node
+        except AttributeError:
+            raise ValueError('{} not in list.'.format(val))
