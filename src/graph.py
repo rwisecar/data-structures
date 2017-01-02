@@ -53,8 +53,6 @@ class Graph():
     def edges(self):
         """Return a list of all edges in the graph."""
         edge_list = []
-        # for item in self.graph.items():
-        #     edge_list.append(item)
         for n in self.graph.keys():
             edge_list.append("{}: {}".format(n, self.graph[n]["edges"]))
         return edge_list
@@ -85,9 +83,7 @@ class Graph():
         """Return a list of all nodes connected to n by edges."""
         if n not in self.graph.keys():
             raise KeyError("Not in graph.")
-        edges_list = []
-        edges_list.extend(self.graph[n]['edges'])
-        return edges_list
+        return self.graph[n]['edges']
 
     def adjacent(self, n1, n2):
         """Return True if n1 and n2 are connected by an edge."""
