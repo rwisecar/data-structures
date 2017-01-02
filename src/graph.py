@@ -92,3 +92,13 @@ class Graph():
         elif node2 not in self.graph.keys():
             raise KeyError("{} is not in the graph.".format(node2))
         return node1 in self.graph[node2]['edges'] or node2 in self.graph[node1]['edges']
+
+    def depth_traversal(self, start):
+        """Traverse the graph by depth."""
+        checked_nodes, node_stack = set(), [start]
+        while node_stack:
+            checked_node = node_stack.pop()
+            if checked_node not in checked_nodes:
+                checked_nodes.add(checked_node)
+                node_stack.extend(set(self.graph[checked_node]["edges"]) - checked_nodes)
+        return checked_nodes
