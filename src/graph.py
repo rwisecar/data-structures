@@ -95,6 +95,8 @@ class Graph():
 
     def depth_traversal(self, start):
         """Traverse the graph by depth."""
+        if start not in list(self.graph):
+            raise KeyError("{} not in graph.".format(start))
         checked_nodes, node_stack = set(), [start]
         while node_stack:
             checked_node = node_stack.pop()
