@@ -235,3 +235,13 @@ def test_adjacent_for_lack_of_connection(graph_with_edges):
     graph_with_edges.add_node("Charlie Brown")
     assert graph_with_edges.adjacent(15, "Charlie Brown") is False
 
+
+def test_depth_traversal_for_unknown_node(graph_with_edges):
+    """ Test depth traversal with starting point not in graph."""
+    with pytest.raises(KeyError):
+        graph_with_edges.depth_traversal("backpack")
+
+def test_depth_traversal_returns_expected_path(graph_with_edges):
+    """Test DFS returns expected path through graph."""
+    asset graph_with_edges.depth_traversal(5) == {5, 10, 15}
+
