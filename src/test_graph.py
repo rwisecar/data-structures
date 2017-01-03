@@ -33,9 +33,9 @@ def graph_with_edges():
     from graph import Graph
     new_graph = Graph()
     new_graph.add_node(5)
-    new_graph.add_edge(5, 10)
-    new_graph.add_edge(5, 15)
-    new_graph.add_edge(10, 15)
+    new_graph.add_edge(5, 10, 3)
+    new_graph.add_edge(5, 15, 6)
+    new_graph.add_edge(10, 15, 2)
     return new_graph
 
 
@@ -319,3 +319,8 @@ def test_breadth_traversal_for_unconnected_node(graph_with_edges):
     """Test that node with no edges doesn't end up in path."""
     graph_with_edges.add_node(23)
     assert graph_with_edges.breadth_traversal(5) == [5, 10, 15]
+
+
+def test_added_edge_shows_weight(graph_with_edges):
+    """Make sure edge is weighted."""
+    graph_with_edges.graph[10] == {'edge_and_weight': [15, 2]}
