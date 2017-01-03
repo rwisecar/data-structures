@@ -192,7 +192,7 @@ def test_del_node_removes_edges_to_node_in_other_nodes(graph_with_edges):
 
 
 def test_del_edge_raises_error_when_no_edge(graph_with_edges):
-    """Test that KeyError is raised when edge not in graph."""
+    """Test that ValueError is raised when edge not in graph."""
     with pytest.raises(ValueError):
         graph_with_edges.del_edge(10, 5)
 
