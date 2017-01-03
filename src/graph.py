@@ -1,5 +1,5 @@
 """Create an unweighted, directed graph."""
-
+import timeit
 
 class Graph():
     """
@@ -93,10 +93,12 @@ class Graph():
             raise KeyError("{} is not in the graph.".format(node2))
         return node1 in self.graph[node2]['edges'] or node2 in self.graph[node1]['edges']
 
-    def depth_traversal(self, start, checked=[]):
+    def depth_traversal(self, start, checked=None):
         """Traverse the graph by depth."""
         if start not in list(self.graph):
             raise KeyError("{} not in graph.".format(start))
+        if checked is None:
+            checked = []
         checked.extend([start])
         for edge in self.graph[start]["edges"]:
             if edge not in checked:
@@ -113,3 +115,24 @@ class Graph():
                 [node_list.append(edge) for edge in self.graph[vertex]['edges']
                     if edge not in checked]
         return checked
+
+
+if "__name__" == "__main__":
+    """Calculate the runtime for depth_traversal and breadth_traversal."""
+    dummy = Graph()
+    dummy.add_edge(1, 2)
+    dummy.add_edge(1, 3)
+    dummy.add_edge(1, 7)
+    dummy.add_edge(2, 4)
+    dummy.add_edge(7, 5)
+    dummy.add_edge(7, 10)
+
+    depth = timeit.timeit(
+        stmt="dummy.depth_traversal()",
+        setup="from __main__ import depth_traversal"
+    )
+    breadth = timeit.timeit(
+        stmt="dummy.breadth_traversal()",
+        setup="from __main__ import breadth_traversal"
+    )
+    print "It takes {} ms to run depth_traversal, and {} ms to run breadth_traversal".format(depth, breadth)
