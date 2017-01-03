@@ -255,10 +255,17 @@ def test_depth_traversal_for_unknown_node(graph_with_edges):
     with pytest.raises(KeyError):
         graph_with_edges.depth_traversal("backpack")
 
+
 def test_depth_traversal_returns_expected_path(graph_with_edges):
     """Test DFS returns expected path through graph."""
     assert graph_with_edges.depth_traversal(5) == [5, 10, 15]
 
+
 def test_depth_traversal_nonsequential_path(bigger_graph_with_edges):
-    """Test DFS returns expected path that's not in sequential order."""
+    """Test BFS returns expected path that's not in sequential order."""
+    assert bigger_graph_with_edges.depth_traversal(5) == [5, 10, 9, 11, 15]
+
+
+def test_breadth_traversal_nonsequential_path(bigger_graph_with_edges):
+    """Test BFS returns expected path that's not in sequential order."""
     assert bigger_graph_with_edges.breadth_traversal(5) == [5, 10, 15, 9, 11]
