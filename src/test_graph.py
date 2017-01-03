@@ -39,6 +39,18 @@ def graph_with_edges():
     return new_graph
 
 
+@pytest.fixture
+def bigger_graph_with_edges():
+    """Fixture for a graph with edges. Bigger than before."""
+    from graph import Graph
+    new_graph = Graph()
+    new_graph.add_node(5)
+    new_graph.add_edge(5, 10)
+    new_graph.add_edge(5, 15)
+    new_graph.add_edge(10, 15)
+    return new_graph
+
+
 def test_a_graph_exists(empty_graph):
     """Test to make sure graph instantiates."""
     assert empty_graph.graph == {}
@@ -235,3 +247,14 @@ def test_adjacent_for_lack_of_connection(graph_with_edges):
     graph_with_edges.add_node("Charlie Brown")
     assert graph_with_edges.adjacent(15, "Charlie Brown") is False
 
+
+def test_depth_traversal_for_unknown_node(graph_with_edges):
+    """ Test depth traversal with starting point not in graph."""
+    with pytest.raises(KeyError):
+        graph_with_edges.depth_traversal("backpack")
+
+def test_depth_traversal_returns_expected_path(graph_with_edges):
+    """Test DFS returns expected path through graph."""
+    assert graph_with_edges.depth_traversal(5) == {5, 10, 15}
+
+# def test_depth_traversal_nonsequential_path()
