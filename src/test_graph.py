@@ -53,6 +53,18 @@ def bigger_graph_with_edges():
     return new_graph
 
 
+@pytest.fixture
+def circular_graph():
+    """Fixture for a graph with edges."""
+    from graph import Graph
+    new_graph = Graph()
+    new_graph.add_node(5)
+    new_graph.add_edge(5, 10)
+    new_graph.add_edge(10, 15)
+    new_graph.add_edge(15, 5)
+    return new_graph
+
+
 def test_a_graph_exists(empty_graph):
     """Test to make sure graph instantiates."""
     assert empty_graph.graph == {}
@@ -95,13 +107,15 @@ def test_add_edge_when_second_node_doesnt_exist(empty_graph):
 def test_add_edge_creates_edge(empty_graph):
     """Test add_edge() adds edge."""
     empty_graph.add_edge("Wisecarver, Rachael", "Valenzuela, Rick")
-    assert empty_graph.graph["Wisecarver, Rachael"]["edges"] == ["Valenzuela, Rick"]
+    assert empty_graph.graph["Wisecarver, Rachael"]["edges"] == [
+        "Valenzuela, Rick"]
 
 
 def test_add_edge_only_in_expected_direction(empty_graph):
     """Test add_edge() doesn't add edge in reverse director."""
     empty_graph.add_edge("Wisecarver, Rachael", "Valenzuela, Rick")
-    assert ["Valenzuela, Rick"] not in empty_graph.graph["Wisecarver, Rachael"]["edges"]
+    assert ["Valenzuela, Rick"] not in empty_graph.graph[
+        "Wisecarver, Rachael"]["edges"]
 
 
 def test_nodes_list_on_empty_graph(empty_graph):
@@ -251,7 +265,7 @@ def test_adjacent_for_lack_of_connection(graph_with_edges):
 
 
 def test_depth_traversal_for_unknown_node(graph_with_edges):
-    """ Test depth traversal with starting point not in graph."""
+    """Test depth traversal with starting point not in graph."""
     with pytest.raises(KeyError):
         graph_with_edges.depth_traversal("backpack")
 
@@ -263,9 +277,42 @@ def test_depth_traversal_returns_expected_path(graph_with_edges):
 
 def test_depth_traversal_nonsequential_path(bigger_graph_with_edges):
     """Test BFS returns expected path that's not in sequential order."""
-    assert bigger_graph_with_edges.depth_traversal(5) == [5, 10, 9, 11, 15]
+    assert bigger_graph_with_edges.depth_traversal(5) == [
+        5, 10, 9, 11, 15] or bigger_graph_with_edges.depth_traversal(5) == [
+        5, 10, 15, 9, 11]
+
+
+def test_depth_traversal_circular_graph_not_looping(circular_graph):
+    """Test DFS on circuitous path doesn't loop."""
+    assert circular_graph.depth_traversal(5) == [5, 10, 15]
+
+def test_depth_traversal_for_unconnected_node(graph_with_edges):
+    graph_with_edges.add_node(23)
+    assert graph_with_edges.depth_traversal(5) == [5, 10, 15]
+
+
+def test_breadth_traversal_for_unknown_node(graph_with_edges):
+    """Test breadth traversal with starting point not in graph."""
+    with pytest.raises(KeyError):
+        graph_with_edges.breadth_traversal("backpack")
+
+
+def test_breadth_traversal_returns_expected_path(graph_with_edges):
+    """Test BFS returns expected path through graph."""
+    assert graph_with_edges.breadth_traversal(5) == [5, 10, 15]
 
 
 def test_breadth_traversal_nonsequential_path(bigger_graph_with_edges):
     """Test BFS returns expected path that's not in sequential order."""
-    assert bigger_graph_with_edges.breadth_traversal(5) == [5, 10, 15, 9, 11]
+    assert bigger_graph_with_edges.breadth_traversal(5) == [
+        5, 10, 15, 9, 11]
+
+
+def test_breadth_traversal_circular_graph_not_looping(circular_graph):
+    """Test bFS on circuitous path doesn't loop."""
+    assert circular_graph.breadth_traversal(5) == [5, 10, 15]
+
+
+def test_breadth_traversal_for_unconnected_node(graph_with_edges):
+    graph_with_edges.add_node(23)
+    assert graph_with_edges.breadth_traversal(5) == [5, 10, 15]
