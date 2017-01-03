@@ -93,14 +93,23 @@ class Graph():
             raise KeyError("{} is not in the graph.".format(node2))
         return node1 in self.graph[node2]['edges'] or node2 in self.graph[node1]['edges']
 
-    def depth_traversal(self, start):
+    def depth_traversal(self, start, checked=[]):
         """Traverse the graph by depth."""
         if start not in list(self.graph):
             raise KeyError("{} not in graph.".format(start))
-        checked_nodes, node_stack = set(), [start]
-        while node_stack:
-            checked_node = node_stack.pop()
-            if checked_node not in checked_nodes:
-                checked_nodes.add(checked_node)
-                node_stack.extend(set(self.graph[checked_node]["edges"]) - checked_nodes)
-        return checked_nodes
+        checked.extend([start])
+        for edge in self.graph[start]["edges"]:
+            if edge not in checked:
+                self.depth_traversal(edge, checked)
+        return checked
+
+    def breadth_traversal(self, start):
+        """Traverse the graph by breadth."""
+        checked, node_list = [], [start]
+        while node_list:
+            vertex = node_list.pop(0)
+            if vertex not in checked:
+                checked.append(vertex)
+                [node_list.append(edge) for edge in self.graph[vertex]['edges']
+                    if edge not in checked]
+        return checked

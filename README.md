@@ -69,6 +69,7 @@ We had help from the following stack overflow resource: http://stackoverflow.com
 Our graph structure creates an unweighted, directed graph in which nodes have edges connecting them to other nodes. We built our graph using a series of dictionaries. The associated methods are as follows.
 
 For the depth and breadth traversal methods, we used the following resources:
+Claire
 http://eddmann.com/posts/depth-first-search-and-breadth-first-search-in-python/
 http://codereview.stackexchange.com/questions/78577/depth-first-search-in-python
 
