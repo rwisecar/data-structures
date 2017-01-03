@@ -1,5 +1,5 @@
 """Create an unweighted, directed graph."""
-import timeit
+
 
 class Graph():
     """
@@ -117,22 +117,27 @@ class Graph():
         return checked
 
 
-if "__name__" == "__main__":
+if __name__ == "__main__":
     """Calculate the runtime for depth_traversal and breadth_traversal."""
+    import timeit
+
     dummy = Graph()
     dummy.add_edge(1, 2)
     dummy.add_edge(1, 3)
     dummy.add_edge(1, 7)
+    dummy.add_edge(2, 3)
     dummy.add_edge(2, 4)
     dummy.add_edge(7, 5)
     dummy.add_edge(7, 10)
 
     depth = timeit.timeit(
-        stmt="dummy.depth_traversal()",
-        setup="from __main__ import depth_traversal"
+        stmt="dummy.depth_traversal(1)",
+        setup="from __main__ import dummy",
+        number=1000
     )
     breadth = timeit.timeit(
-        stmt="dummy.breadth_traversal()",
-        setup="from __main__ import breadth_traversal"
+        stmt="dummy.breadth_traversal(1)",
+        setup="from __main__ import dummy",
+        number=1000
     )
-    print "It takes {} ms to run depth_traversal, and {} ms to run breadth_traversal".format(depth, breadth)
+    print("It takes {} ms to run depth_traversal, and {} ms to run breadth_traversal".format(depth, breadth))
