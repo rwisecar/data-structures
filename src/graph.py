@@ -54,7 +54,7 @@ class Graph():
         """Return a list of all edges in the graph."""
         edge_list = []
         for node in self.graph.keys():
-            edge_list.append("{}: {}".format(node, self.graph[node]["edge_and_weight"]))
+            edge_list.append("{}: {}".format(node, self.graph[node]["edge_and_weight"][0]))
         return edge_list
 
     def del_node(self, node):
