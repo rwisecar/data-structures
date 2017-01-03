@@ -286,7 +286,9 @@ def test_depth_traversal_circular_graph_not_looping(circular_graph):
     """Test DFS on circuitous path doesn't loop."""
     assert circular_graph.depth_traversal(5) == [5, 10, 15]
 
+
 def test_depth_traversal_for_unconnected_node(graph_with_edges):
+    """Test that node with no edges doesn't end up in path."""
     graph_with_edges.add_node(23)
     assert graph_with_edges.depth_traversal(5) == [5, 10, 15]
 
@@ -314,5 +316,6 @@ def test_breadth_traversal_circular_graph_not_looping(circular_graph):
 
 
 def test_breadth_traversal_for_unconnected_node(graph_with_edges):
+    """Test that node with no edges doesn't end up in path."""
     graph_with_edges.add_node(23)
     assert graph_with_edges.breadth_traversal(5) == [5, 10, 15]
