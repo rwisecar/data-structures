@@ -68,10 +68,8 @@ class Graph():
 
     def del_edge(self, node1, node2):
         """Delete the edge connecting n1 and n2."""
-        if self.graph[node1]['edge_and_weight'] and self.graph[node2]:
-            for edge in self.graph[node1]['edge_and_weight']:
-                if edge[0] == node2:
-                    self.graph[node1]['edge_and_weight'].remove(edge)
+        if node2 in self.graph[node1].keys() and self.graph[node2]:
+            del self.graph[node1][node2]
         elif node1 not in self.graph.keys() or node2 not in self.graph.keys():
             raise KeyError("That node is not in the graph.")
         else:
@@ -85,10 +83,7 @@ class Graph():
         """Return a list of all nodes connected to n by edges."""
         if node not in self.graph.keys():
             raise KeyError("Not in graph.")
-        neighbors_list = []
-        for edge in self.graph[node]['edge_and_weight']:
-            neighbors_list.append(edge[0])
-        return neighbors_list
+        return self.graph[node].keys()
 
     def adjacent(self, node1, node2):
         """Return True if n1 and n2 are connected by an edge."""
@@ -96,18 +91,18 @@ class Graph():
             raise KeyError("{} is not in the graph.".format(node1))
         elif node2 not in self.graph.keys():
             raise KeyError("{} is not in the graph.".format(node2))
-        return node1 in self.graph[node2]['edge_and_weight'] or node2 in self.graph[node1]['edge_and_weight']
+        return node1 in self.graph[node2].keys() or node2 in self.graph[node1].keys()
 
     def depth_traversal(self, start, checked=None):
         """Traverse the graph by depth."""
-        if start not in list(self.graph):
+        if start not in self.graph.keys():
             raise KeyError("{} not in graph.".format(start))
         if checked is None:
             checked = []
         checked.extend([start])
-        for edge in self.graph[start]["edge_and_weight"]:
-            if edge[0] not in checked:
-                self.depth_traversal(edge[0], checked)
+        for edge in self.graph[start].keys():
+            if edge not in checked:
+                self.depth_traversal(edge, checked)
         return checked
 
     def breadth_traversal(self, start):
@@ -117,8 +112,8 @@ class Graph():
             vertex = node_list.pop(0)
             if vertex not in checked:
                 checked.append(vertex)
-                [node_list.append(edge[0]) for edge in self.graph[vertex]['edge_and_weight']
-                    if edge[0] not in checked]
+                [node_list.append(edge) for edge in self.graph[vertex].keys()
+                    if edge not in checked]
         return checked
 
 
