@@ -48,6 +48,8 @@ def bigger_graph_with_edges():
     new_graph.add_edge(5, 10)
     new_graph.add_edge(5, 15)
     new_graph.add_edge(10, 15)
+    new_graph.add_edge(10, 9)
+    new_graph.add_edge(9, 11)
     return new_graph
 
 
@@ -255,6 +257,8 @@ def test_depth_traversal_for_unknown_node(graph_with_edges):
 
 def test_depth_traversal_returns_expected_path(graph_with_edges):
     """Test DFS returns expected path through graph."""
-    assert graph_with_edges.depth_traversal(5) == {5, 10, 15}
+    assert graph_with_edges.depth_traversal(5) == [5, 10, 15]
 
-# def test_depth_traversal_nonsequential_path()
+def test_depth_traversal_nonsequential_path(bigger_graph_with_edges):
+    """Test DFS returns expected path that's not in sequential order."""
+    assert bigger_graph_with_edges.breadth_traversal(5) == [5, 10, 15, 9, 11]
