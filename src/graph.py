@@ -32,16 +32,16 @@ class Graph():
         """Add a node to the graph."""
         if node in self.graph.keys():
             raise KeyError("Node already in graph.")
-        self.graph[node] = {"edges": []}
+        self.graph[node] = {"edge_and_weight": []}
 
-    def add_edge(self, node1, node2):
+    def add_edge(self, node1, node2, weight=0):
         """Add an edge from node1 to node2 in the graph."""
         if node1 not in self.graph.keys():
             self.add_node(node1)
         if node2 not in self.graph.keys():
             self.add_node(node2)
-        if node2 not in self.graph[node1]['edges']:
-            self.graph[node1]['edges'].append(node2)
+        if node2 not in self.graph[node1]['edge_and_weight']:
+            self.graph[node1]['edge_and_weight'].append((node2, weight))
 
     def nodes(self):
         """Return a list of all nodes in the graph."""
@@ -54,7 +54,7 @@ class Graph():
         """Return a list of all edges in the graph."""
         edge_list = []
         for node in self.graph.keys():
-            edge_list.append("{}: {}".format(node, self.graph[node]["edges"]))
+            edge_list.append("{}: {}".format(node, self.graph[node]["edge_and_weight"]))
         return edge_list
 
     def del_node(self, node):
@@ -63,13 +63,13 @@ class Graph():
             raise KeyError("You can't delete a node that does not exist.")
         del self.graph[node]
         for key in self.graph.keys():
-            if node in self.graph[key]["edges"]:
-                self.graph[key]["edges"].remove(node)
+            if node in self.graph[key]["edge_and_weight"]:
+                self.graph[key]["edge_and_weight"].remove(node)
 
     def del_edge(self, node1, node2):
         """Delete the edge connecting n1 and n2."""
-        if self.graph[node1]['edges'] and self.graph[node2]:
-            self.graph[node1]['edges'].remove(node2)
+        if self.graph[node1]['edge_and_weight'] and self.graph[node2]:
+            self.graph[node1]['edge_and_weight'].remove(node2)
         elif node1 not in self.graph.keys() or node2 not in self.graph.keys():
             raise KeyError("That node is not in the graph.")
         else:
@@ -83,7 +83,7 @@ class Graph():
         """Return a list of all nodes connected to n by edges."""
         if node not in self.graph.keys():
             raise KeyError("Not in graph.")
-        return self.graph[node]['edges']
+        return self.graph[node]['edge_and_weight']
 
     def adjacent(self, node1, node2):
         """Return True if n1 and n2 are connected by an edge."""
@@ -91,7 +91,7 @@ class Graph():
             raise KeyError("{} is not in the graph.".format(node1))
         elif node2 not in self.graph.keys():
             raise KeyError("{} is not in the graph.".format(node2))
-        return node1 in self.graph[node2]['edges'] or node2 in self.graph[node1]['edges']
+        return node1 in self.graph[node2]['edge_and_weight'] or node2 in self.graph[node1]['edge_and_weight']
 
     def depth_traversal(self, start, checked=None):
         """Traverse the graph by depth."""
@@ -100,9 +100,9 @@ class Graph():
         if checked is None:
             checked = []
         checked.extend([start])
-        for edge in self.graph[start]["edges"]:
-            if edge not in checked:
-                self.depth_traversal(edge, checked)
+        for edge in self.graph[start]["edge_and_weight"]:
+            if edge[0] not in checked:
+                self.depth_traversal(edge[0], checked)
         return checked
 
     def breadth_traversal(self, start):
@@ -112,8 +112,8 @@ class Graph():
             vertex = node_list.pop(0)
             if vertex not in checked:
                 checked.append(vertex)
-                [node_list.append(edge) for edge in self.graph[vertex]['edges']
-                    if edge not in checked]
+                [node_list.append(edge[0]) for edge in self.graph[vertex]['edge_and_weight']
+                    if edge[0] not in checked]
         return checked
 
 
