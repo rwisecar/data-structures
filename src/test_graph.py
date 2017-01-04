@@ -33,9 +33,35 @@ def graph_with_edges():
     from graph import Graph
     new_graph = Graph()
     new_graph.add_node(5)
-    new_graph.add_edge(5, 10)
-    new_graph.add_edge(5, 15)
-    new_graph.add_edge(10, 15)
+    new_graph.add_edge(5, 10, 3)
+    new_graph.add_edge(5, 15, 6)
+    new_graph.add_edge(10, 15, 2)
+    return new_graph
+
+
+@pytest.fixture
+def bigger_graph_with_edges():
+    """Fixture for a graph with edges. Bigger than before."""
+    from graph import Graph
+    new_graph = Graph()
+    new_graph.add_node(5)
+    new_graph.add_edge(5, 10, 2)
+    new_graph.add_edge(5, 15, 4)
+    new_graph.add_edge(10, 15, 6)
+    new_graph.add_edge(10, 9, 8)
+    new_graph.add_edge(9, 11, 10)
+    return new_graph
+
+
+@pytest.fixture
+def circular_graph():
+    """Fixture for a graph with edges."""
+    from graph import Graph
+    new_graph = Graph()
+    new_graph.add_node(5)
+    new_graph.add_edge(5, 10, 2)
+    new_graph.add_edge(10, 15, 4)
+    new_graph.add_edge(15, 5, 6)
     return new_graph
 
 
@@ -59,7 +85,7 @@ def test_add_existing_node(empty_graph):
 
 def test_add_edge_will_create_node(empty_graph):
     """Test add_edge() will create nodes in empty graph."""
-    empty_graph.add_edge("Wisecarver, Rachael", "Valenzuela, Rick")
+    empty_graph.add_edge("Wisecarver, Rachael", "Valenzuela, Rick", 10)
     assert "Wisecarver, Rachael" in empty_graph.graph.keys()
     assert "Valenzuela, Rick" in empty_graph.graph.keys()
 
@@ -67,27 +93,28 @@ def test_add_edge_will_create_node(empty_graph):
 def test_add_edge_when_first_node_doesnt_exist(empty_graph):
     """Test add_edge() creates nonexistent first node/argument."""
     empty_graph.add_node("Wisecarver, Rachael")
-    empty_graph.add_edge("Valenzuela, Rick", "Wisecarver, Rachael")
+    empty_graph.add_edge("Valenzuela, Rick", "Wisecarver, Rachael", 10)
     assert "Valenzuela, Rick" in empty_graph.graph.keys()
 
 
 def test_add_edge_when_second_node_doesnt_exist(empty_graph):
     """Test add_edge() creates nonexistent second node/argument."""
     empty_graph.add_node("Wisecarver, Rachael")
-    empty_graph.add_edge("Wisecarver, Rachael", "Valenzuela, Rick")
+    empty_graph.add_edge("Wisecarver, Rachael", "Valenzuela, Rick", 10)
     assert "Valenzuela, Rick" in empty_graph.graph.keys()
 
 
 def test_add_edge_creates_edge(empty_graph):
     """Test add_edge() adds edge."""
-    empty_graph.add_edge("Wisecarver, Rachael", "Valenzuela, Rick")
-    assert empty_graph.graph["Wisecarver, Rachael"]["edges"] == ["Valenzuela, Rick"]
+    empty_graph.add_edge("Wisecarver, Rachael", "Valenzuela, Rick", 10)
+    assert empty_graph.graph["Wisecarver, Rachael"]["Valenzuela, Rick"] == 10
 
 
 def test_add_edge_only_in_expected_direction(empty_graph):
     """Test add_edge() doesn't add edge in reverse director."""
-    empty_graph.add_edge("Wisecarver, Rachael", "Valenzuela, Rick")
-    assert ["Valenzuela, Rick"] not in empty_graph.graph["Wisecarver, Rachael"]["edges"]
+    empty_graph.add_edge("Wisecarver, Rachael", "Valenzuela, Rick", 10)
+    assert "Elvis" not in empty_graph.graph[
+        "Wisecarver, Rachael"]
 
 
 def test_nodes_list_on_empty_graph(empty_graph):
@@ -159,12 +186,12 @@ def test_del_node_when_node_does_not_exist(three_node_graph):
 def test_del_node_removes_edges_to_node_in_other_nodes(graph_with_edges):
     """Test that del_node removes references to n in other nodes."""
     graph_with_edges.del_node(15)
-    assert 15 not in graph_with_edges.graph[5]["edges"]
-    assert 15 not in graph_with_edges.graph[10]["edges"]
+    assert 15 not in graph_with_edges.graph[5].keys()
+    assert 15 not in graph_with_edges.graph[10].keys()
 
 
 def test_del_edge_raises_error_when_no_edge(graph_with_edges):
-    """Test that KeyError is raised when edge not in graph."""
+    """Test that ValueError is raised when edge not in graph."""
     with pytest.raises(ValueError):
         graph_with_edges.del_edge(10, 5)
 
@@ -172,7 +199,7 @@ def test_del_edge_raises_error_when_no_edge(graph_with_edges):
 def test_edge_deletes_edge(graph_with_edges):
     """Test that del_edge deletes the edge from the graph."""
     graph_with_edges.del_edge(5, 10)
-    assert 10 not in graph_with_edges.graph[5]["edges"]
+    assert 10 not in graph_with_edges.graph[5].keys()
 
 
 def test_del_edge_raises_keyerror_if_n1_not_in_graph(graph_with_edges):
@@ -235,3 +262,64 @@ def test_adjacent_for_lack_of_connection(graph_with_edges):
     graph_with_edges.add_node("Charlie Brown")
     assert graph_with_edges.adjacent(15, "Charlie Brown") is False
 
+
+def test_depth_traversal_for_unknown_node(graph_with_edges):
+    """Test depth traversal with starting point not in graph."""
+    with pytest.raises(KeyError):
+        graph_with_edges.depth_traversal("backpack")
+
+
+def test_depth_traversal_returns_expected_path(graph_with_edges):
+    """Test DFS returns expected path through graph."""
+    assert graph_with_edges.depth_traversal(5) == [5, 10, 15]
+
+
+def test_depth_traversal_nonsequential_path(bigger_graph_with_edges):
+    """Test BFS returns expected path that's not in sequential order."""
+    assert bigger_graph_with_edges.depth_traversal(5) == [
+        5, 10, 9, 11, 15] or bigger_graph_with_edges.depth_traversal(5) == [
+        5, 10, 15, 9, 11]
+
+
+def test_depth_traversal_circular_graph_not_looping(circular_graph):
+    """Test DFS on circuitous path doesn't loop."""
+    assert circular_graph.depth_traversal(5) == [5, 10, 15]
+
+
+def test_depth_traversal_for_unconnected_node(graph_with_edges):
+    """Test that node with no edges doesn't end up in path."""
+    graph_with_edges.add_node(23)
+    assert graph_with_edges.depth_traversal(5) == [5, 10, 15]
+
+
+def test_breadth_traversal_for_unknown_node(graph_with_edges):
+    """Test breadth traversal with starting point not in graph."""
+    with pytest.raises(KeyError):
+        graph_with_edges.breadth_traversal("backpack")
+
+
+def test_breadth_traversal_returns_expected_path(graph_with_edges):
+    """Test BFS returns expected path through graph."""
+    assert graph_with_edges.breadth_traversal(5) == [5, 10, 15]
+
+
+def test_breadth_traversal_nonsequential_path(bigger_graph_with_edges):
+    """Test BFS returns expected path that's not in sequential order."""
+    assert bigger_graph_with_edges.breadth_traversal(5) == [
+        5, 10, 15, 9, 11]
+
+
+def test_breadth_traversal_circular_graph_not_looping(circular_graph):
+    """Test bFS on circuitous path doesn't loop."""
+    assert circular_graph.breadth_traversal(5) == [5, 10, 15]
+
+
+def test_breadth_traversal_for_unconnected_node(graph_with_edges):
+    """Test that node with no edges doesn't end up in path."""
+    graph_with_edges.add_node(23)
+    assert graph_with_edges.breadth_traversal(5) == [5, 10, 15]
+
+
+def test_added_edge_shows_weight(graph_with_edges):
+    """Make sure edge is weighted."""
+    graph_with_edges.graph[10] == {15: 2}
