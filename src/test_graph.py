@@ -322,4 +322,4 @@ def test_breadth_traversal_for_unconnected_node(graph_with_edges):
 
 def test_added_edge_shows_weight(graph_with_edges):
     """Make sure edge is weighted."""
-    graph_with_edges.graph[10] == {'edge_and_weight': [15, 2]}
+    graph_with_edges.graph[10] == {15: 2}
