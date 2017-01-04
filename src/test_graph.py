@@ -107,15 +107,14 @@ def test_add_edge_when_second_node_doesnt_exist(empty_graph):
 def test_add_edge_creates_edge(empty_graph):
     """Test add_edge() adds edge."""
     empty_graph.add_edge("Wisecarver, Rachael", "Valenzuela, Rick", 10)
-    assert empty_graph.graph["Wisecarver, Rachael"]["edge_and_weight"] == [
-        ("Valenzuela, Rick", 10)]
+    assert empty_graph.graph["Wisecarver, Rachael"]["Valenzuela, Rick"] == 10
 
 
 def test_add_edge_only_in_expected_direction(empty_graph):
     """Test add_edge() doesn't add edge in reverse director."""
     empty_graph.add_edge("Wisecarver, Rachael", "Valenzuela, Rick", 10)
     assert ["Valenzuela, Rick"] not in empty_graph.graph[
-        "Wisecarver, Rachael"]["edge_and_weight"]
+        "Wisecarver, Rachael"].keys()
 
 
 def test_nodes_list_on_empty_graph(empty_graph):
@@ -187,8 +186,8 @@ def test_del_node_when_node_does_not_exist(three_node_graph):
 def test_del_node_removes_edges_to_node_in_other_nodes(graph_with_edges):
     """Test that del_node removes references to n in other nodes."""
     graph_with_edges.del_node(15)
-    assert 15 not in graph_with_edges.graph[5]["edge_and_weight"]
-    assert 15 not in graph_with_edges.graph[10]["edge_and_weight"]
+    assert 15 not in graph_with_edges.graph[5].keys()
+    assert 15 not in graph_with_edges.graph[10].keys()
 
 
 def test_del_edge_raises_error_when_no_edge(graph_with_edges):
@@ -200,7 +199,7 @@ def test_del_edge_raises_error_when_no_edge(graph_with_edges):
 def test_edge_deletes_edge(graph_with_edges):
     """Test that del_edge deletes the edge from the graph."""
     graph_with_edges.del_edge(5, 10)
-    assert 10 not in graph_with_edges.graph[5]["edge_and_weight"]
+    assert 10 not in graph_with_edges.graph[5].keys()
 
 
 def test_del_edge_raises_keyerror_if_n1_not_in_graph(graph_with_edges):
