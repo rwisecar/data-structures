@@ -102,15 +102,26 @@ class BST(object):
     def balance(self):
         """Return negative number if left leaning, postive for right leaning, or zero for balanced."""
         if self.root:
-            right = self._count(self.root.right_child)
-            left = self._count(self.root.left_child)
+            right = self._depth(self.root.right_child)
+            left = self._depth(self.root.left_child)
             return right - left
 
-    def _count(self, node, count=0):
-        if node is not None:
-            count = 1
-            if node.left_child is not None:
-                count += self._count(node.left_child, count)
-            if node.right_child is not None:
-                count += self._count(node.right_child, count)
-        return count
+
+if __name__ == "__main__":
+    """Calculate the runtime for binary searches in the BST."""
+    import timeit
+    value = [50, 45, 60, 58, 59, 55, 70, 75, 65, 20, 48, 49, 46, 10, 25]
+    balanced = BST(value)
+    unbalanced = BST(sorted(value))
+
+    bal = timeit.timeit(
+        stmt="balanced.search(75)",
+        setup="from __main__ import balanced",
+        number=1000
+    ) * 1000
+    unbal = timeit.timeit(
+        stmt="unbalanced.search(75)",
+        setup="from __main__ import unbalanced",
+        number=1000
+    ) * 1000
+    print("It takes {} microseconds to find 75 in a balanced tree, and {} microseconds to find 75 in an unbalanced tree".format(bal, unbal))
