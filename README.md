@@ -44,41 +44,100 @@ The deque module creates a deque that inherits some functionality from the doubl
 
 It contains the append(), appendleft(), pop(), popleft(), peek(), peekleft(), and size() methods. 
 
+#Binary Heap
+##Module: binheap.py
+##Test Module: text_deque.py
+
+The binary heap module creates a minheap binary heap structure, in which each parent is smaller than its child elements. It has a pop() method, which removes the first element and maintains the heap structure, and a push() method, which adds an element to the end and resorts the structure as necessary.
+
+We refactored this module after reviewing Maelle and Ben S.'s code in class. We also looked at https://interactivepython.org/runestone/static/pythonds/Trees/BinaryHeapImplementation.html 
+
+#Priority Queue
+##Module: priority_queue.py
+##Test Module: test_priority_queue.py
+
+The priority queue takes in a list of tuples of (value, priority). 
+
+The insert(value, priority=0) method adds an item to the queue with the value and priority assigned by the user. The pop() method returns the tuple with the lowest priority (most important item). The peek()function returns the value of the most important item, without removing it.
+
+We had help from the following stack overflow resource: http://stackoverflow.com/questions/10695139/sort-a-list-of-tuples-by-2nd-item-integer-value
+
+#Graph
+##Module: graph.py
+##Test Module: test_graph.py
+
+Our graph structure creates an unweighted, directed graph in which nodes have edges connecting them to other nodes. We built our graph using a series of dictionaries. The associated methods are as follows.
+
+### Methods:
+
+    The nodes(): returns a list of all nodes in the graph.
+
+    edges(): returns a list of all edges in the graph.
+
+    add_node(n): adds a new node, n, to the graph.
+
+    add_edge(n1, n2): adds n1 and n2 if they don't exist, and adds an edge connecting them.
+
+    del_node(n): deletes node n from the graph.
+
+    del_edge(n1, n2): deletes the edge connecting n1 and n2.
+
+    has_node(n): Returns True if node n is contained in the graph.
+
+    neighbors(n): Returns a list of all nodes connected to n by edges.
+
+    adjacent(n1, n2): returns True if n1 and n2 are connceted by an edge.
+    """
+---
 
 #Testing Information:
 
----------- coverage: platform darwin, python 2.7.13-final-0 ----------
-Name                      Stmts   Miss  Cover   Missing
--------------------------------------------------------
-src/deque.py                 24      0   100%
-src/dll.py                   68      0   100%
-src/linked_list.py           67      0   100%
-src/queue.py                 22      0   100%
-src/stack.py                 11      0   100%
-src/test_deque.py            89      0   100%
-src/test_dll.py              84      0   100%
-src/test_linked_list.py      57      0   100%
-src/test_queue.py            43      0   100%
-src/test_stack.py            37      0   100%
--------------------------------------------------------
-TOTAL                       502      0   100%
+---------- coverage: platform darwin, python 2.7.10-final-0 ----------
+Name                         Stmts   Miss  Cover   Missing
+----------------------------------------------------------
+src/binheap.py                  30      0   100%
+src/deque.py                    24      0   100%
+src/dll.py                      68      0   100%
+src/graph.py                    51      3    94%   75-78
+src/linked_list.py              67      0   100%
+src/priority_queue.py           20      0   100%
+src/queue.py                    22      0   100%
+src/stack.py                    11      0   100%
+src/test_binheap.py             40      0   100%
+src/test_deque.py               89      0   100%
+src/test_dll.py                 84      0   100%
+src/test_graph.py              119      0   100%
+src/test_linked_list.py         57      0   100%
+src/test_priority_queue.py      53      0   100%
+src/test_queue.py               43      0   100%
+src/test_stack.py               37      0   100%
+----------------------------------------------------------
+TOTAL                          815      3    99%
 
 
 ---------- coverage: platform darwin, python 3.5.2-final-0 -----------
-Name                      Stmts   Miss  Cover   Missing
--------------------------------------------------------
-src/deque.py                 24      0   100%
-src/dll.py                   68      0   100%
-src/linked_list.py           67      0   100%
-src/queue.py                 22      0   100%
-src/stack.py                 11      0   100%
-src/test_deque.py            89      0   100%
-src/test_dll.py              84      0   100%
-src/test_linked_list.py      57      0   100%
-src/test_queue.py            43      0   100%
-src/test_stack.py            37      0   100%
--------------------------------------------------------
-TOTAL                       502      0   100%
+Name                         Stmts   Miss  Cover   Missing
+----------------------------------------------------------
+src/binheap.py                  30      0   100%
+src/deque.py                    24      0   100%
+src/dll.py                      68      0   100%
+src/graph.py                    51      3    94%   75-78
+src/linked_list.py              67      0   100%
+src/priority_queue.py           20      0   100%
+src/queue.py                    22      0   100%
+src/stack.py                    11      0   100%
+src/test_binheap.py             40      0   100%
+src/test_deque.py               89      0   100%
+src/test_dll.py                 84      0   100%
+src/test_graph.py              119      0   100%
+src/test_linked_list.py         57      0   100%
+src/test_priority_queue.py      53      0   100%
+src/test_queue.py               43      0   100%
+src/test_stack.py               37      0   100%
+----------------------------------------------------------
+TOTAL                          815      3    99%
+
+
   py27: commands succeeded
   py35: commands succeeded
 
