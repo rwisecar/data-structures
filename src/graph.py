@@ -117,6 +117,66 @@ class Graph():
         return checked
 
 
+    def heuristic(self, start):
+        """Run BFS to set a heuristic for A* algorithm on a simple weighted graph."""
+        node_list = [start]
+        checked, weights = [], []
+        while node_list:
+            vertex = node_list.pop(0)
+            if vertex not in checked:
+                checked.append(vertex)
+                for key, weight in self.graph[vertex].items():
+                    if self.graph[vertex][key] not in checked:
+                        weights.append(weight)
+                        node_list.append(key)
+        print("weights: " + str(weights))
+        print("sum of weights: " + str(sum(weights)))
+        print("node_list: " + str(node_list))
+        print("checked: " + str(checked))
+        return sum(weights) / len(checked)
+
+    def a_star_search(self, start, goal):
+        """Do an A* search."""
+        from priority_queue import Priority_Q
+        avg_weight = self.heuristic(start)
+        print(avg_weight)
+        came_from = {}
+        cost_so_far = {}
+        came_from[start] = None
+        cost_so_far[start] = 0
+        a_star_priorityq = Priority_Q()
+        a_star_priorityq.insert(start, 0)
+        print(type(a_star_priorityq))
+        print(a_star_priorityq.peek())
+        while self.neighbors(a_star_priorityq.peek()[0]):
+            try:
+                current = a_star_priorityq.pop()
+
+                if current == goal:
+                    break
+
+                for next in self.neighbors(current[0]):
+                    new_cost = cost_so_far[current] + self.graph[current][next]
+                    if next not in cost_so_far or new_cost < cost_so_far[next]:
+                        cost_so_far[next] = new_cost
+                        priority = new_cost + avg_weight
+                        a_star_priorityq.insert(next, priority)
+                        came_from[next] = current
+            except IndexError:
+                print("IndexError: you can't get there from here.")
+
+        return came_from, cost_so_far
+
+    def reconstruct_path(came_from, start, goal):
+        current = goal
+        path = [current]
+        while current != start:
+            current = came_from[current]
+            path.append(current)
+        path.append(start) # optional
+        path.reverse() # optional
+        return path
+
 if __name__ == "__main__":
     """Calculate the runtime for depth_traversal and breadth_traversal."""
     import timeit
