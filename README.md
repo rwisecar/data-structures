@@ -66,7 +66,12 @@ We had help from the following stack overflow resource: http://stackoverflow.com
 ##Module: graph.py
 ##Test Module: test_graph.py
 
-Our graph structure creates an unweighted, directed graph in which nodes have edges connecting them to other nodes. We built our graph using a series of dictionaries. The associated methods are as follows.
+Our graph structure creates an weighted, directed graph in which nodes have edges connecting them to other nodes. We built our graph using a series of dictionaries. The associated methods are as follows.
+
+For the depth and breadth traversal methods, we used the following resources:
+Claire
+http://eddmann.com/posts/depth-first-search-and-breadth-first-search-in-python/
+http://codereview.stackexchange.com/questions/78577/depth-first-search-in-python
 
 ### Methods:
 
@@ -87,18 +92,22 @@ Our graph structure creates an unweighted, directed graph in which nodes have ed
     neighbors(n): Returns a list of all nodes connected to n by edges.
 
     adjacent(n1, n2): returns True if n1 and n2 are connceted by an edge.
+
+    depth_traversal(start, checked=none): returns the path traversed by depth.
+
+    breadth_traversal(start): traverses the graph by breadth and returns the path.
     """
 ---
 
 #Testing Information:
-
+```
 ---------- coverage: platform darwin, python 2.7.10-final-0 ----------
 Name                         Stmts   Miss  Cover   Missing
 ----------------------------------------------------------
 src/binheap.py                  30      0   100%
 src/deque.py                    24      0   100%
 src/dll.py                      68      0   100%
-src/graph.py                    51      3    94%   75-78
+src/graph.py                    80     12    85%   122-143
 src/linked_list.py              67      0   100%
 src/priority_queue.py           20      0   100%
 src/queue.py                    22      0   100%
@@ -106,13 +115,13 @@ src/stack.py                    11      0   100%
 src/test_binheap.py             40      0   100%
 src/test_deque.py               89      0   100%
 src/test_dll.py                 84      0   100%
-src/test_graph.py              119      0   100%
+src/test_graph.py              163      0   100%
 src/test_linked_list.py         57      0   100%
 src/test_priority_queue.py      53      0   100%
 src/test_queue.py               43      0   100%
 src/test_stack.py               37      0   100%
 ----------------------------------------------------------
-TOTAL                          815      3    99%
+TOTAL                          888     12    99%
 
 
 ---------- coverage: platform darwin, python 3.5.2-final-0 -----------
@@ -121,7 +130,7 @@ Name                         Stmts   Miss  Cover   Missing
 src/binheap.py                  30      0   100%
 src/deque.py                    24      0   100%
 src/dll.py                      68      0   100%
-src/graph.py                    51      3    94%   75-78
+src/graph.py                    80     12    85%   122-143
 src/linked_list.py              67      0   100%
 src/priority_queue.py           20      0   100%
 src/queue.py                    22      0   100%
@@ -129,18 +138,18 @@ src/stack.py                    11      0   100%
 src/test_binheap.py             40      0   100%
 src/test_deque.py               89      0   100%
 src/test_dll.py                 84      0   100%
-src/test_graph.py              119      0   100%
+src/test_graph.py              163      0   100%
 src/test_linked_list.py         57      0   100%
 src/test_priority_queue.py      53      0   100%
 src/test_queue.py               43      0   100%
 src/test_stack.py               37      0   100%
 ----------------------------------------------------------
-TOTAL                          815      3    99%
+TOTAL                          888     12    99%
 
 
   py27: commands succeeded
   py35: commands succeeded
-
+```
 
 ## We relied on the following resources in building our linked list and associated functions.
 
