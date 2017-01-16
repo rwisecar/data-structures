@@ -202,3 +202,17 @@ def test_balance_on_left_leaning_tree_returns_proper_depth(left_leaning_bst):
 def test_balance_on_right_leaning_tree_returns_proper_depth(right_leaning_bst):
     """Test that balance search on a right leaning bst with ten values returns a balance of 9."""
     assert right_leaning_bst.balance() == 9
+
+
+def test_the_balance_of_a_tree_as_its_built(test_bst):
+    """Build a tree and verify its balance as its built."""
+    test_bst.insert(5)
+    assert test_bst.balance() == 0
+    test_bst.insert(1)
+    assert test_bst.balance() == -1
+    test_bst.insert(0)
+    assert test_bst.balance() == -2
+    test_bst.insert(9)
+    assert test_bst.balance() == -1
+    test_bst.insert(8)
+    assert test_bst.balance() == 0
