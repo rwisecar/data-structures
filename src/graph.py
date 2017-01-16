@@ -125,7 +125,9 @@ class Graph():
         distances[start] = [0, [start]]
         current_node = start
 
-        if finish not in unvisited:
+        if start not in unvisited:
+            raise KeyError("The start node is not in the graph.")
+        elif finish not in unvisited:
             raise ValueError("The finish node is not in the graph.")
 
         while unvisited:

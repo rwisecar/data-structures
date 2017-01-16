@@ -322,4 +322,26 @@ def test_breadth_traversal_for_unconnected_node(graph_with_edges):
 
 def test_added_edge_shows_weight(graph_with_edges):
     """Make sure edge is weighted."""
-    graph_with_edges.graph[10] == {15: 2}
+    assert graph_with_edges.graph[10] == {15: 2}
+
+
+def test_dijkstra_with_empty_graph(empty_graph):
+    """Test that dijkstra raises key error when start node not in graph."""
+    with pytest.raises(KeyError):
+        empty_graph.dijkstra(0, 0)
+
+
+def test_dijkstra_raises_error_when_no_finish(graph_with_edges):
+    """Test that dijkstra raises key error when finish node not in graph."""
+    with pytest.raises(ValueError):
+        graph_with_edges.dijkstra(5, 30)
+
+
+def test_dijkstra_with_basic_graph(graph_with_edges):
+    """Test that dijkstra returns shortest path with simple graph."""
+    assert graph_with_edges.dijkstra(5, 15) == [5, [5, 10, 15]]
+
+
+def test_dijkstra_with_circular_graph(circular_graph):
+    """Test that dijkstra returns shortest path with circular graph."""
+    assert circular_graph.dijkstra(5, 15) == [6, [5, 10, 15]]
