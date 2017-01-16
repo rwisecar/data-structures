@@ -232,12 +232,12 @@ def test_neighbors_with_nonexistent_node(empty_graph):
 
 def test_neighbors_lists_arguments_edges(graph_with_edges):
     """Test method returns edges for given node."""
-    assert graph_with_edges.neighbors(5) == [10, 15]
+    assert graph_with_edges.neighbors(5) == {10: 3, 15: 6}
 
 
 def test_neighbors_when_no_neighbors(graph_with_edges):
     """Test that neighbors returns empty list when node has no neighbors."""
-    assert graph_with_edges.neighbors(15) == []
+    assert graph_with_edges.neighbors(15) == {}
 
 
 def test_adjacent_returns_true_on_edge(graph_with_edges):
