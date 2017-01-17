@@ -109,6 +109,7 @@ We had help from the following resources:
 1. http://stackoverflow.com/questions/19187901/counting-number-of-nodes-in-a-binary-search-tree
 2. http://stackoverflow.com/questions/29379213/depth-of-a-binary-search-tree-in-python
 3. https://interactivepython.org/courselib/static/pythonds/Trees/SearchTreeImplementation.html
+4. http://stackoverflow.com/questions/33301591/binary-tree-inorder-traversal-using-generator
 
 ### BST Methods:
     insert(self, val): will insert the value val into the BST. If val is already present, it will be ignored.

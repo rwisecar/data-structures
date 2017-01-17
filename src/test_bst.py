@@ -19,6 +19,13 @@ def filled_bst():
 
 
 @pytest.fixture
+def traversal_bst():
+    """A filled bst."""
+    bst = BST([6, 7, 8, 9, 2, 1, 4, 3, 5])
+    return bst
+
+
+@pytest.fixture
 def left_leaning_bst(test_bst):
     """A left leaning filled bst."""
     test_bst.insert(10)
@@ -226,3 +233,44 @@ def test_the_balance_of_a_tree_as_its_built(test_bst):
     assert test_bst.balance() == -1
     test_bst.insert(8)
     assert test_bst.balance() == 0
+
+
+# ********************* TRAVERSAL TESTING ************************************
+def test_that_in_order_traversal_of_empty_tree_returns_empty(test_bst):
+    """Test that traversal on an empty tree returns empty results."""
+    assert test_bst.in_order_traversal() == []
+
+
+def test_that_in_order_traversal_produces_correct_results(traversal_bst):
+    """Test that ttraversal on basic tree works."""
+    assert traversal_bst.in_order_traversal() == [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+
+def test_that_pre_order_traversal_of_empty_tree_returns_empty(test_bst):
+    """Test that traversal on an empty tree returns empty results."""
+    assert test_bst.pre_order_traversal() == []
+
+
+def test_that_pre_order_traversal_produces_correct_results(traversal_bst):
+    """Test that ttraversal on basic tree works."""
+    assert traversal_bst.pre_order_traversal() == [6, 2, 1, 4, 3, 5, 7, 8, 9]
+
+
+def test_that_post_order_traversal_of_empty_tree_returns_empty(test_bst):
+    """Test that traversal on an empty tree returns empty results."""
+    assert test_bst.post_order_traversal() == []
+
+
+def test_that_post_order_traversal_produces_correct_results(traversal_bst):
+    """Test that ttraversal on basic tree works."""
+    assert traversal_bst.post_order_traversal() == [1, 3, 5, 4, 2, 9, 8, 7, 6]
+
+
+def test_that_breadth_first_traversal_of_empty_tree_returns_empty(test_bst):
+    """Test that traversal on an empty tree returns empty results."""
+    assert test_bst.breadth_first_traversal() == []
+
+
+def test_that_breadth_first_traversal_produces_correct_results(traversal_bst):
+    """Test that ttraversal on basic tree works."""
+    assert traversal_bst.breadth_first_traversal() == [6, 2, 7, 1, 4, 8, 3, 5, 9]
