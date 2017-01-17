@@ -105,6 +105,7 @@ class BST(object):
             right = self._depth(self.root.right_child)
             left = self._depth(self.root.left_child)
             return right - left
+        return 0
 
 
 if __name__ == "__main__":

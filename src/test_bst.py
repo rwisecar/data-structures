@@ -149,6 +149,11 @@ def test_search_for_small_value_not_in_tree_returns_none(filled_bst):
     assert filled_bst.search(1) is None
 
 
+def test_depth_on_empty_tree_is_zero(test_bst):
+    """Depth of empty tree is zero."""
+    assert test_bst.depth() == 0
+
+
 def test_depth_0n_filled_bst_returns_proper_depth(filled_bst):
     """Test that a tree that is 3 deep returns a depth of three."""
     assert filled_bst.depth() == 3
@@ -187,6 +192,11 @@ def test_contains_on_large_value_not_in_tree_returns_false(filled_bst):
 def test_contains_on_small_value_not_in_tree_returns_false(filled_bst):
     """Search for value not in tree returns false."""
     assert filled_bst.contains(1) is False
+
+
+def test_balanced_on_empty_tree_returns_zero(test_bst):
+    """Balance of a empty tree is zero."""
+    assert test_bst.balance() == 0
 
 
 def test_balanced_works_on_filled_bst(filled_bst):
