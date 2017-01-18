@@ -197,7 +197,7 @@ class BST(object):
             replacement.left_child = node.left_child
             replacement.right_child = node.right_child
         # If node has one child or no children
-        elif node.left is None:
+        elif node.left_child is None:
             replacement = node.right_child
         else:
             replacement = node.left_child
