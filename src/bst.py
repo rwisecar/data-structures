@@ -175,6 +175,54 @@ class BST(object):
                 for child in current._the_children():
                     node_list.append(child)
 
+    def delete(self, val):
+        """Delete a node while maintaining the integrity of the binary tree."""
+        node, parent = self.root, None
+
+        while node is not None and val != node.value:
+            parent = node
+            if val > node.value:
+                node = node.right_child
+            else:
+                node = node.left_child
+
+        if node is None:
+            return None
+
+        replacement = None
+
+        # If node has two children
+        if node.left_child and node.right_child:
+            replacement = self._delete(node)
+            replacement.left_child = node.left_child
+            replacement.right_child = node.right_child
+        # If node has one child or no children
+        elif node.left is None:
+            replacement = node.right_child
+        else:
+            replacement = node.left_child
+
+        # Replace node
+        if node == self.root:
+            self.root = replacement
+        elif parent.left_child == node:
+            parent.left_child = replacement
+        else:
+            parent.right_child = replacement
+
+        return None
+
+    def _delete(self, node):
+        """Hidden method to remove the node and fix pointers to children."""
+        successor, parent = node.right_child, node
+        while successor.left_child:
+            parent = successor
+            successor = successor.left_child
+
+        # If there are no more left children
+        parent.left_child = successor.right_child
+        return successor
+
 
 if __name__ == "__main__":
     """Calculate the runtime for binary searches in the BST."""
