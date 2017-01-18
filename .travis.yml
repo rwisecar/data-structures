@@ -4,6 +4,12 @@ python:
   - "2.7"
   - "3.5"
 
-# Command to run tests
+# Command to install coverage tests
+install:
+  - pip install coveralls
 
+# Command to run tests
 script: py.test
+
+after success:
+  - coveralls
