@@ -6,4 +6,4 @@ python:
 
 # Command to run tests
 
-script: py.test src --cov=src --cov-report 
+script: py.test
