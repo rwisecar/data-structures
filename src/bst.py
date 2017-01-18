@@ -220,7 +220,10 @@ class BST(object):
             successor = successor.left_child
 
         # If there are no more left children
-        parent.left_child = successor.right_child
+        if successor == parent.right_child:
+            parent.right_child = successor.right_child
+        else:
+            parent.left_child = successor.right_child
         return successor
 
 
