@@ -6,7 +6,7 @@ python:
 
 # Command to install coverage tests
 install:
-  - pip install coveralls
+  - pip install python-coveralls
 
 # Command to run tests
 script: py.test
