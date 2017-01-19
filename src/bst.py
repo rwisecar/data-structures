@@ -209,7 +209,7 @@ class BST(object):
             parent.left_child = replacement
         else:
             parent.right_child = replacement
-
+        self._size -= 1
         return None
 
     def _delete(self, node):

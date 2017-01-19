@@ -323,7 +323,9 @@ def test_remove_node_of_bst_in_middle_of_graph_with_left_child(traversal_bst):
 
 def test_remove_node_of_bst_in_middle_of_graph_with_right_child(traversal_bst):
     """Test that removing a node from the middle of a bst with a left child successor."""
+    assert traversal_bst.size() == 9
     assert traversal_bst.delete(4) is None
+    assert traversal_bst.size() == 8
     assert traversal_bst.contains(4) is False
     assert traversal_bst.root.left_child.right_child.value == 5
 
@@ -333,7 +335,9 @@ def test_remove_value_not_in_bst_leaves_bst_untouched(test_bst):
     test_bst.insert(5)
     test_bst.insert(4)
     test_bst.insert(6)
+    assert test_bst.size() == 3
     test_bst.delete(10)
+    assert test_bst.size() == 3
     assert test_bst.contains(5) is True
     assert test_bst.contains(4) is True
     assert test_bst.contains(6) is True
