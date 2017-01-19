@@ -39,6 +39,7 @@ class BST(object):
         else:
             self.root = Node(value)
             self._size += 1
+        self.rebalance(self.root)
 
     def _insert(self, value, node):
         if value == node.value:
@@ -220,7 +221,7 @@ class BST(object):
             parent.left_child = replacement
         else:
             parent.right_child = replacement
-
+        self.rebalance(self.root)
         return None
 
     def _delete(self, node):
@@ -237,45 +238,95 @@ class BST(object):
             parent.left_child = successor.right_child
         return successor
 
+    def rebalance(self, node):
+        """."""
+        while self._balance(node) < -1 or self._balance(node) > 1:
+            # import pdb; pdb.set_trace()
+            if self._balance(node) > 1:
+                if self._balance(node.right_child) < 0:
+                    self.rotate_right(node.right_child, node)
+                    self.rotate_left(node)
+                else:
+                    self.rotate_left(node)
+            if self._balance(node) < -1:
+                if self._balance(node.left_child) > 0:
+                    self.rotate_left(node.left_child, node)
+                    self.rotate_right(node)
+                else:
+                    self.rotate_right(node)
+
+    def rotate_left(self, node, parent=None):
+        """."""
+        new_root = node.right_child
+        new_left_sub = new_root.left_child
+        old_root = node
+        node = new_root
+        old_root.right_child = new_left_sub
+        new_root.left_child = old_root
+        if parent:
+            parent.left_child = new_root
+        else:
+            self.root = new_root
+
+    def rotate_right(self, node, parent=None):
+        """."""
+        new_root = node.left_child
+        new_left_sub = new_root.right_child
+        old_root = node
+        node = new_root
+        old_root.left_child = new_left_sub
+        new_root.right_child = old_root
+        if parent:
+            parent.right_child = new_root
+        else:
+            self.root = new_root
+
 
 if __name__ == "__main__":
-    """Calculate the runtime for binary searches in the BST."""
-    import timeit
-    value = [50, 45, 60, 58, 59, 55, 70, 75, 65, 20, 48, 49, 46, 10, 25]
-    balanced = BST(value)
-    unbalanced = BST(sorted(value))
+    bst = BST([10, 20, 30, 25])
+    bst = BST([10, 15, 7, 5, 8, 6])
+    print(bst.breadth_first_traversal())
+    bst.delete(5)
+    print(bst.breadth_first_traversal())
+    bst.delete(6)
+    print(bst.breadth_first_traversal())
+    # """Calculate the runtime for binary searches in the BST."""
+    # import timeit
+    # value = [50, 45, 60, 58, 59, 55, 70, 75, 65, 20, 48, 49, 46, 10, 25]
+    # balanced = BST(value)
+    # unbalanced = BST(sorted(value))
 
-    bal = timeit.timeit(
-        stmt="balanced.search(75)",
-        setup="from __main__ import balanced",
-        number=1000
-    ) * 1000
-    unbal = timeit.timeit(
-        stmt="unbalanced.search(75)",
-        setup="from __main__ import unbalanced",
-        number=1000
-    ) * 1000
-    print("It takes {} microseconds to find 75 in a balanced tree, and {} microseconds to find 75 in an unbalanced tree".format(bal, unbal))
+    # bal = timeit.timeit(
+    #     stmt="balanced.search(75)",
+    #     setup="from __main__ import balanced",
+    #     number=1000
+    # ) * 1000
+    # unbal = timeit.timeit(
+    #     stmt="unbalanced.search(75)",
+    #     setup="from __main__ import unbalanced",
+    #     number=1000
+    # ) * 1000
+    # print("It takes {} microseconds to find 75 in a balanced tree, and {} microseconds to find 75 in an unbalanced tree".format(bal, unbal))
 
-    in_o = timeit.timeit(
-        stmt="balanced.in_order_traversal()",
-        setup="from __main__ import balanced",
-        number=1000
-    ) * 1000
-    pre = timeit.timeit(
-        stmt="balanced.pre_order_traversal()",
-        setup="from __main__ import balanced",
-        number=1000
-    ) * 1000
-    post = timeit.timeit(
-        stmt="balanced.post_order_traversal()",
-        setup="from __main__ import balanced",
-        number=1000
-    ) * 1000
-    breadth = timeit.timeit(
-        stmt="balanced.breadth_first_traversal()",
-        setup="from __main__ import balanced",
-        number=1000
-    ) * 1000
+    # in_o = timeit.timeit(
+    #     stmt="balanced.in_order_traversal()",
+    #     setup="from __main__ import balanced",
+    #     number=1000
+    # ) * 1000
+    # pre = timeit.timeit(
+    #     stmt="balanced.pre_order_traversal()",
+    #     setup="from __main__ import balanced",
+    #     number=1000
+    # ) * 1000
+    # post = timeit.timeit(
+    #     stmt="balanced.post_order_traversal()",
+    #     setup="from __main__ import balanced",
+    #     number=1000
+    # ) * 1000
+    # breadth = timeit.timeit(
+    #     stmt="balanced.breadth_first_traversal()",
+    #     setup="from __main__ import balanced",
+    #     number=1000
+    # ) * 1000
 
-    print("It takes {} microseconds to traverse tree in order\n It takes {} microseconds to traverse tree preorder\n It takes {} microseconds to traverse tree postorder\n It takes {} microseconds to traverse tree in breadth first\n ".format(in_o, pre, post, breadth))
+    # print("It takes {} microseconds to traverse tree in order\n It takes {} microseconds to traverse tree preorder\n It takes {} microseconds to traverse tree postorder\n It takes {} microseconds to traverse tree in breadth first\n ".format(in_o, pre, post, breadth))
