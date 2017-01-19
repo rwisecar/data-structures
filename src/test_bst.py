@@ -274,3 +274,67 @@ def test_that_breadth_first_traversal_of_empty_tree_returns_empty(test_bst):
 def test_that_breadth_first_traversal_produces_correct_results(traversal_bst):
     """Test that ttraversal on basic tree works."""
     assert traversal_bst.breadth_first_traversal() == [6, 2, 7, 1, 4, 8, 3, 5, 9]
+
+# ********************* DELETE TESTING ************************************
+
+
+def test_delete_from_empty_bst_is_none(test_bst):
+    """Test that delete from empty bst returns none and nothing changed."""
+    assert test_bst.delete(1) is None
+    assert test_bst.root is None
+
+
+def test_delete_root_with_no_left_child_moves_right_child_to_root(test_bst):
+    """Test that deleting root with only a right child moves that child to root."""
+    test_bst.insert(5)
+    test_bst.insert(10)
+    test_bst.delete(5)
+    assert test_bst.root.value == 10
+
+
+def test_delete_root_with_no_right_child_moves_left_child_to_root(test_bst):
+    """Test that deleting root with only a left child moves that child to root."""
+    test_bst.insert(10)
+    test_bst.insert(5)
+    test_bst.delete(10)
+    assert test_bst.root.value == 5
+
+
+def test_remove_root_from_bst_depth_greater_than_two(traversal_bst):
+    """Test remove root from a bst with a depth greater than two functions."""
+    assert traversal_bst.delete(6) is None
+    assert traversal_bst.root.value == 7
+    assert traversal_bst.root.left_child.value == 2
+    assert traversal_bst.root.right_child.value == 8
+
+
+def test_remove_leaf_of_bst_depth_greater_than_two(traversal_bst):
+    """Test that removing a leaf from a bst with a depth greater than two works."""
+    assert traversal_bst.delete(3) is None
+    assert traversal_bst.contains(3) is False
+
+
+def test_remove_node_of_bst_in_middle_of_graph_with_left_child(traversal_bst):
+    """Test that removing a node from the middle of a bst with a left child successor."""
+    assert traversal_bst.delete(2) is None
+    assert traversal_bst.contains(2) is False
+    assert traversal_bst.root.left_child.value == 3
+
+
+def test_remove_node_of_bst_in_middle_of_graph_with_right_child(traversal_bst):
+    """Test that removing a node from the middle of a bst with a left child successor."""
+    assert traversal_bst.delete(4) is None
+    assert traversal_bst.contains(4) is False
+    assert traversal_bst.root.left_child.right_child.value == 5
+
+
+def test_remove_value_not_in_bst_leaves_bst_untouched(test_bst):
+    """Test that trying to remove a val not in tree does nothing."""
+    test_bst.insert(5)
+    test_bst.insert(4)
+    test_bst.insert(6)
+    test_bst.delete(10)
+    assert test_bst.contains(5) is True
+    assert test_bst.contains(4) is True
+    assert test_bst.contains(6) is True
+    assert test_bst.contains(10) is False

@@ -4,11 +4,11 @@
 class Node(object):
     """Create node to for use in a binary search tree."""
 
-    def __init__(self, value=None, left_child=None, right_child=None):
+    def __init__(self, value=None):
         """Create node to push into Doubly link list."""
         self.value = value
-        self.left_child = left_child
-        self.right_child = right_child
+        self.left_child = None
+        self.right_child = None
 
     def _the_children(self):
         children = []
