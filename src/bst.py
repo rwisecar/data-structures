@@ -80,14 +80,21 @@ class BST(object):
 
     def depth(self):
         """Return the depth of the binary search tree."""
-        return self._depth(self.root)
+        if not self.root:
+            return -1
+        else:
+            return self._depth(self.root)
 
     def _depth(self, node):
-        """Helper for depth method."""
+        """Return actual depth utilizing _depth."""
+        return self._depth_helper(node) - 1
+
+    def _depth_helper(self, node):
+        """Helper for depth method, returns depth plus one."""
         if node is None:
             return 0
         else:
-            return max(self._depth(node.left_child), self._depth(node.right_child)) + 1
+            return max(self._depth_helper(node.left_child), self._depth_helper(node.right_child)) + 1
 
     def contains(self, value):
         """Return true if the val is contained in the BST, false otherwise."""
@@ -109,9 +116,13 @@ class BST(object):
 
     def balance(self):
         """Return negative number if left leaning, postive for right leaning, or zero for balanced."""
-        if self.root:
-            right = self._depth(self.root.right_child)
-            left = self._depth(self.root.left_child)
+        return self._balance(self.root)
+
+    def _balance(self, node):
+        """Return negative number if left leaning, postive for right leaning, or zero for balanced."""
+        if node:
+            right = self._depth(node.right_child)
+            left = self._depth(node.left_child)
             return right - left
         return 0
 

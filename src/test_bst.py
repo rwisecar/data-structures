@@ -156,24 +156,24 @@ def test_search_for_small_value_not_in_tree_returns_none(filled_bst):
     assert filled_bst.search(1) is None
 
 
-def test_depth_on_empty_tree_is_zero(test_bst):
+def test_depth_on_empty_tree_is_negative(test_bst):
     """Depth of empty tree is zero."""
-    assert test_bst.depth() == 0
+    assert test_bst.depth() == -1
 
 
 def test_depth_0n_filled_bst_returns_proper_depth(filled_bst):
     """Test that a tree that is 3 deep returns a depth of three."""
-    assert filled_bst.depth() == 3
+    assert filled_bst.depth() == 2
 
 
 def test_depth_on_left_leaning_tree_returns_proper_depth(left_leaning_bst):
     """Test that depth search on a left leaning bst with ten values returns a depth of 10."""
-    assert left_leaning_bst.depth() == 10
+    assert left_leaning_bst.depth() == 9
 
 
 def test_depth_on_right_leaning_tree_returns_proper_depth(right_leaning_bst):
     """Test that depth search on a left leaning bst with ten values returns a depth of 10."""
-    assert right_leaning_bst.depth() == 10
+    assert right_leaning_bst.depth() == 9
 
 
 def test_contains_on_root_value_returns_true(filled_bst):
@@ -225,9 +225,9 @@ def test_the_balance_of_a_tree_as_its_built(test_bst):
     """Build a tree and verify its balance as its built."""
     test_bst.insert(5)
     assert test_bst.balance() == 0
-    test_bst.insert(1)
+    test_bst.insert(2)
     assert test_bst.balance() == -1
-    test_bst.insert(0)
+    test_bst.insert(1)
     assert test_bst.balance() == -2
     test_bst.insert(9)
     assert test_bst.balance() == -1
