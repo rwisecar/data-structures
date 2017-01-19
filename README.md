@@ -112,8 +112,10 @@ The binary search tree takes in an iterable that will populate the tree using No
 We had help from the following resources: 
 1. http://stackoverflow.com/questions/19187901/counting-number-of-nodes-in-a-binary-search-tree
 2. http://stackoverflow.com/questions/29379213/depth-of-a-binary-search-tree-in-python
-3. https://interactivepython.org/courselib/static/pythonds/Trees/SearchTreeImplementation.html
-4. http://stackoverflow.com/questions/33301591/binary-tree-inorder-traversal-using-generator
+3. https://interactivepython.org/courselib/static/pyt
+honds/Trees/SearchTreeImplementation.html
+4. 
+5. http://www.geekviewpoint.com/python/bst/delete
 
 ### BST Methods:
     insert(self, val): will insert the value val into the BST. If val is already present, it will be ignored.
@@ -130,10 +132,11 @@ We had help from the following resources:
 
 #Testing Information:
 ```
----------- coverage: platform darwin, python 2.7.10-final-0 ----------
+---------- coverage: platform linux2, python 2.7.6-final-0 -----------
 Name                         Stmts   Miss  Cover   Missing
 ----------------------------------------------------------
 src/binheap.py                  30      0   100%
+src/bst.py                     170     12    93%   232-270
 src/deque.py                    24      0   100%
 src/dll.py                      68      0   100%
 src/graph.py                    80     12    85%   122-143
@@ -142,6 +145,7 @@ src/priority_queue.py           20      0   100%
 src/queue.py                    22      0   100%
 src/stack.py                    11      0   100%
 src/test_binheap.py             40      0   100%
+src/test_bst.py                183      0   100%
 src/test_deque.py               89      0   100%
 src/test_dll.py                 84      0   100%
 src/test_graph.py              163      0   100%
@@ -150,13 +154,14 @@ src/test_priority_queue.py      53      0   100%
 src/test_queue.py               43      0   100%
 src/test_stack.py               37      0   100%
 ----------------------------------------------------------
-TOTAL                          888     12    99%
+TOTAL                         1241     24    98%
 
 
----------- coverage: platform darwin, python 3.5.2-final-0 -----------
+----------- coverage: platform linux, python 3.5.2-final-0 -----------
 Name                         Stmts   Miss  Cover   Missing
 ----------------------------------------------------------
 src/binheap.py                  30      0   100%
+src/bst.py                     170     12    93%   232-270
 src/deque.py                    24      0   100%
 src/dll.py                      68      0   100%
 src/graph.py                    80     12    85%   122-143
@@ -165,6 +170,7 @@ src/priority_queue.py           20      0   100%
 src/queue.py                    22      0   100%
 src/stack.py                    11      0   100%
 src/test_binheap.py             40      0   100%
+src/test_bst.py                183      0   100%
 src/test_deque.py               89      0   100%
 src/test_dll.py                 84      0   100%
 src/test_graph.py              163      0   100%
@@ -173,7 +179,7 @@ src/test_priority_queue.py      53      0   100%
 src/test_queue.py               43      0   100%
 src/test_stack.py               37      0   100%
 ----------------------------------------------------------
-TOTAL                          888     12    99%
+TOTAL                         1241     24    98%
 
 
   py27: commands succeeded

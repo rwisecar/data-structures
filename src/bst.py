@@ -4,11 +4,11 @@
 class Node(object):
     """Create node to for use in a binary search tree."""
 
-    def __init__(self, value=None, left_child=None, right_child=None):
+    def __init__(self, value=None):
         """Create node to push into Doubly link list."""
         self.value = value
-        self.left_child = left_child
-        self.right_child = right_child
+        self.left_child = None
+        self.right_child = None
 
     def _the_children(self):
         children = []
@@ -174,6 +174,57 @@ class BST(object):
             if current._the_children():
                 for child in current._the_children():
                     node_list.append(child)
+
+    def delete(self, val):
+        """Delete a node while maintaining the integrity of the binary tree."""
+        node, parent = self.root, None
+
+        while node is not None and val != node.value:
+            parent = node
+            if val > node.value:
+                node = node.right_child
+            else:
+                node = node.left_child
+
+        if node is None:
+            return None
+
+        replacement = None
+
+        # If node has two children
+        if node.left_child and node.right_child:
+            replacement = self._delete(node)
+            replacement.left_child = node.left_child
+            replacement.right_child = node.right_child
+        # If node has one child or no children
+        elif node.left_child is None:
+            replacement = node.right_child
+        else:
+            replacement = node.left_child
+
+        # Replace node
+        if node == self.root:
+            self.root = replacement
+        elif parent.left_child == node:
+            parent.left_child = replacement
+        else:
+            parent.right_child = replacement
+        self._size -= 1
+        return None
+
+    def _delete(self, node):
+        """Hidden method to remove the node and fix pointers to children."""
+        successor, parent = node.right_child, node
+        while successor.left_child:
+            parent = successor
+            successor = successor.left_child
+
+        # If there are no more left children
+        if successor == parent.right_child:
+            parent.right_child = successor.right_child
+        else:
+            parent.left_child = successor.right_child
+        return successor
 
 
 if __name__ == "__main__":
