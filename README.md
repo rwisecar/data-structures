@@ -103,6 +103,30 @@ http://codereview.stackexchange.com/questions/78577/depth-first-search-in-python
     """
 ---
 
+#Binary Search Tree
+##Module: bst.py
+##Test Module: test_bst.py
+
+The binary search tree takes in an iterable that will populate the tree using Nodes that consist of the Node Value, and pointers to the left and right children of that node.  Any left child must be smaller than its parent node and and right child myust be greater than its parent node.
+
+We had help from the following resources: 
+1. http://stackoverflow.com/questions/19187901/counting-number-of-nodes-in-a-binary-search-tree
+2. http://stackoverflow.com/questions/29379213/depth-of-a-binary-search-tree-in-python
+3. https://interactivepython.org/courselib/static/pythonds/Trees/SearchTreeImplementation.html
+
+### BST Methods:
+    insert(self, val): will insert the value val into the BST. If val is already present, it will be ignored.
+
+    search(self, val): will return the node containing that value, else None
+
+    size(self): will return the integer size of the BST (equal to the total number of values stored in the tree). It will return 0 if the tree is empty.
+
+    depth(self): will return an integer representing the total number of levels in the tree. If there is one value, the depth should be 1, if two values it will be 2, if three values it may be 2 or three, depending, etc.
+
+    contains(self, val): will return True if val is in the BST, False if not.
+
+    balance(self): will return an integer, positive or negative that represents how well balanced the tree is. Trees which are higher on the left than the right should return a positive value, trees which are higher on the right than the left should return a negative value. An ideally-balanced tree should return 0.
+
 #Testing Information:
 ```
 ---------- coverage: platform darwin, python 2.7.10-final-0 ----------
