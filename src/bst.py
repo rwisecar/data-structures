@@ -10,6 +10,14 @@ class Node(object):
         self.left_child = left_child
         self.right_child = right_child
 
+    def _the_children(self):
+        children = []
+        if self.left_child:
+            children.append(self.left_child)
+        if self.right_child:
+            children.append(self.right_child)
+        return children
+
 
 class BST(object):
     """The Binary search tree class."""
@@ -107,6 +115,66 @@ class BST(object):
             return right - left
         return 0
 
+    def in_order_traversal(self):
+        """Traverse a BST ih order."""
+        order = []
+        result = self._traversal(self.root, 'inorder')
+        for val in result:
+            order.append(val.value)
+        return order
+
+    def pre_order_traversal(self):
+        """Traverse a BST ih order."""
+        order = []
+        result = self._traversal(self.root, 'pre')
+        for val in result:
+            order.append(val.value)
+        return order
+
+    def post_order_traversal(self):
+        """Traverse a BST ih order."""
+        order = []
+        result = self._traversal(self.root, 'post')
+        for val in result:
+            order.append(val.value)
+        return order
+
+    def _traversal(self, node, function):
+        if node is None:
+            return
+        if function == "pre":
+            yield node
+        if node.left_child:
+            for val in self._traversal(node.left_child, function):
+                yield val
+        if function == "inorder":
+            yield node
+        if node.right_child:
+            for val in self._traversal(node.right_child, function):
+                yield val
+        if function == "post":
+            yield node
+
+    def breadth_first_traversal(self):
+        """Traverse a BST ih order."""
+        order = []
+        result = self._breadth_first_traversal(self.root)
+        for val in result:
+            order.append(val.value)
+
+        return order
+
+    def _breadth_first_traversal(self, node):
+        if node is None:
+            return
+        node_list = [node]
+        while node_list:
+            current = node_list.pop(0)
+            yield current
+            if current._the_children():
+                for child in current._the_children():
+                    node_list.append(child)
+
 
 if __name__ == "__main__":
     """Calculate the runtime for binary searches in the BST."""
@@ -126,3 +194,26 @@ if __name__ == "__main__":
         number=1000
     ) * 1000
     print("It takes {} microseconds to find 75 in a balanced tree, and {} microseconds to find 75 in an unbalanced tree".format(bal, unbal))
+
+    in_o = timeit.timeit(
+        stmt="balanced.in_order_traversal()",
+        setup="from __main__ import balanced",
+        number=1000
+    ) * 1000
+    pre = timeit.timeit(
+        stmt="balanced.pre_order_traversal()",
+        setup="from __main__ import balanced",
+        number=1000
+    ) * 1000
+    post = timeit.timeit(
+        stmt="balanced.post_order_traversal()",
+        setup="from __main__ import balanced",
+        number=1000
+    ) * 1000
+    breadth = timeit.timeit(
+        stmt="balanced.breadth_first_traversal()",
+        setup="from __main__ import balanced",
+        number=1000
+    ) * 1000
+
+    print("It takes {} microseconds to traverse tree in order\n It takes {} microseconds to traverse tree preorder\n It takes {} microseconds to traverse tree postorder\n It takes {} microseconds to traverse tree in breadth first\n ".format(in_o, pre, post, breadth))
