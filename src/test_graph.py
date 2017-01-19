@@ -232,12 +232,12 @@ def test_neighbors_with_nonexistent_node(empty_graph):
 
 def test_neighbors_lists_arguments_edges(graph_with_edges):
     """Test method returns edges for given node."""
-    assert graph_with_edges.neighbors(5) == [10, 15]
+    assert graph_with_edges.neighbors(5) == {10: 3, 15: 6}
 
 
 def test_neighbors_when_no_neighbors(graph_with_edges):
     """Test that neighbors returns empty list when node has no neighbors."""
-    assert graph_with_edges.neighbors(15) == []
+    assert graph_with_edges.neighbors(15) == {}
 
 
 def test_adjacent_returns_true_on_edge(graph_with_edges):
@@ -322,4 +322,26 @@ def test_breadth_traversal_for_unconnected_node(graph_with_edges):
 
 def test_added_edge_shows_weight(graph_with_edges):
     """Make sure edge is weighted."""
-    graph_with_edges.graph[10] == {15: 2}
+    assert graph_with_edges.graph[10] == {15: 2}
+
+
+def test_dijkstra_with_empty_graph(empty_graph):
+    """Test that dijkstra raises key error when start node not in graph."""
+    with pytest.raises(KeyError):
+        empty_graph.dijkstra(0, 0)
+
+
+def test_dijkstra_raises_error_when_no_finish(graph_with_edges):
+    """Test that dijkstra raises key error when finish node not in graph."""
+    with pytest.raises(ValueError):
+        graph_with_edges.dijkstra(5, 30)
+
+
+def test_dijkstra_with_basic_graph(graph_with_edges):
+    """Test that dijkstra returns shortest path with simple graph."""
+    assert graph_with_edges.dijkstra(5, 15) == [5, [5, 10, 15]]
+
+
+def test_dijkstra_with_circular_graph(circular_graph):
+    """Test that dijkstra returns shortest path with circular graph."""
+    assert circular_graph.dijkstra(5, 15) == [6, [5, 10, 15]]
