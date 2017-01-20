@@ -239,7 +239,7 @@ class BST(object):
         return successor
 
     def rebalance(self, node):
-        """."""
+        """Rebalance tree and call rotate methods."""
         while self._balance(node) < -1 or self._balance(node) > 1:
             # import pdb; pdb.set_trace()
             if self._balance(node) > 1:
@@ -256,7 +256,7 @@ class BST(object):
                     self.rotate_right(node)
 
     def rotate_left(self, node, parent=None):
-        """."""
+        """Rotate node left."""
         new_root = node.right_child
         new_left_sub = new_root.left_child
         old_root = node
@@ -269,7 +269,7 @@ class BST(object):
             self.root = new_root
 
     def rotate_right(self, node, parent=None):
-        """."""
+        """Rotate node right."""
         new_root = node.left_child
         new_left_sub = new_root.right_child
         old_root = node
@@ -285,6 +285,7 @@ class BST(object):
 if __name__ == "__main__":
     bst = BST([10, 20, 30, 25])
     bst = BST([10, 15, 7, 5, 8, 6])
+    # bst = BST([6, 2, 7, 1, 4, 8, 3, 5, 9])
     print(bst.breadth_first_traversal())
     bst.delete(5)
     print(bst.breadth_first_traversal())
