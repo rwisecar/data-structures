@@ -1,5 +1,9 @@
 # Data Structures
 
+[![Build Status](https://travis-ci.org/rwisecar/data-structures.svg?branch=master)](https://travis-ci.org/rwisecar/data-structures)
+
+[![Coverage Status](https://coveralls.io/repos/github/rwisecar/data-structures/badge.svg)](https://coveralls.io/github/rwisecar/data-structures)
+
 # Linked List
 ##Module: linked_list.py
 ##Test Module: test_linked_list.py

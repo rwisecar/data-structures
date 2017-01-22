@@ -222,6 +222,7 @@ class BST(object):
         else:
             parent.right_child = replacement
         self.rebalance(self.root)
+        self._size -= 1
         return None
 
     def _delete(self, node):
