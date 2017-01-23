@@ -18,7 +18,7 @@ class Hash(object):
         if type(key) is not str:
             raise TypeError("Hash Tables can only accept strings.")
         key_hash = self._hash(key)
-        self._hashtable[key_hash].append((key_hash, value))
+        self._hashtable[key_hash].append((key, value))
 
     def _hash(self, key):
         """Hash the key provided."""
@@ -27,5 +27,8 @@ class Hash(object):
 
     def get(self, key):
         """Return the value stored with the given key."""
-        pass
-
+        key_hash = self._hash(key)
+        bucket = self._hashtable[key_hash]
+        for tup in bucket:
+            if tup[0] == key:
+                return tup[1]
