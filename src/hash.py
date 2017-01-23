@@ -10,6 +10,21 @@ class Hash(object):
 
     def __init__(self, size):
         """Instantiates hashtable instance."""
+        self._size = size
         self._hashtable = [[] for n in range(size)]
 
-    
+    def set(key, value):
+        """Store the given value using the given key."""
+        if type(key) is not str:
+            raise TypeError("Hash Tables can only accept strings.")
+        pass
+
+    def _hash(self, key):
+        """Hash the key provided."""
+        nums = sum([ord(k) for k in key])
+        return nums % self._size
+
+    def get(self, key):
+        """Return the value stored with the given key."""
+        pass
+
