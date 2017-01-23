@@ -40,6 +40,8 @@ class BST(object):
             self.root = Node(value)
             self._size += 1
         self.rebalance(self.root)
+        # self.rebalance(self.root.left_child)
+        # self.rebalance(self.root.right_child)
 
     def _insert(self, value, node):
         if value == node.value:
@@ -122,8 +124,14 @@ class BST(object):
     def _balance(self, node):
         """Return negative number if left leaning, postive for right leaning, or zero for balanced."""
         if node:
-            right = self._depth(node.right_child)
-            left = self._depth(node.left_child)
+            if node.right_child:
+                right = self._depth_helper(node.right_child)
+            else:
+                right = 0
+            if node.left_child:
+                left = self._depth_helper(node.left_child)
+            else:
+                left = 0
             return right - left
         return 0
 
@@ -242,7 +250,6 @@ class BST(object):
     def rebalance(self, node):
         """Rebalance tree and call rotate methods."""
         while self._balance(node) < -1 or self._balance(node) > 1:
-            # import pdb; pdb.set_trace()
             if self._balance(node) > 1:
                 if self._balance(node.right_child) < 0:
                     self.rotate_right(node.right_child, node)
