@@ -10,4 +10,6 @@ class Hash(object):
 
     def __init__(self, size):
         """Instantiates hashtable instance."""
-        self.hash = [[] for n in range(size)]
+        self._hashtable = [[] for n in range(size)]
+
+    
