@@ -16,8 +16,13 @@ class Hash(object):
     def set(self, key, value):
         """Store the given value using the given key."""
         if type(key) is not str:
-            raise TypeError("Hash Tables can only accept strings.")
+            raise TypeError("Hash tables can only accept strings.")
         key_hash = self._hash(key)
+        bucket = self._hashtable[key_hash]
+        if bucket:
+            for tup in bucket:
+                if tup[0] == key:
+                    bucket.remove(tup)
         self._hashtable[key_hash].append((key, value))
 
     def _hash(self, key):
