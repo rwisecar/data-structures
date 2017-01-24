@@ -83,7 +83,7 @@ class Graph():
         """Return a list of all nodes connected to n by edges."""
         if node not in list(self.graph.keys()):
             raise KeyError("Not in graph.")
-        return list(self.graph[node].keys())
+        return self.graph[node]
 
     def adjacent(self, node1, node2):
         """Return True if n1 and n2 are connected by an edge."""
@@ -115,7 +115,6 @@ class Graph():
                 [node_list.append(edge) for edge in list(self.graph[vertex].keys())
                     if edge not in checked]
         return checked
-
 
     def heuristic(self, start):
         """Run BFS to set a heuristic for A* algorithm on a simple weighted graph."""
@@ -177,27 +176,77 @@ class Graph():
         path.reverse() # optional
         return path
 
-if __name__ == "__main__":
-    """Calculate the runtime for depth_traversal and breadth_traversal."""
-    import timeit
+    def dijkstra(self, start, finish):
+        """Return the shortest path between two nodes.
+        Return the path and the number of steps taken to follow that path."""
 
-    dummy = Graph()
-    dummy.add_edge(1, 2)
-    dummy.add_edge(1, 3)
-    dummy.add_edge(1, 7)
-    dummy.add_edge(2, 3)
-    dummy.add_edge(2, 4)
-    dummy.add_edge(7, 5)
-    dummy.add_edge(7, 10)
+        unvisited = self.depth_traversal(start)
+        distances = {i: [None, [None]] for i in unvisited}
+        distances[start] = [0, [start]]
+        current_node = start
 
-    depth = timeit.timeit(
-        stmt="dummy.depth_traversal(1)",
-        setup="from __main__ import dummy",
-        number=1000
-    )
-    breadth = timeit.timeit(
-        stmt="dummy.breadth_traversal(1)",
-        setup="from __main__ import dummy",
-        number=1000
-    )
-    print("It takes {} ms to run depth_traversal, and {} ms to run breadth_traversal".format(depth, breadth))
+        if start not in unvisited:
+            raise KeyError("The start node is not in the graph.")
+        elif finish not in unvisited:
+            raise ValueError("The finish node is not in the graph.")
+
+        while unvisited:
+            for item in self.neighbors(current_node):
+                study_node = item
+                current_node_distance = distances[current_node][0]
+                potential_distance = self.neighbors(current_node)[study_node]
+                original_distance = distances[study_node][0]
+
+                if study_node not in unvisited:
+                    continue
+                elif original_distance is None or potential_distance < original_distance:
+                    current_node_path = (distances[current_node])[1][:]
+                    current_node_path.append(study_node)
+                    distances[study_node][0] = potential_distance + current_node_distance
+                    distances[study_node][1] = current_node_path
+                    continue
+
+            if current_node == finish:
+                return distances[finish]
+
+            unvisited.remove(current_node)
+            next_node = None
+            for key, value in distances.items():
+                if key in unvisited:
+                    if next_node is None:
+                        next_node = key
+                        continue
+                    elif distances[key][0]:
+                        if distances[key][0] < distances[next_node][0]:
+                            next_node = key
+            current_node = next_node
+
+dummy = Graph()
+dummy.add_edge(1, 2, 2)
+dummy.add_edge(1, 3, 1)
+dummy.add_edge(2, 4, 4)
+dummy.add_edge(3, 5, 3)
+dummy.add_edge(4, 6, 6)
+dummy.add_edge(5, 6, 5)
+
+dummy.dijkstra(1, 6)
+
+
+
+# if __name__ == "__main__":
+#     """Calculate the runtime for depth_traversal and breadth_traversal."""
+#     import timeit
+
+
+
+#     depth = timeit.timeit(
+#         stmt="dummy.depth_traversal(1)",
+#         setup="from __main__ import dummy",
+#         number=1000
+#     )
+#     breadth = timeit.timeit(
+#         stmt="dummy.breadth_traversal(1)",
+#         setup="from __main__ import dummy",
+#         number=1000
+#     )
+#     print("It takes {} ms to run depth_traversal, and {} ms to run breadth_traversal".format(depth, breadth))
