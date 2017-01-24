@@ -8,12 +8,20 @@ class Hash(object):
     _hash(key) - should hash the key provided.
     """
 
-    def __init__(self, size):
-        """Instantiates hashtable instance."""
+    def __init__(self, size, hash_type='add'):
+        """Instantiate hashtable instance."""
         self._size = size
         self._hashtable = [[] for n in range(size)]
+        self._hash_type = hash_type
 
-    def _additive_hash(self, key):
+    def _hash(self, key):
+        """."""
+        if self._hash_type == 'add':
+            return self._addative_hash(key)
+        if self._hash_type == 'fnv':
+            return self._fnv_hash(key)
+
+    def _addative_hash(self, key):
         """Hash the key provided using the additive method."""
         hash_total = sum([ord(k) for k in key])
         return hash_total % self._size
@@ -25,7 +33,7 @@ class Hash(object):
             hash_total = (hash_total * 16777619) ^ ord(k)
         return hash_total % self._size
 
-    def set(self, key, value, _hash):
+    def set(self, key, value):
         """Store the given value using the given key."""
         if type(key) is not str:
             raise TypeError("Hash tables can only accept strings.")
@@ -37,7 +45,7 @@ class Hash(object):
                     bucket.remove(tup)
         self._hashtable[key_hash].append((key, value))
 
-    def get(self, key, _hash):
+    def get(self, key):
         """Return the value stored with the given key."""
         key_hash = self._hash(key)
         bucket = self._hashtable[key_hash]

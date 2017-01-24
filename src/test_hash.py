@@ -16,7 +16,7 @@ def test_that_hash_table_has_the_size_given(test_hash):
     assert len(test_hash._hashtable) == 10
 
 
-def test_hash_table_returns_appropriate_hash_value(test_hash):
+def test_additive_hash_table_returns_appropriate_hash_value(test_hash):
     """Test that the hash function adds value of each char."""
     assert test_hash._hash("d") == 0
     assert test_hash._hash("e") == 1
@@ -30,7 +30,7 @@ def test_hash_table_returns_appropriate_hash_value(test_hash):
     assert test_hash._hash("m") == 9
 
 
-def test_that_seting_a_non_string_throws_type_error(test_hash):
+def test_that_setting_a_non_string_throws_type_error(test_hash):
     """Test that you must pass a string to set."""
     with pytest.raises(TypeError):
         test_hash.set(9, 8)
@@ -55,3 +55,11 @@ def test_that_getting_key_returns_proper_value(test_hash):
     test_hash.set('quiche', 'data2')
     assert test_hash.get('m') == 'data'
     assert test_hash.get('quiche') == 'data2'
+
+
+def test_that_setting_key_more_than_once_updates_value(test_hash):
+    """Test that adding to table with key already in hash replaces value."""
+    test_hash.set('m', 'data')
+    assert test_hash.get('m') == 'data'
+    test_hash.set('m', 'data3')
+    assert test_hash.get('m') == 'data3'
