@@ -27,10 +27,12 @@ class Hash(object):
         return hash_total % self._size
 
     def _fnv_hash(self, key):
-        """Hash the key provided using a modified fnv/xor method."""
+        """Hash the key provided using a modified fnv/xor method.
+        To make it really work, take the ord(k) for each char in key.
+        Then multiple them together, and compare THAT to the hash_total."""
         hash_total = 2166136261
         for k in key:
-            hash_total = (hash_total * 16777619) ^ ord(k)
+            hash_total += (hash_total * 16777619) ^ ord(k)
         return hash_total % self._size
 
     def set(self, key, value):
