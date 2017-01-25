@@ -45,6 +45,8 @@ class Trie(object):
 
     def contains(self, string):
         """Return true if string is in trie."""
+        if not isinstance(string, str):
+            raise TypeError("Word must be a string")
         current = self.root
         for letter in string:
             if letter in current.children:
@@ -63,4 +65,18 @@ class Trie(object):
 
     def remove(self, string):
         """Return the string from the trie if it exists."""
-        pass
+        if not isinstance(string, str):
+            raise TypeError("Word must be a string")
+        current = self.root
+        last_known_bifurcation = [None, None]
+        for letter in string:
+            if letter in current.children:
+                if len(current.children) > 1:
+                    last_known_bifurcation[0] = current
+                    last_known_bifurcation[1] = letter
+                current = current.children[letter]
+        if '$' in current.children:
+            del last_known_bifurcation[0].children[last_known_bifurcation[1]]
+            self._size -= 1
+        else:
+            raise KeyError('Word is not in trie')
