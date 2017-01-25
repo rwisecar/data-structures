@@ -39,16 +39,16 @@ def test_additive_hash_table_returns_appropriate_hash_value(test_hash):
 
 def test_fnv_hash_table_returns_appropriate_hash_value(test_hash_fnv):
     """Test that the hash function adds value of each char."""
-    assert test_hash_fnv._hash("o") == 0
-    assert test_hash_fnv._hash("n") == 1
-    assert test_hash_fnv._hash("m") == 2
-    assert test_hash_fnv._hash("l") == 3
-    assert test_hash_fnv._hash("k") == 4
-    assert test_hash_fnv._hash("j") == 5
-    assert test_hash_fnv._hash("i") == 6
-    assert test_hash_fnv._hash("h") == 7
-    assert test_hash_fnv._hash("g") == 8
-    assert test_hash_fnv._hash("f") == 9
+    assert test_hash_fnv._hash("f") == 0
+    assert test_hash_fnv._hash("g") == 9
+    assert test_hash_fnv._hash("h") == 8
+    assert test_hash_fnv._hash("i") == 7
+    assert test_hash_fnv._hash("j") == 6
+    assert test_hash_fnv._hash("k") == 5
+    assert test_hash_fnv._hash("l") == 4
+    assert test_hash_fnv._hash("m") == 3
+    assert test_hash_fnv._hash("n") == 2
+    assert test_hash_fnv._hash("o") == 1
 
 
 def test_that_setting_a_non_string_throws_type_error(test_hash):
@@ -66,7 +66,7 @@ def test_that_setting_places_key_value_tuple_in_proper_bucket(test_hash):
 def test_that_setting_places_key_value_in_proper_bucket_fnv(test_hash_fnv):
     """Test fnv hash key value pair go into the proper bucket."""
     test_hash_fnv.set('m', 'data')
-    assert test_hash_fnv._hashtable[2][0] == ('m', 'data')
+    assert test_hash_fnv._hashtable[3][0] == ('m', 'data')
 
 
 def test_that_hashing_to_bucket_with_value_adds_to_list(test_hash):
@@ -79,8 +79,8 @@ def test_that_hashing_to_bucket_with_value_adds_to_list(test_hash):
 def test_that_hashing_to_bucket_with_value_adds_to_list_fmv(test_hash_fnv):
     """Test fnv hash can add multiple key value pairs to the bucket."""
     test_hash_fnv.set('k', 'data')
-    test_hash_fnv.set('quiche', 'data2')
-    assert len(test_hash_fnv._hashtable[4]) == 2
+    test_hash_fnv.set('u', 'data2')
+    assert len(test_hash_fnv._hashtable[5]) == 2
 
 
 def test_that_getting_key_returns_proper_value(test_hash):
