@@ -29,6 +29,8 @@ class Trie(object):
 
     def insert(self, string):
         """Insert a string into the trie."""
+        if not isinstance(string, str):
+            raise TypeError("Word must be a string")
         current = self.root
         word_progression = ''
         for letter in string:
