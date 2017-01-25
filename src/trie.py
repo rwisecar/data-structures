@@ -70,16 +70,17 @@ class Trie(object):
             raise TypeError("Word must be a string")
         current = self.root
         last_bifurcated_node = None
-        value_at_last_bifurcation = None
+        # value_at_last_bifurcation = None
         for letter in string:
             if letter in current.children:
                 if len(current.children) > 1:
                     last_bifurcated_node = current
-                    value_at_last_bifurcation = letter
+                    # value_at_last_bifurcation = letter
                 current = current.children[letter]
         if '$' in current.children:
             if last_bifurcated_node:
-                del last_bifurcated_node.children[value_at_last_bifurcation]
+                del current.children['$']
+                # del last_bifurcated_node.children[value_at_last_bifurcation]
                 self._size -= 1
             else:
                 del self.root.children[string[:1]]
