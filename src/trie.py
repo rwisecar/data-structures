@@ -68,15 +68,16 @@ class Trie(object):
         if not isinstance(string, str):
             raise TypeError("Word must be a string")
         current = self.root
-        last_known_bifurcation = [None, None]
+        last_bifurcated_node = None
+        value_at_last_bifurcation = None
         for letter in string:
             if letter in current.children:
                 if len(current.children) > 1:
-                    last_known_bifurcation[0] = current
-                    last_known_bifurcation[1] = letter
+                    last_bifurcated_node = current
+                    value_at_last_bifurcation = letter
                 current = current.children[letter]
         if '$' in current.children:
-            del last_known_bifurcation[0].children[last_known_bifurcation[1]]
+            del last_bifurcated_node.children[value_at_last_bifurcation]
             self._size -= 1
         else:
             raise KeyError('Word is not in trie')
