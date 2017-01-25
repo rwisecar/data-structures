@@ -12,6 +12,7 @@ class TrieNode(object):
 
 class Trie(object):
     """An implementation of a trie tree.
+
     insert(self, string): will insert the input string into the trie. If character in the input string is already present, it will be ignored.
 
     contains(self, string): will return True if the string is in the trie, False if not.
@@ -38,10 +39,21 @@ class Trie(object):
                 current.children[letter] = TrieNode(word_progression)
                 current = current.children[letter]
         current.children['$'] = string
+        self._size += 1
 
     def contains(self, string):
         """Return true if string is in trie."""
-        pass
+        current = self.root
+        for letter in string:
+            if letter in current.children:
+                current = current.children[letter]
+            else:
+                return False
+        try:
+            if current.children['$']:
+                return True
+        except KeyError:
+            raise KeyError("That word has not been inserted")
 
     def size(self):
         """Return the number of words contained in the trie."""
