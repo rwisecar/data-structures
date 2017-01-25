@@ -31,6 +31,7 @@ class Trie(object):
         """Insert a string into the trie."""
         if not isinstance(string, str):
             raise TypeError("Word must be a string")
+        string = string.lower()
         current = self.root
         word_progression = ''
         for letter in string:
@@ -77,7 +78,10 @@ class Trie(object):
                     value_at_last_bifurcation = letter
                 current = current.children[letter]
         if '$' in current.children:
-            del last_bifurcated_node.children[value_at_last_bifurcation]
-            self._size -= 1
+            if last_bifurcated_node:
+                del last_bifurcated_node.children[value_at_last_bifurcation]
+                self._size -= 1
+            else:
+                del self.root.children[string[:1]]
         else:
             raise KeyError('Word is not in trie')
