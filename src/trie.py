@@ -6,6 +6,7 @@ class TrieNode(object):
 
     def __init__(self, value=None):
         """Create node to push into Doubly link list."""
+        self.value = value
         self.children = {}
 
 
@@ -17,7 +18,7 @@ class Trie(object):
 
     size(self): will return the total number of words contained within the trie. 0 if empty.
 
-    remove(self, string): will remove the given string from the trie. If the word doesn’t exist, will raise an appropriate exception.
+    remove(self, string): will remove the given string from the trie. If the word does not exist, will raise an appropriate exception.
     """
 
     def __init__(self):
@@ -28,16 +29,15 @@ class Trie(object):
     def insert(self, string):
         """Insert a string into the trie."""
         current = self.root
-
+        word_progression = ''
         for letter in string:
+            word_progression += letter
             if letter in current.children:
                 current = current.children[letter]
             else:
-                current.children[letter] = TrieNode(letter)
+                current.children[letter] = TrieNode(word_progression)
                 current = current.children[letter]
         current.children['$'] = string
-
-
 
     def contains(self, string):
         """Return true if string is in trie."""
