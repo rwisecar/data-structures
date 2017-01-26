@@ -1,4 +1,5 @@
 """An implementation of a trie."""
+from collections import OrderedDict
 
 
 class TrieNode(object):
@@ -7,7 +8,7 @@ class TrieNode(object):
     def __init__(self, value=None):
         """Create node to push into Doubly link list."""
         self.value = value
-        self.children = {}
+        self.children = OrderedDict()
 
 
 class Trie(object):
@@ -20,6 +21,8 @@ class Trie(object):
     size(self): will return the total number of words contained within the trie. 0 if empty.
 
     remove(self, string): will remove the given string from the trie. If the word does not exist, will raise an appropriate exception.
+
+    traversal(self, start): Perform a full depth-first traversal of the graph beginning at start. The argument start should be a string, which may or may not be the beginning of a string or strings contained in the Trie.
     """
 
     def __init__(self):
@@ -33,13 +36,11 @@ class Trie(object):
             raise TypeError("Word must be a string")
         string = string.lower()
         current = self.root
-        word_progression = ''
         for letter in string:
-            word_progression += letter
             if letter in current.children:
                 current = current.children[letter]
             else:
-                current.children[letter] = TrieNode(word_progression)
+                current.children[letter] = TrieNode(letter)
                 current = current.children[letter]
         if '$' not in current.children:
             current.children['$'] = string
@@ -88,3 +89,31 @@ class Trie(object):
             del current.children['$']
         else:
             raise KeyError('Word is not in trie')
+
+    def traversal(self, start=None):
+        """Return a list of all the words in the subtree starting at start."""
+        current = self.root
+        if start:
+            for letter in start:
+                if letter in current.children:
+                    current = current.children[letter]
+                else:
+                    return
+        result = self._traversal(current, True)
+        for val in result:
+            yield val.value
+
+    def _traversal(self, node, first=False):
+        if node is None:
+            return
+        if not first:
+            yield node
+        # import pdb; pdb.set_trace()
+        for child in node.children:
+            if child == '$':
+                continue
+            for val in self._traversal(node.children[child]):
+                yield val
+
+    def _for_me(self, word=None):
+        return list(self.traversal(word))
