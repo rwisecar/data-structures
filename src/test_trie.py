@@ -58,8 +58,8 @@ def test_insert_string_has_correct_key_value_pairs(empty_trie):
     empty_trie.insert("hey")
     start = empty_trie.root.children
     assert empty_trie.root.value is None
-    assert start.keys() == ["h"]
-    assert start["h"].children["e"].children.keys() == ["y"]
+    assert list(start.keys()) == ["h"]
+    assert list(start["h"].children["e"].children.keys()) == ["y"]
 
 
 def test_insert_many_words_still_works(multi_trie):
@@ -86,26 +86,26 @@ def test_track_word_progression_with_multi_words(multi_trie):
 def test_insert_string_increases_size(empty_trie):
     """Test that insertion increases size with each node inserted."""
     empty_trie.insert("hey")
-    assert empty_trie._size == 1
+    assert empty_trie.size() == 1
     empty_trie.insert("howdy")
-    assert empty_trie._size == 2
+    assert empty_trie.size() == 2
 
 
 def test_size_of_multi_trie(multi_trie):
     """Test that the size of a trie reflects multiple words."""
-    assert multi_trie._size == 5
+    assert multi_trie.size() == 5
 
 
 def test_size_doesnt_change_when_you_run_contains(full_trie):
     """Test that the size attribute is unchanged when you run contains."""
     full_trie.contains("hey")
-    assert full_trie._size == 1
+    assert full_trie.size() == 1
 
 
 def test_size_changes_on_remove(multi_trie):
     """Test that remove changes the size of the trie."""
     multi_trie.remove("hello")
-    assert multi_trie._size == 4
+    assert multi_trie.size() == 4
 
 
 # *******************Contains Tests********************************************
@@ -166,9 +166,8 @@ def test_remove_non_string_raises_type_error(full_trie):
 
 def test_remove_longer_word_removes_word(multi_trie):
     """Test that you can remove a word and that word won't be in the trie."""
-    multi_trie.remove("hello")
-    with pytest.raises(KeyError):
-        multi_trie.contains("hello")
+    multi_trie.remove("hello") 
+    assert multi_trie.contains("hello") is False
 
 
 def test_remove_longer_word_retains_all_shorter_words(multi_trie):
@@ -183,8 +182,7 @@ def test_remove_longer_word_retains_all_shorter_words(multi_trie):
 def test_remove_word_with_one_bifurcation(multi_trie):
     """Test that you can remove a word with only one bifurcation."""
     multi_trie.remove("howdy")
-    with pytest.raises(KeyError):
-        multi_trie.contains("howdy")
+    assert multi_trie.contains("howdy") is False
 
 
 def test_remove_one_bifurcation_word_retains_all_other_words(multi_trie):
@@ -200,3 +198,10 @@ def test_remove_shorter_word_retains_longer_form_of_that_word(multi_trie):
     """Test that removing word that is part of a bigger word keeps big word."""
     multi_trie.remove("hell")
     assert multi_trie.contains("hello") is True
+
+
+def test_remove_word_that_branches_from_root_by_itself(empty_trie):
+    """Test that removing word that is the only word from that letter."""
+    empty_trie.insert("tool")
+    empty_trie.remove("tool")
+    assert empty_trie.contains("tool") is False
