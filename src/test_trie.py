@@ -91,6 +91,14 @@ def test_insert_string_increases_size(empty_trie):
     assert empty_trie.size() == 2
 
 
+def test_insert_a_word_twice_does_not_change_size(empty_trie):
+    """Test inserting a word twice does not xhange the size of the trie."""
+    empty_trie.insert("hey")
+    assert empty_trie.size() == 1
+    empty_trie.insert("hey")
+    assert empty_trie.size() == 1
+
+
 def test_size_of_multi_trie(multi_trie):
     """Test that the size of a trie reflects multiple words."""
     assert multi_trie.size() == 5

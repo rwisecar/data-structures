@@ -41,8 +41,9 @@ class Trie(object):
             else:
                 current.children[letter] = TrieNode(word_progression)
                 current = current.children[letter]
-        current.children['$'] = string
-        self._size += 1
+        if '$' not in current.children:
+            current.children['$'] = string
+            self._size += 1
 
     def contains(self, string):
         """Return true if string is in trie."""
