@@ -104,16 +104,11 @@ class Trie(object):
             yield val.value
 
     def _traversal(self, node, first=False):
-        if node is None:
-            return
         if not first:
             yield node
-        # import pdb; pdb.set_trace()
         for child in node.children:
             if child == '$':
                 continue
             for val in self._traversal(node.children[child]):
                 yield val
 
-    def _for_me(self, word=None):
-        return list(self.traversal(word))
