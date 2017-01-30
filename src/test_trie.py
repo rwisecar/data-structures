@@ -28,6 +28,7 @@ def multi_trie():
     trie.insert("hello")
     trie.insert("howdy")
     trie.insert("head")
+    trie.insert("hi you")
     return trie
 
 
@@ -70,15 +71,19 @@ def test_insert_many_words_still_works(multi_trie):
     assert "y" and "a" and "l" in multi_trie.root.children["h"].children["e"].children.keys()
 
 
-def test_insert_string_tracks_word_progression(full_trie):
+def test_check_value_with_short_word(full_trie):
     """Test that insertion tracks word progression correctly."""
-    assert full_trie.root.children['h'].children['e'].children['y'].value == "hey"
+    assert full_trie.root.children['h'].children['e'].children['y'].value == "y"
 
 
-def test_track_word_progression_with_multi_words(multi_trie):
+def test_check_value_of_last_letterwith_multi_words(multi_trie):
     """Test that insertion tracks word progression when many words in trie."""
-    assert multi_trie.root.children['h'].children['e'].children['l'].children['l'].children['o'].value == 'hello'
+    assert multi_trie.root.children['h'].children['e'].children['l'].children['l'].children['o'].value == 'o'
 
+
+def test_value_with_spaces_in_word(multi_trie):
+    """Test that a space does not break the trie."""
+    assert multi_trie.root.children['h'].children['i'].children[' '].value == ' '
 
 # *******************Size Tests***********************************************
 
@@ -101,7 +106,7 @@ def test_insert_a_word_twice_does_not_change_size(empty_trie):
 
 def test_size_of_multi_trie(multi_trie):
     """Test that the size of a trie reflects multiple words."""
-    assert multi_trie.size() == 5
+    assert multi_trie.size() == 6
 
 
 def test_size_doesnt_change_when_you_run_contains(full_trie):
@@ -113,7 +118,7 @@ def test_size_doesnt_change_when_you_run_contains(full_trie):
 def test_size_changes_on_remove(multi_trie):
     """Test that remove changes the size of the trie."""
     multi_trie.remove("hello")
-    assert multi_trie.size() == 4
+    assert multi_trie.size() == 5
 
 
 # *******************Contains Tests********************************************
@@ -152,6 +157,11 @@ def test_contains_returns_true_for_partial_word_in_multi_word_trie(multi_trie):
     assert multi_trie.contains("hell") is True
 
 
+def test_contains_returns_true_for_words_with_spaces(multi_trie):
+    """Test that contains returns true if the words have a space."""
+    assert multi_trie.contains("hi you") is True
+
+
 # *******************Removes Tests********************************************
 
 
@@ -174,7 +184,7 @@ def test_remove_non_string_raises_type_error(full_trie):
 
 def test_remove_longer_word_removes_word(multi_trie):
     """Test that you can remove a word and that word won't be in the trie."""
-    multi_trie.remove("hello") 
+    multi_trie.remove("hello")
     assert multi_trie.contains("hello") is False
 
 
@@ -213,3 +223,70 @@ def test_remove_word_that_branches_from_root_by_itself(empty_trie):
     empty_trie.insert("tool")
     empty_trie.remove("tool")
     assert empty_trie.contains("tool") is False
+
+# *******************Traversal Tests*******************************************
+
+
+def test_traverse_on_empty_trie(empty_trie):
+    """Test that traversal on an empty trie returns nothing."""
+    assert list(empty_trie.traversal()) == []
+
+
+def test_traverse_string_on_empty_trie(empty_trie):
+    """Test that traversal on an empty trie returns nothing."""
+    assert list(empty_trie.traversal('hello')) == []
+
+
+def test_traversal_with_no_input_string_returns_trie(full_trie):
+    """Test that traversal returns the whole trie when input is none or ' '."""
+    assert list(full_trie.traversal()) == ['h', 'e', 'y']
+    assert list(full_trie.traversal('')) == ['h', 'e', 'y']
+
+
+def test_input_and_traversal_with_no_input_string_returns_trie(full_trie):
+    """Test that traversal returns the whole trie when input is none or ' '."""
+    full_trie.insert('hi')
+    assert list(full_trie.traversal()) == ['h', 'e', 'y', 'i']
+    assert list(full_trie.traversal('')) == ['h', 'e', 'y', 'i']
+
+
+def test_traversal_with_partial_word_returns_rest_of_word(full_trie):
+    """Test that inputing part of a word returns the remaining letters."""
+    assert list(full_trie.traversal('h')) == ['e', 'y']
+
+
+def test_traversal_with_string_not_in_trie(full_trie):
+    """Test that traversal returns nothing when input not in trie."""
+    assert list(full_trie.traversal("goodbye")) == []
+
+
+def test_traversal_on_word_with_no_following_letters(full_trie):
+    """Test that traversal returns nothing when input == trie."""
+    assert list(full_trie.traversal("hey")) == []
+
+
+def test_traversal_on_input_word_with_no_following_letters(full_trie):
+    """Test that traversal returns nothing when inserted input == trie."""
+    full_trie.insert("yo")
+    assert list(full_trie.traversal("yo")) == []
+
+
+def test_traversal_on_multi_word_trie_returns_whole_branch(multi_trie):
+    """Test that traversal on multitrie returns remaining branch chars."""
+    assert list(multi_trie.traversal("he")) == ['y', 'l', 'l', 'o', 'a', 'd']
+
+
+def test_traversal_on_word_with_space_returns_spaces_too(multi_trie):
+    """Test that traversal on a word with a space returns the space."""
+    assert list(multi_trie.traversal("hi")) == [' ', 'y', 'o', 'u']
+
+
+def test_remove_doesnt_break_traversal(multi_trie):
+    """Test that removing a shared string does not break traversal."""
+    multi_trie.remove('hello')
+    assert list(multi_trie.traversal("he")) == ['y', 'l', 'l', 'a', 'd']
+
+
+def test_traversal_with_non_ascii_chars(full_trie):
+    """Test that non ascii characters do not break the traversal."""
+    assert list(full_trie.traversal('@#$#^&#')) == []

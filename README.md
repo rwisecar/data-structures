@@ -100,7 +100,7 @@ http://codereview.stackexchange.com/questions/78577/depth-first-search-in-python
     depth_traversal(start, checked=none): returns the path traversed by depth.
 
     breadth_traversal(start): traverses the graph by breadth and returns the path.
-    """
+
 ---
 
 #Binary Search Tree
@@ -130,56 +130,111 @@ honds/Trees/SearchTreeImplementation.html
 
     balance(self): will return an integer, positive or negative that represents how well balanced the tree is. Trees which are higher on the left than the right should return a positive value, trees which are higher on the right than the left should return a negative value. An ideally-balanced tree should return 0.
 
+---
+
+#Hashtables
+##Module: hash.py
+##Test Module: test_hash.py
+
+Our hash module creates a hashtable that gives the user the option of one of two different hash functions: the addative function and the fnv function.
+
+We had help from the following resources:
+https://en.wikipedia.org/wiki/Hash_table
+https://gist.github.com/vaiorabbit/5670985
+http://isthe.com/chongo/tech/comp/fnv/
+
+## Hashtable Methods:
+
+    _hash(self, key): takes in a key, and runs a helper hash function on that key.
+    _addative_hash(self, key): hashes the key provided using the addative method.
+    _fnv_hash(self, key): hashes the key provided using the fnv algorithm.
+    set(self, key, value): stores a key-value pair within the hash table.
+    get(self, key): retrieves a value from the hash table based on key.
+
+---
+
+# Trie
+##Module: trie.py
+##Test Module: test_trie.py
+
+Our trie module creates a trie trie that allows the user to store strings by letter.
+
+We had help from the following resources:
+http://stackoverflow.com/questions/7634323/python-generators-correct-code-recursing-a-tree
+http://stackoverflow.com/questions/26145678/implementing-a-depth-first-tree-iterator-in-python
+
+### Trie Methods:
+    
+    insert(self, string): will insert the input string into the trie. If character in the input string is already present, it will be ignored.
+
+    contains(self, string): will return True if the string is in the trie, False if not.
+
+    size(self): will return the total number of words contained within the trie. 0 if empty.
+
+    remove(self, string): will remove the given string from the trie. If the word does not exist, will raise an appropriate exception.
+
+    traversal(self, start): Perform a full depth-first traversal of the graph beginning at start. The argument start should be a string, which may or may not be the beginning of a string or strings contained in the Trie.
+
 #Testing Information:
+
 ```
----------- coverage: platform linux2, python 2.7.6-final-0 -----------
+
+---------- coverage: platform darwin, python 2.7.10-final-0 ----------
 Name                         Stmts   Miss  Cover   Missing
 ----------------------------------------------------------
 src/binheap.py                  30      0   100%
-src/bst.py                     170     12    93%   232-270
+src/bst.py                     171     12    93%   232-270
 src/deque.py                    24      0   100%
 src/dll.py                      68      0   100%
-src/graph.py                    80     12    85%   122-143
+src/graph.py                   111      1    99%   129
+src/hash.py                     34      0   100%
 src/linked_list.py              67      0   100%
 src/priority_queue.py           20      0   100%
 src/queue.py                    22      0   100%
 src/stack.py                    11      0   100%
 src/test_binheap.py             40      0   100%
-src/test_bst.py                183      0   100%
+src/test_bst.py                187      0   100%
 src/test_deque.py               89      0   100%
 src/test_dll.py                 84      0   100%
-src/test_graph.py              163      0   100%
+src/test_graph.py              173      0   100%
+src/test_hash.py                69      0   100%
 src/test_linked_list.py         57      0   100%
 src/test_priority_queue.py      53      0   100%
 src/test_queue.py               43      0   100%
 src/test_stack.py               37      0   100%
+src/test_trie.py               143      0   100%
+src/trie.py                     75      0   100%
 ----------------------------------------------------------
-TOTAL                         1241     24    98%
+TOTAL                         1608     13    99%
 
 
 ----------- coverage: platform linux, python 3.5.2-final-0 -----------
 Name                         Stmts   Miss  Cover   Missing
 ----------------------------------------------------------
 src/binheap.py                  30      0   100%
-src/bst.py                     170     12    93%   232-270
+src/bst.py                     171     12    93%   232-270
 src/deque.py                    24      0   100%
 src/dll.py                      68      0   100%
-src/graph.py                    80     12    85%   122-143
+src/graph.py                   111      1    99%   129
+src/hash.py                     34      0   100%
 src/linked_list.py              67      0   100%
 src/priority_queue.py           20      0   100%
 src/queue.py                    22      0   100%
 src/stack.py                    11      0   100%
 src/test_binheap.py             40      0   100%
-src/test_bst.py                183      0   100%
+src/test_bst.py                187      0   100%
 src/test_deque.py               89      0   100%
 src/test_dll.py                 84      0   100%
-src/test_graph.py              163      0   100%
+src/test_graph.py              173      0   100%
+src/test_hash.py                69      0   100%
 src/test_linked_list.py         57      0   100%
 src/test_priority_queue.py      53      0   100%
 src/test_queue.py               43      0   100%
 src/test_stack.py               37      0   100%
+src/test_trie.py               143      0   100%
+src/trie.py                     75      0   100%
 ----------------------------------------------------------
-TOTAL                         1241     24    98%
+TOTAL                         1608     13    99%
 
 
   py27: commands succeeded
