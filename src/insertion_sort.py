@@ -11,6 +11,3 @@ def insertion_sort(lst):
             index -= 1
         lst[index] = current
     return lst
-
-
-if 
