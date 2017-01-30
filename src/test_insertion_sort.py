@@ -30,4 +30,4 @@ def test_insertion_sort_works_on_an_iterable_of_strings():
 def test_insertion_sort_on_non_iterable_raises_error():
     """Test that you must have an iterable to sort."""
     with pytest.raises(TypeError):
-        insertion_sort(8)
+        insertion_sort({'a': 1, 'b': 2})
