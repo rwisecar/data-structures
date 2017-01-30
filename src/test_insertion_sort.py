@@ -22,12 +22,20 @@ def test_insertion_sort_works_on_an_iterable_of_strings():
     """Test that you can insertion sort a list of char."""
     assert insertion_sort(['boom', 'doom', 'room', 'because', 'jokes', 'rule']) == ['because', 'boom', 'doom', 'jokes', 'room', 'rule']
 
-# def test_insertion_sort_works_on_strings():
-#     """Test that you can insertion sort a list of char."""
-#     assert insertion_sort('dags') == 'adgs'
+
+def test_insertion_sort_works_on_strings():
+    """Test that you can insertion sort a list of char."""
+    with pytest.raises(TypeError):
+        insertion_sort('dags')
+
+
+def test_insertion_sort_on_dict_raises_error():
+    """Test that you must have an iterable to sort."""
+    with pytest.raises(TypeError):
+        insertion_sort({'a': 1, 'b': 2})
 
 
 def test_insertion_sort_on_non_iterable_raises_error():
     """Test that you must have an iterable to sort."""
     with pytest.raises(TypeError):
-        insertion_sort({'a': 1, 'b': 2})
+        insertion_sort(8)
