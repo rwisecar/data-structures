@@ -1,10 +1,9 @@
 """Create a function to insertion-sort an iterable."""
-from collections import Iterable
 
 
 def insertion_sort(lst):
     """Insertion sort an iterable."""
-    if isinstance(lst, Iterable):
+    if isinstance(lst, list):
         for idx in range(1, len(lst)):
             current = lst[idx]
             index = idx
@@ -17,43 +16,30 @@ def insertion_sort(lst):
         raise TypeError("You cannot insertion_sort a non-iterable.")
 
 
-# if __name__ == "__main__":
-#     """Calculate the runtime for binary searches in the BST."""
-#     import timeit
-#     lst_1 = [50, 45, 60, 1, -59, 55, 70, -75, 65, 20, 48, 49, 0, 10, 25]
-#     sortit = insertion_sort(lst_1)
+if __name__ == "__main__":
+    """Calculate the runtime for binary searches in the BST."""
+    import timeit
+    import random
+    lst_1 = [random.randint(-100, 100) for x in range(10000)]
+    lst_2 = [1, 2, 3]
+    lst_3 = [x for x in range(10000)][::-1]
 
-#     sort_time = timeit.timeit(
-#         stmt="balanced.search(75)",
-#         setup="from __main__ import balanced",
-#         number=1000
-#     ) * 1000
-#     unbal = timeit.timeit(
-#         stmt="unbalanced.search(75)",
-#         setup="from __main__ import unbalanced",
-#         number=1000
-#     ) * 1000
-#     print("It takes {} microseconds to find 75 in a balanced tree, and {} microseconds to find 75 in an unbalanced tree".format(bal, unbal))
+    best_case = timeit.timeit(
+        stmt="insertion_sort(lst_2)",
+        setup="from __main__ import insertion_sort, lst_2",
+        number=1000
+    ) * 1000
 
-#     in_o = timeit.timeit(
-#         stmt="balanced.in_order_traversal()",
-#         setup="from __main__ import balanced",
-#         number=1000
-#     ) * 1000
-#     pre = timeit.timeit(
-#         stmt="balanced.pre_order_traversal()",
-#         setup="from __main__ import balanced",
-#         number=1000
-#     ) * 1000
-#     post = timeit.timeit(
-#         stmt="balanced.post_order_traversal()",
-#         setup="from __main__ import balanced",
-#         number=1000
-#     ) * 1000
-#     breadth = timeit.timeit(
-#         stmt="balanced.breadth_first_traversal()",
-#         setup="from __main__ import balanced",
-#         number=1000
-#     ) * 1000
+    average_case = timeit.timeit(
+        stmt="insertion_sort(lst_1)",
+        setup="from __main__ import insertion_sort, lst_1",
+        number=1000
+    ) * 1000
 
-#     print("It takes {} microseconds to traverse tree in order\n It takes {} microseconds to traverse tree preorder\n It takes {} microseconds to traverse tree postorder\n It takes {} microseconds to traverse tree in breadth first\n ".format(in_o, pre, post, breadth))
+    worst_case = timeit.timeit(
+        stmt="insertion_sort(lst_3)",
+        setup="from __main__ import insertion_sort, lst_3",
+        number=1000
+    ) * 1000
+
+    print("Insertion sort's best case scenario takes {} microseconds.\n Insertion sort's average case scenario takes {} microseconds.\n Insertion sort's worst case scenario takes {} microseconds.".format(best_case, average_case, worst_case))
