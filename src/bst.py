@@ -39,6 +39,9 @@ class BST(object):
         else:
             self.root = Node(value)
             self._size += 1
+        self.rebalance(self.root)
+        # self.rebalance(self.root.left_child)
+        # self.rebalance(self.root.right_child)
 
     def _insert(self, value, node):
         if value == node.value:
@@ -80,14 +83,21 @@ class BST(object):
 
     def depth(self):
         """Return the depth of the binary search tree."""
-        return self._depth(self.root)
+        if not self.root:
+            return -1
+        else:
+            return self._depth(self.root)
 
     def _depth(self, node):
-        """Helper for depth method."""
+        """Return actual depth utilizing _depth."""
+        return self._depth_helper(node) - 1
+
+    def _depth_helper(self, node):
+        """Helper for depth method, returns depth plus one."""
         if node is None:
             return 0
         else:
-            return max(self._depth(node.left_child), self._depth(node.right_child)) + 1
+            return max(self._depth_helper(node.left_child), self._depth_helper(node.right_child)) + 1
 
     def contains(self, value):
         """Return true if the val is contained in the BST, false otherwise."""
@@ -109,9 +119,19 @@ class BST(object):
 
     def balance(self):
         """Return negative number if left leaning, postive for right leaning, or zero for balanced."""
-        if self.root:
-            right = self._depth(self.root.right_child)
-            left = self._depth(self.root.left_child)
+        return self._balance(self.root)
+
+    def _balance(self, node):
+        """Return negative number if left leaning, postive for right leaning, or zero for balanced."""
+        if node:
+            if node.right_child:
+                right = self._depth_helper(node.right_child)
+            else:
+                right = 0
+            if node.left_child:
+                left = self._depth_helper(node.left_child)
+            else:
+                left = 0
             return right - left
         return 0
 
@@ -209,6 +229,7 @@ class BST(object):
             parent.left_child = replacement
         else:
             parent.right_child = replacement
+        self.rebalance(self.root)
         self._size -= 1
         return None
 
@@ -226,45 +247,95 @@ class BST(object):
             parent.left_child = successor.right_child
         return successor
 
+    def rebalance(self, node):
+        """Rebalance tree and call rotate methods."""
+        while self._balance(node) < -1 or self._balance(node) > 1:
+            if self._balance(node) > 1:
+                if self._balance(node.right_child) < 0:
+                    self.rotate_right(node.right_child, node)
+                    self.rotate_left(node)
+                else:
+                    self.rotate_left(node)
+            if self._balance(node) < -1:
+                if self._balance(node.left_child) > 0:
+                    self.rotate_left(node.left_child, node)
+                    self.rotate_right(node)
+                else:
+                    self.rotate_right(node)
+
+    def rotate_left(self, node, parent=None):
+        """Rotate node left."""
+        new_root = node.right_child
+        new_left_sub = new_root.left_child
+        old_root = node
+        node = new_root
+        old_root.right_child = new_left_sub
+        new_root.left_child = old_root
+        if parent:
+            parent.left_child = new_root
+        else:
+            self.root = new_root
+
+    def rotate_right(self, node, parent=None):
+        """Rotate node right."""
+        new_root = node.left_child
+        new_left_sub = new_root.right_child
+        old_root = node
+        node = new_root
+        old_root.left_child = new_left_sub
+        new_root.right_child = old_root
+        if parent:
+            parent.right_child = new_root
+        else:
+            self.root = new_root
+
 
 if __name__ == "__main__":
-    """Calculate the runtime for binary searches in the BST."""
-    import timeit
-    value = [50, 45, 60, 58, 59, 55, 70, 75, 65, 20, 48, 49, 46, 10, 25]
-    balanced = BST(value)
-    unbalanced = BST(sorted(value))
+    bst = BST([10, 20, 30, 25])
+    bst = BST([10, 15, 7, 5, 8, 6])
+    # bst = BST([6, 2, 7, 1, 4, 8, 3, 5, 9])
+    print(bst.breadth_first_traversal())
+    bst.delete(5)
+    print(bst.breadth_first_traversal())
+    bst.delete(6)
+    print(bst.breadth_first_traversal())
+    # """Calculate the runtime for binary searches in the BST."""
+    # import timeit
+    # value = [50, 45, 60, 58, 59, 55, 70, 75, 65, 20, 48, 49, 46, 10, 25]
+    # balanced = BST(value)
+    # unbalanced = BST(sorted(value))
 
-    bal = timeit.timeit(
-        stmt="balanced.search(75)",
-        setup="from __main__ import balanced",
-        number=1000
-    ) * 1000
-    unbal = timeit.timeit(
-        stmt="unbalanced.search(75)",
-        setup="from __main__ import unbalanced",
-        number=1000
-    ) * 1000
-    print("It takes {} microseconds to find 75 in a balanced tree, and {} microseconds to find 75 in an unbalanced tree".format(bal, unbal))
+    # bal = timeit.timeit(
+    #     stmt="balanced.search(75)",
+    #     setup="from __main__ import balanced",
+    #     number=1000
+    # ) * 1000
+    # unbal = timeit.timeit(
+    #     stmt="unbalanced.search(75)",
+    #     setup="from __main__ import unbalanced",
+    #     number=1000
+    # ) * 1000
+    # print("It takes {} microseconds to find 75 in a balanced tree, and {} microseconds to find 75 in an unbalanced tree".format(bal, unbal))
 
-    in_o = timeit.timeit(
-        stmt="balanced.in_order_traversal()",
-        setup="from __main__ import balanced",
-        number=1000
-    ) * 1000
-    pre = timeit.timeit(
-        stmt="balanced.pre_order_traversal()",
-        setup="from __main__ import balanced",
-        number=1000
-    ) * 1000
-    post = timeit.timeit(
-        stmt="balanced.post_order_traversal()",
-        setup="from __main__ import balanced",
-        number=1000
-    ) * 1000
-    breadth = timeit.timeit(
-        stmt="balanced.breadth_first_traversal()",
-        setup="from __main__ import balanced",
-        number=1000
-    ) * 1000
+    # in_o = timeit.timeit(
+    #     stmt="balanced.in_order_traversal()",
+    #     setup="from __main__ import balanced",
+    #     number=1000
+    # ) * 1000
+    # pre = timeit.timeit(
+    #     stmt="balanced.pre_order_traversal()",
+    #     setup="from __main__ import balanced",
+    #     number=1000
+    # ) * 1000
+    # post = timeit.timeit(
+    #     stmt="balanced.post_order_traversal()",
+    #     setup="from __main__ import balanced",
+    #     number=1000
+    # ) * 1000
+    # breadth = timeit.timeit(
+    #     stmt="balanced.breadth_first_traversal()",
+    #     setup="from __main__ import balanced",
+    #     number=1000
+    # ) * 1000
 
-    print("It takes {} microseconds to traverse tree in order\n It takes {} microseconds to traverse tree preorder\n It takes {} microseconds to traverse tree postorder\n It takes {} microseconds to traverse tree in breadth first\n ".format(in_o, pre, post, breadth))
+    # print("It takes {} microseconds to traverse tree in order\n It takes {} microseconds to traverse tree preorder\n It takes {} microseconds to traverse tree postorder\n It takes {} microseconds to traverse tree in breadth first\n ".format(in_o, pre, post, breadth))
