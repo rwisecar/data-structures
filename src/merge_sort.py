@@ -8,9 +8,9 @@ def merge_sort(lst):
     """
     if len(lst) < 2:
         return lst
-    midpoint_idx = len(lst)/2
-    first_half = merge_sort(lst[:midpoint_idx])
-    second_half = merge_sort(lst[midpoint_idx:])
+    midpoint_idx = len(lst)//2
+    first_half = merge_sort(lst[midpoint_idx:])
+    second_half = merge_sort(lst[:midpoint_idx])
     return _merge(first_half, second_half)
 
 
