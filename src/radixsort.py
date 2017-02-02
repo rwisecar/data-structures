@@ -3,29 +3,26 @@
 
 def radix(lst):
     """Sort a list of numbers using the radix sort method."""
-    
+    for num in lst:
+        if not isinstance(num, int):
+            raise TypeError('Must use integers')
     digit_place = 1
-    x = 0
-    working_num = 0
+    number_of_places, working_num = 0, 0
     new_lst = lst
-    while x < len(str(max(lst))) + 1:
+    while number_of_places < len(str(max(lst))) + 1:
         buckets = [[] for _ in range(10)]
         for num in new_lst:
             working_num = num // digit_place
             buckets[working_num % 10].append(num)
-
         new_lst = []
         for b in buckets:
             for num in b:
                 new_lst.append(num)
 
         digit_place *= 10
-        x += 1
+        number_of_places += 1
     return new_lst
 
-
-# lst = [11761, 26713, 47756, 53008, 8, 333454, 578, 99]
-# print(radix(lst))
 
 if __name__ == "__main__":
     import timeit
