@@ -148,11 +148,6 @@ def test_nodes_list_append_node(empty_graph):
     assert 5 in empty_graph.graph.keys()
 
 
-def test_edges_list_returns_list_of_edges(graph_with_edges):
-    """Test that running edges returns a list of edges."""
-    assert graph_with_edges.edges() == ['10: [15]', '5: [10, 15]', '15: []']
-
-
 def test_edges_list_with_no_edges(three_node_graph):
     """Test that you get a list with no edges where no edges."""
     assert "Valenzuela, Rick: []" in three_node_graph.edges()
