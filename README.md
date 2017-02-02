@@ -175,6 +175,31 @@ http://stackoverflow.com/questions/26145678/implementing-a-depth-first-tree-iter
 
     traversal(self, start): Perform a full depth-first traversal of the graph beginning at start. The argument start should be a string, which may or may not be the beginning of a string or strings contained in the Trie.
 
+---
+
+# Insertion Sort:
+##Module: insertion_sort.py
+##Test Module: test_insertion_sort.py
+
+The insertion sort module sorts a list using the insertion sort method.
+
+We had help from the following resources:
+https://interactivepython.org/runestone/static/pythonds/SortSearch/TheInsertionSort.html
+
+---
+
+# Merge Sort:
+##Module: merge_sort.py
+##Test Module: test_merge_sort.py
+
+The merge sort module sorts a list of iterables using the merge sort method.
+
+We had help from the following resources:
+
+https://en.wikipedia.org/wiki/Merge_sort
+https://www.khanacademy.org/computing/computer-science/algorithms/merge-sort/a/overview-of-merge-sort
+http://markmiyashita.com/interviews/problems/merge_sort/
+
 #Testing Information:
 
 ```
