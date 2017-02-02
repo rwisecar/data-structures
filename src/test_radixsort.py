@@ -26,3 +26,9 @@ def test_radix_on_random_integers():
     new_list = radix(randos)
     for n in new_list[1:]:
         assert n > new_list[new_list.index(n) - 1]
+
+
+def test_radix_sort_raises_error_with_nonintegers():
+    """Test that radix raises a TypeError if you don't input integers."""
+    with pytest.raises(TypeError):
+        radix("abc")
