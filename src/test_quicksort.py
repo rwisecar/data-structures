@@ -1,4 +1,5 @@
-"""Tests for the insertion sort."""
+"""Tests for the quicksort sort."""
+
 from quicksort import quicksort
 import pytest
 
