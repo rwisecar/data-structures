@@ -39,3 +39,9 @@ def test_insertion_sort_on_non_iterable_raises_error():
     """Test that you must have an iterable to sort."""
     with pytest.raises(TypeError):
         insertion_sort(8)
+
+
+def test_insertion_sort_on_very_large_list():
+    import random
+    vll = [random.randint(0, 10000) for x in range(1, 1000)]
+    assert insertion_sort(vll) == sorted(vll)
