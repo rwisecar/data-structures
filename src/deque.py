@@ -49,11 +49,11 @@ class Deque(object):
     def peek(self):
         """Return value at tail."""
         if self._deque.tail is None:
-            raise AttributeError("Can't peek at empty!")
+            return None
         return self._deque.tail.value
 
     def peekleft(self):
         """Return value at head."""
         if self._deque.head is None:
-            raise AttributeError("Can't peekleft at empty!")
+            return None
         return self._deque.head.value

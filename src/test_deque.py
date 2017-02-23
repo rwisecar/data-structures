@@ -166,8 +166,7 @@ def test_popleft_empty_deque_raises_error(empty_deque):
 
 def test_cant_peek_empty(empty_deque):
     """Test peek can't be called on empty deques."""
-    with pytest.raises(AttributeError):
-        empty_deque.peek()
+    assert empty_deque.peek() is None
 
 
 def test_peek_returns_value(full_deque):
@@ -177,10 +176,76 @@ def test_peek_returns_value(full_deque):
 
 def test_cant_peekleft_empty(empty_deque):
     """Test peekleft can't be called on empty deques."""
-    with pytest.raises(AttributeError):
-        empty_deque.peekleft()
+    assert empty_deque.peekleft() is None
 
 
 def test_peekleft_returns_value(full_deque):
     """Test peeklefting at the proper (head) value."""
     assert full_deque.peekleft() == 3
+
+
+def test_pop_with_append(empty_deque):
+    """Test pop will return correct value."""
+    empty_deque.append(1)
+    empty_deque.append(2)
+    empty_deque.pop()
+    empty_deque.append(3)
+    empty_deque.append(4)
+    empty_deque.append(5)
+    assert empty_deque.pop() == 5
+
+
+def test_pop_with_appendleft(empty_deque):
+    """Test pop will return correct value."""
+    empty_deque.appendleft(1)
+    empty_deque.appendleft(2)
+    empty_deque.pop()
+    empty_deque.appendleft(3)
+    empty_deque.appendleft(4)
+    empty_deque.appendleft(5)
+    assert empty_deque.pop() == 2
+
+
+def test_popleft_with_append(empty_deque):
+    """Test popleft will return correct value."""
+    empty_deque.append(1)
+    empty_deque.append(2)
+    empty_deque.popleft()
+    empty_deque.append(3)
+    empty_deque.append(4)
+    empty_deque.append(5)
+    assert empty_deque.popleft() == 2
+
+
+def test_popleft_with_appendleft(empty_deque):
+    """Test popleft will return correct value."""
+    empty_deque.appendleft(1)
+    empty_deque.appendleft(2)
+    empty_deque.popleft()
+    empty_deque.appendleft(3)
+    empty_deque.appendleft(4)
+    empty_deque.appendleft(5)
+    assert empty_deque.popleft() == 5
+
+
+def test_popleft_with_append_and_pop(empty_deque):
+    """Test popleft will return correct value."""
+    empty_deque.append(1)
+    empty_deque.append(2)
+    empty_deque.pop()
+    empty_deque.append(3)
+    empty_deque.append(4)
+    empty_deque.append(5)
+    assert empty_deque.popleft() == 1
+
+
+def test_pop_with_append_and_popleft(empty_deque):
+    """Test pop will return correct value."""
+    empty_deque.append(1)
+    empty_deque.append(2)
+    empty_deque.popleft()
+    empty_deque.append(3)
+    empty_deque.append(4)
+    empty_deque.append(5)
+    empty_deque.popleft()
+    assert empty_deque.pop() == 5
