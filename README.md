@@ -183,6 +183,8 @@ http://stackoverflow.com/questions/26145678/implementing-a-depth-first-tree-iter
 
 The insertion sort module sorts a list using the insertion sort method.
 
+Our insertion sort's time complexity is, on average, O(n**2); growth doubles exponentially with each addition to the dataset.
+
 We had help from the following resources:
 https://interactivepython.org/runestone/static/pythonds/SortSearch/TheInsertionSort.html
 
@@ -194,11 +196,46 @@ https://interactivepython.org/runestone/static/pythonds/SortSearch/TheInsertionS
 
 The merge sort module sorts a list of iterables using the merge sort method.
 
+Our merge sort's time complexity is O(n log n) because it divides the list into n sublists of 1 item each, and then merges those sublists to produce an ordered list. 
+
 We had help from the following resources:
 
 https://en.wikipedia.org/wiki/Merge_sort
 https://www.khanacademy.org/computing/computer-science/algorithms/merge-sort/a/overview-of-merge-sort
 http://markmiyashita.com/interviews/problems/merge_sort/
+
+---
+
+# Quick Sort:
+##Module: quicksort.py
+##Test Module: test_quicksort.py
+
+The quick sort module sorts a list of iterables using the quick sort method.
+
+Our quick sort's time complexity is O(n log n) because it is a divide and conquer method, like merge sort. 
+
+We had help from the following resources:
+https://en.wikipedia.org/wiki/Quicksort
+https://interactivepython.org/runestone/static/pythonds/SortSearch/TheQuickSort.html
+http://stackoverflow.com/questions/18262306/quicksort-with-python
+
+
+---
+
+# Radix Sort:
+##Module: radixsort.py
+##Test Module: test_radixsort.py
+
+The radix sort module sorts a list of iterables using the radix sort method.
+
+Our radix sort's time complexity is O(nk); you create buckets and assign each item to the bucket based on the value of each of its digits. You only have to loop through once, so the time complexity will be n number of items * the length of the average digit length of each item.
+
+We had help from the following resources:
+
+https://en.wikipedia.org/wiki/Radix_sort
+http://www.geekviewpoint.com/python/sorting/radixsort
+https://rosettacode.org/wiki/Sorting_algorithms/Radix_sort
+
 
 #Testing Information:
 
@@ -213,27 +250,35 @@ src/deque.py                    24      0   100%
 src/dll.py                      68      0   100%
 src/graph.py                   111      1    99%   129
 src/hash.py                     34      0   100%
+src/insertion_sort.py           21      9    57%   21-45
 src/linked_list.py              67      0   100%
+src/merge_sort.py               25      9    64%   29-54
 src/priority_queue.py           20      0   100%
 src/queue.py                    22      0   100%
+src/quicksort.py                25      9    64%   26-51
+src/radixsort.py                29      9    69%   28-53
 src/stack.py                    11      0   100%
 src/test_binheap.py             40      0   100%
 src/test_bst.py                187      0   100%
 src/test_deque.py               89      0   100%
 src/test_dll.py                 84      0   100%
-src/test_graph.py              173      0   100%
+src/test_graph.py              171      0   100%
 src/test_hash.py                69      0   100%
+src/test_insertion_sort.py      23      0   100%
 src/test_linked_list.py         57      0   100%
+src/test_merge_sort.py          23      0   100%
 src/test_priority_queue.py      53      0   100%
 src/test_queue.py               43      0   100%
+src/test_quicksort.py           23      0   100%
+src/test_radixsort.py           14      0   100%
 src/test_stack.py               37      0   100%
 src/test_trie.py               143      0   100%
 src/trie.py                     75      0   100%
 ----------------------------------------------------------
-TOTAL                         1608     13    99%
+TOTAL                         1789     49    97%
 
 
------------ coverage: platform linux, python 3.5.2-final-0 -----------
+---------- coverage: platform darwin, python 3.6.0-final-0 -----------
 Name                         Stmts   Miss  Cover   Missing
 ----------------------------------------------------------
 src/binheap.py                  30      0   100%
@@ -242,28 +287,35 @@ src/deque.py                    24      0   100%
 src/dll.py                      68      0   100%
 src/graph.py                   111      1    99%   129
 src/hash.py                     34      0   100%
+src/insertion_sort.py           21      9    57%   21-45
 src/linked_list.py              67      0   100%
+src/merge_sort.py               25      9    64%   29-54
 src/priority_queue.py           20      0   100%
 src/queue.py                    22      0   100%
+src/quicksort.py                25      9    64%   26-51
+src/radixsort.py                29      9    69%   28-53
 src/stack.py                    11      0   100%
 src/test_binheap.py             40      0   100%
 src/test_bst.py                187      0   100%
 src/test_deque.py               89      0   100%
 src/test_dll.py                 84      0   100%
-src/test_graph.py              173      0   100%
+src/test_graph.py              171      0   100%
 src/test_hash.py                69      0   100%
+src/test_insertion_sort.py      23      0   100%
 src/test_linked_list.py         57      0   100%
+src/test_merge_sort.py          23      0   100%
 src/test_priority_queue.py      53      0   100%
 src/test_queue.py               43      0   100%
+src/test_quicksort.py           23      0   100%
+src/test_radixsort.py           14      0   100%
 src/test_stack.py               37      0   100%
 src/test_trie.py               143      0   100%
 src/trie.py                     75      0   100%
 ----------------------------------------------------------
-TOTAL                         1608     13    99%
-
+TOTAL                         1789     49    97%
 
   py27: commands succeeded
-  py35: commands succeeded
+  py36: commands succeeded
 ```
 
 ## We relied on the following resources in building our linked list and associated functions.

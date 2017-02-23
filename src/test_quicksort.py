@@ -40,3 +40,9 @@ def test_quicksort_on_non_iterable_raises_error():
     """Test that you must have an iterable to sort."""
     with pytest.raises(TypeError):
         quicksort(8)
+
+
+def test_quick_sort_on_very_large_list():
+    import random
+    vll = [random.randint(0, 10000) for x in range(1, 100)]
+    assert quicksort(vll) == sorted(vll)
