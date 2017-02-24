@@ -20,6 +20,22 @@ def full_heap():
     return heap
 
 
+@pytest.fixture
+def full_heap_1_to_10():
+    """Fixture for full heap 1-10."""
+    from binheap import Binheap
+    heap = Binheap([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    return heap
+
+
+@pytest.fixture
+def full_heap_10_to_1():
+    """Fixture for full heap 10-1."""
+    from binheap import Binheap
+    heap = Binheap([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    return heap
+
+
 def test_cant_init_w_noniter():
     """Test you can't instantiate heap with noniterable."""
     from binheap import Binheap
@@ -67,6 +83,18 @@ def test_push_to_populated_heap_sorts_bigger_num(full_heap):
     assert full_heap.heap[3] == 5
 
 
+def test_push_on_10_to_1(full_heap_10_to_1):
+    """Test that root is zero."""
+    full_heap_10_to_1.push(0)
+    assert full_heap_10_to_1.heap[0] == 0
+
+
+def test_push_on_1_to_10(full_heap_1_to_10):
+    """Test that root is zero."""
+    full_heap_1_to_10.push(0)
+    assert full_heap_1_to_10.heap[0] == 0
+
+
 def test_pop_from_empty(empty_heap):
     """Test you can't pop from empty heap."""
     with pytest.raises(IndexError):
@@ -84,5 +112,21 @@ def test_pop_sorts_heap_structure(full_heap):
     assert full_heap.heap[0] == 2
 
 
+def test_pop_1_to_10(full_heap_1_to_10):
+    """Test that you can pop in order."""
+    a = [full_heap_1_to_10.pop() for i in range(1, 11)]
+    assert a == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 
+def test_pop_10_to_1(full_heap_10_to_1):
+    """Test that you can pop in order."""
+    a = [full_heap_10_to_1.pop() for i in range(1, 11)]
+    assert a == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+
+def test_pop_random_num():
+    """Test that random nums return 1 - 10."""
+    from binheap import Binheap
+    a = Binheap([6, 3, 4, 1, 2, 9, 5, 7, 8, 10])
+    b = [a.pop() for i in range(1, 11)]
+    assert b == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
